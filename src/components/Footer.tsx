@@ -6,7 +6,7 @@ import footer_line from '@/assets/img/footer_line.png';
 
 const Footer = () => {
   return (
-    <div className='bg-primary-yellow pb-5 font-cubic '>
+    <div className='bg-primary-yellow pb-5 font-cubic mt-10'>
       <div className='relative container mx-auto flex justify-center items-center'>
         <div className='text-center text-primary-dk'>
           <Image src={mainLogo} width={300} height={115} alt='神龍變裝' className='block' />

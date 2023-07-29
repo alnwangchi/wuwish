@@ -69,10 +69,9 @@ const page = () => {
             </Hexagon>
           </div>
         </div>
-
         <div className='relative'>
           <Image src={rental_bg} className='w-full' alt='deco' />
-          <div className='ab-center w-3/4 font-cubic leading-loose'>
+          <div className='ab-center w-3/4 font-cubic leading-loose text-white'>
             <h2 className='text-center mb-4'>租借細則</h2>
             <p>
               1.訂單確認後，每套服裝需先預繳1/2之訂金，

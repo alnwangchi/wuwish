@@ -1,18 +1,22 @@
-import Carousel from '@/components/Carousel';
 import CategoryItem from '@/components/CategoryItem';
 import { tmpCategory } from '@/constance';
-import Image from 'next/image';
+import React from 'react';
 import slugify from 'slugify';
 
-export default function Home() {
+const page = () => {
   return (
-    <main className='min-h-screen'>
-      <Carousel />
+    <div>
       <section className='container mx-auto py-10 grid grid-cols-5 gap-5 place-items-center'>
         {tmpCategory.map((c) => (
-          <CategoryItem text={c.name} key={c.name} href={`/product-rental/${slugify(c.en)}`} />
+          <CategoryItem
+            text={c.name}
+            key={c.name}
+            href={`/product-sale/${slugify(c.en, { lower: true })}`}
+          />
         ))}
       </section>
-    </main>
+    </div>
   );
-}
+};
+
+export default page;
