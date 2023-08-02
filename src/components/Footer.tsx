@@ -17,13 +17,13 @@ const Footer = () => {
 
         <div className='flex gap-3 absolute bottom-0 left-0'>
           <a href='/'>
-            <Image src={footer_fb} width={50} height={70} alt='神龍變裝 facebook' />
+            <Image src={footer_fb} width={75} height={105} alt='神龍變裝 facebook' />
           </a>
           <a href='/'>
-            <Image src={footer_ig} width={50} height={70} alt='神龍變裝 instagram' />
+            <Image src={footer_ig} width={75} height={105} alt='神龍變裝 instagram' />
           </a>
           <a href='/'>
-            <Image src={footer_line} width={50} height={70} alt='神龍變裝 line' />
+            <Image src={footer_line} width={75} height={105} alt='神龍變裝 line' />
           </a>
         </div>
       </div>
