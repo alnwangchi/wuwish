@@ -7,12 +7,10 @@ export default async function RentalCategory({ params }: { params: { category: s
   console.log(params);
   const { category } = params;
   return (
-    <div>
-      <section className='container mx-auto py-10 grid grid-cols-5 gap-5 place-items-center'>
-        {tmp.map((p) => (
-          <ClothesCard href={`/product-rental/${category}/id`} key='d' />
-        ))}
-      </section>
-    </div>
+    <section className='container mx-auto py-10 grid grid-cols-5 gap-5 place-items-center'>
+      {tmp.map((p) => (
+        <ClothesCard href={`/product-rental/${category}/id`} key='d' />
+      ))}
+    </section>
   );
 }
