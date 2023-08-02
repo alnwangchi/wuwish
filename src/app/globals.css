@@ -36,3 +36,14 @@ body {
 .hexagon {
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 }
+
+/* for overwrite slick css */
+
+.slick-dots {
+  bottom: unset !important;
+}
+
+.slick-dots li{
+  width: 30px !important;
+  height: 30px !important;
+}
