@@ -3,7 +3,17 @@
 import React, {  useState } from "react";
 import { Col, Row, Table } from "antd";
 import { ColumnsType, SorterResult } from "antd/es/table/interface";
-import { List } from "@/interface/I_List";
+
+interface ListType {
+  category: string;
+  name: string;
+  title: string;
+  content: string;
+  price: number;
+  status: string;
+  situation: string;
+  image: string;
+}
 
 enum sort {
   asc = "asc",
@@ -11,7 +21,7 @@ enum sort {
 }
 
 const List = () => {
-  const MockData = [] as List[];
+  const MockData = [] as ListType[];
   const defaultPageParam = {
     current: 1,
     pagesize: 10,
