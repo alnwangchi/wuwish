@@ -2,6 +2,10 @@
   font-family: "cubic";
   src: url("../assets/font/Cubic_11_1.013_R.woff"), url("../assets/font/Cubic_11_1.013_R.woff2"), url("../assets/font/Cubic_11_1.013_R.ttf");
 }
+@font-face {
+  font-family: "timer";
+  src: url("../assets/font/CursedTimerUlil-Aznm.ttf");
+}
 
 @tailwind base;
 @tailwind components;
@@ -46,4 +50,21 @@ body {
 .slick-dots li{
   width: 30px !important;
   height: 30px !important;
+}
+
+/* for overwrite antd pagination css */
+
+.ant-pagination-item, .ant-pagination-prev{
+  border: unset !important;
+  margin: 0 !important;
+}
+
+.ant-pagination-item-active {
+  font-weight: unset !important;
+  background-color: unset !important;
+  border-color: unset !important;
+}
+
+.ant-pagination-item-active p{
+  color: #fff !important;
 }
