@@ -3,7 +3,7 @@
 import React, {  useState } from "react";
 import { Col, Row, Table } from "antd";
 import { ColumnsType, SorterResult } from "antd/es/table/interface";
-import { List } from "@/interface/I_list";
+import { List } from "@/interface/I_List";
 
 enum sort {
   asc = "asc",
