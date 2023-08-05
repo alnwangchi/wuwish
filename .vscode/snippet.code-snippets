@@ -24,5 +24,10 @@
     "prefix": "nl",
     "body": ["import Link from 'next/link';"],
     "description": "next link"
+  },
+  "next router": {
+    "prefix": "nr",
+    "body": ["import { useRouter, usePathname, useSearchParams } from 'next/navigation';"],
+    "description": "next router"
   }
 }

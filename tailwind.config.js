@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         cubic: ['cubic'],
+        timer: ['timer'],
       },
       fontSize: {
         '2.5xl': [
