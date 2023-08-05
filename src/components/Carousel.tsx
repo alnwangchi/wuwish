@@ -34,6 +34,7 @@ const paginationImg = [
 export default function Carousel() {
   const carouselRef = useRef<Slider | null>(null);
   const settings = {
+    autoplay: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
