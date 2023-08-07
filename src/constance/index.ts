@@ -25,3 +25,4 @@ export const tmpCategory =[
   { name: '大型道具', en: 'Large Props' },
   { name: '芭比全系列', en: 'Barbie Series' }
 ]
+export const authorization = { account: 'admin', password: 'dragonpassword' };
