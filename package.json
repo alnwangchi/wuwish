@@ -16,6 +16,7 @@
     "antd": "^5.8.1",
     "autoprefixer": "10.4.14",
     "clsx": "^2.0.0",
+    "cookies-next": "^2.1.2",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "next": "13.4.12",
