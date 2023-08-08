@@ -1,12 +1,12 @@
 'use client';
 import React from 'react';
-
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useRouter } from 'next/navigation';
-import './style.scss';
 import { authenticationService } from '@/hooks/useAuthenticate';
+import InputField from '@/components/Input/Input';
 
 const loginSchema = yup
   .object({
@@ -21,14 +21,11 @@ type FormValues = {
 };
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { handleSubmit, control } = useForm({
     resolver: yupResolver(loginSchema),
   });
   const router = useRouter();
+
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     // check whether pass authentication
     if (authenticationService(data.account, data.password)) {
@@ -36,23 +33,21 @@ const Login = () => {
     }
   };
   return (
-    <div className='container flex justify-center	p-4'>
+    <div className='container flex justify-center	p-4 mx-auto'>
+      {/* <DevTool control={control} placement='top-right' /> */}
       <form onSubmit={handleSubmit(onSubmit)} className='flex-1'>
-        <div>
-          <label>
-            <span>*</span>帳號
-          </label>
-          <input {...register('account')} />
-          {errors.account && <p>帳號是必填欄位</p>}
-        </div>
-        <div>
-          <label>
-            <span>*</span>密碼
-          </label>
-          <input {...register('password')} />
-          {errors.password && <p>密碼是必填欄位</p>}
-        </div>
-        <input type='submit' />
+        <Controller
+          control={control}
+          name='account'
+          render={(props) => <InputField required label='帳號' {...props} />}
+        />
+
+        <Controller
+          control={control}
+          name='password'
+          render={(props) => <InputField required label='密碼' {...props} />}
+        />
+        <input type='submit' style={{ background: '#ec5990' }} />
       </form>
     </div>
   );
