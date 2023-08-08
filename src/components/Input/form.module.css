@@ -1,0 +1,18 @@
+.labelText{
+  color: white;
+}
+
+.labelText-required::before {
+  content: '*';
+  color: #bf1650;
+}
+
+.errorInput {
+  color: #bf1650;
+}
+
+.errorInput::before {
+  display: inline;
+  content: '⚠ ';
+}
+
