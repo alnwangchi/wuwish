@@ -68,3 +68,24 @@ body {
 .ant-pagination-item-active p{
   color: #fff !important;
 }
+
+/* 共用 module */
+.submitInput{
+  background: #ec5990;
+  width: 100%;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  letter-spacing: 10px;
+}
+
+.submitInput:hover{
+  background: #bf1650;
+  cursor: pointer;
+}
+
+.submitInput:active{
+  transition: 0.3s all;
+  transform: translateY(3px);
+  opacity: 0.8;
+}

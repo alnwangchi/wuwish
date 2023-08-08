@@ -21,10 +21,10 @@ type FormValues = {
 };
 
 const Login = () => {
+  const router = useRouter();
   const { handleSubmit, control } = useForm({
     resolver: yupResolver(loginSchema),
   });
-  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     // check whether pass authentication
@@ -47,7 +47,7 @@ const Login = () => {
           name='password'
           render={(props) => <InputField required label='密碼' {...props} />}
         />
-        <input type='submit' style={{ background: '#ec5990' }} />
+        <input type='submit' className='submitInput' />
       </form>
     </div>
   );
