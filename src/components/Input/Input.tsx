@@ -1,26 +1,42 @@
 import React from 'react';
-import style from './form.module.css';
 import { Input } from 'antd';
-import { ControllerProps } from 'react-hook-form';
+import { ReactFormProps } from '@/interface';
 
-type InputFieldProps = Pick<ControllerProps, 'render'> & {
+const { TextArea } = Input;
+
+enum InputType {
+  Input = 'input',
+  Textarea = 'textarea',
+}
+
+interface InputFieldProps extends ReactFormProps {
   label: string;
-  required: boolean;
-};
+  required?: boolean;
+  type?: string;
+}
 
-const InputField = ({ label, required, ...props }: any) => {
+const InputField = ({
+  label,
+  required = true,
+  type = InputType.Input,
+  ...props
+}: InputFieldProps) => {
   const { field, formState } = props;
   return (
     <div className='mb-4'>
       <label
-        className={`${required ? style['labelText-required'] : ''} ${
-          style['labelText']
-        }`}
+        className={`${required ? 'labelText-required' : ''} ${'labelText'}`}
       >
         {label}
       </label>
-      <Input {...props.field} className='py-2'/>
-      {formState?.errors?.[field.name] && <p className={style['errorInput']}>{label}是必填欄位</p>}
+      {type === InputType.Textarea ? (
+        <TextArea rows={4} className='py-2' />
+      ) : (
+        <Input {...field} className='py-2' />
+      )}
+      {formState?.errors?.[field.name] && (
+        <p className={'errorInput'}>{label}是必填欄位</p>
+      )}
     </div>
   );
 };
