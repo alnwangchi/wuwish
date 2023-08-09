@@ -32,7 +32,7 @@ const Header = () => {
     </div>
   ) : (
     <div className='bg-primary-yellow py-3'>
-      <div className='container mx-auto flex justify-between'>
+      <div className='container mx-auto flex justify-center gap-[10%]'>
         <Link href='/'>
           <Image src={main_logo} width={300} height={115} alt='神龍變裝' />
         </Link>
