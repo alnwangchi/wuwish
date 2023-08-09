@@ -1,15 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useEffect } from 'react';
-
+import { message } from 'antd';
 import { tmpCategory } from '@/constance';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import './style.scss';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import useAuthenticate from '@/hooks/useAuthenticate';
+import InputField from '@/components/Input/Input';
+import InputNumberField from '@/components/InputNumber/InputNumber';
+import AxiosInstance from '@/server';
+
 
 const uploadSchema = yup.object({
   name: yup.string().required(),
@@ -40,6 +43,7 @@ const UploadPage = () => {
     setError,
     clearErrors,
     formState: { errors },
+    control,
   } = useForm({
     resolver: yupResolver(uploadSchema),
   });
@@ -53,31 +57,44 @@ const UploadPage = () => {
     }
   }, [isCanViewAdmin, router]);
 
-  useEffect(() => {
-    setError('image', {
-      type: 'custom',
-      message: '請上傳圖片！',
-    });
-  }, [setError]);
-
   const handleUploadImage = (e: any) => {
     setFile(URL.createObjectURL(e.target.files[0]));
     clearErrors(['image']);
   };
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log('1', data);
-    // send api
+    // console.log('data', data.image);
+    if (file === '') {
+      setError('image', {
+        type: 'custom',
+        message: '請上傳圖片！',
+      });
+      return;
+    } else {
+      // send api
+      AxiosInstance.post('/', {
+        ...data,
+        image: (data.image as any)['0'],
+      })
+        .then((result) => {
+          message.success('上傳成功');
+          router.push('/dashboard/list');
+        })
+        .catch((error) => {
+          console.log(error);
+          message.error('上傳失敗');
+        });
+    }
   };
 
   return (
     <div className='container grid grid-cols-2 gap-4 p-4'>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>
-            <span>*</span>類別
+        <div className='mb-4'>
+          <label className='labelText-required labelText'>
+            類別
           </label>
-          <select {...register('category')}>
+          <select {...register('category')} className='w-full py-2'>
             {tmpCategory.map((c) => (
               <option key={c.en} value={c.en}>
                 {c.name}
@@ -86,50 +103,62 @@ const UploadPage = () => {
           </select>
         </div>
 
-        <div>
-          <label>
-            <span>*</span>劇名
-          </label>
-          <input {...register('name')} />
-          {errors.name && <p>劇名是必填欄位</p>}
-        </div>
+        <Controller
+          control={control}
+          name='name'
+          render={(props) => <InputField label='劇名' {...props} />}
+        />
 
-        <div>
-          <label>
-            <span>*</span>名稱
-          </label>
-          <input {...register('title')} />
-          {errors.title && <p>名稱是必填欄位</p>}
-        </div>
+        <Controller
+          control={control}
+          name='title'
+          render={(props) => <InputField label='名稱' {...props} />}
+        />
 
-        <div>
-          <label>內容</label>
-          <textarea {...register('content')} />
-          {errors.content && <p>{errors.content.message}</p>}
-        </div>
+        <Controller
+          control={control}
+          name='content'
+          render={(props) => (
+            <InputField
+              type='textarea'
+              required={false}
+              label='內容'
+              {...props}
+            />
+          )}
+        />
 
-        <div>
-          <label>價格</label>
-          <input type='number' {...register('price')} defaultValue={0} />
-          {errors.price && <p>價格只能輸入數字</p>}
-        </div>
+        <Controller
+          control={control}
+          name='price'
+          render={(props) => (
+            <InputNumberField required={false} label='價格' {...props} />
+          )}
+        />
 
-        <div>
-          <label>狀態</label>
-          <input {...register('status')} />
-          {errors.status && <p>{errors.status.message}</p>}
-        </div>
+        <Controller
+          control={control}
+          name='status'
+          render={(props) => (
+            <InputField required={false} label='狀態' {...props} />
+          )}
+        />
 
-        <div>
-          <label>情境</label>
-          <textarea {...register('situation')} />
-          {errors.situation && <p>{errors.situation.message}</p>}
-        </div>
+        <Controller
+          control={control}
+          name='situation'
+          render={(props) => (
+            <InputField
+              required={false}
+              type='textarea'
+              label='情境'
+              {...props}
+            />
+          )}
+        />
 
-        <div>
-          <label>
-            <span>*</span>上傳圖片
-          </label>
+        <div className='mb-4'>
+          <label className='labelText-required labelText'>上傳圖片</label>
           <input
             type='file'
             accept='.jpg, .jpeg, .png, .gif, .webp, .svg, .bmp'
@@ -139,7 +168,7 @@ const UploadPage = () => {
           {errors.image?.type === 'custom' && <p>{errors.image.message}</p>}
         </div>
 
-        <input type='submit' />
+        <input type='submit' className='submitInput' />
       </form>
       <div className='border border-indigo-600'>
         <label>預覽圖片</label>
