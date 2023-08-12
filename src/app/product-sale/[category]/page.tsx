@@ -23,7 +23,7 @@ const SaleCategory = () => {
   return (
     <ClothesContainer >
       {tmp.map((p) => (
-        <ClothesCard href={`/product-rental/${slugify(category!, { lower: true })}/id`} key='d' />
+        <ClothesCard href={`/product-sale/${slugify(category!, { lower: true })}/id`} key='d' />
       ))}
       <div className='col-span-full'>
         <Pagination current={current} onChange={onChange} />

@@ -10,10 +10,10 @@ const DetailCard: FC<DetailCardProps> = (props) => {
   const { src } = props;
   return (
     <>
-      <div className='w-2/4 f-center'>
+      <div className='w-full sm:w-2/4 f-center'>
         <Image src={src} alt='TBC' />
       </div>
-      <div className='space-y-3 pt-5 text-white font-cubic text-3xl'>
+      <div className='space-y-3 pt-5 text-white font-cubic text-3xl text-center sm:text-left'>
         <p>
           <span className=''>編號 : </span>
           <span className=''>xxxxx</span>
