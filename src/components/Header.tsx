@@ -42,7 +42,13 @@ const Header = () => {
     <div className="relative bg-primary-yellow py-3 z-10">
       <div className="relative container mx-auto flex justify-center gap-[10%]">
         <Link href="/" className="z-20">
-          <Image src={main_logo} width={300} height={115} alt="神龍變裝" className="w-[200px]" />
+          <Image
+            src={main_logo}
+            alt="神龍變裝"
+            layout="responsive"
+            sizes="(max-width: 400px) 200px,
+              300px"
+          />
         </Link>
         <section className="hidden sm:flex sm:flex-col sm:justify-center sm:px-10">
           <div className="pl-2 flex gap-2 text-black text-4xl cursor-pointer">
