@@ -20,7 +20,7 @@ export default function Home() {
       </div>
       <CategoryContainer>
         {tmpCategory.map((c) => (
-          <CategoryItem text={c.name} key={c.name} href={`/product-rental/${slugify(c.en)}`} />
+          <CategoryItem text={c.name} key={c.name} href={`/product-rental/${slugify(c.en, {lower: true})}`} />
         ))}
       </CategoryContainer>
     </main>
