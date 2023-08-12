@@ -29,7 +29,7 @@ const paginationImg = [
   draganball_4,
   draganball_5,
   draganball_6,
-  draganball_7,
+  draganball_7
 ];
 export default function Carousel() {
   const carouselRef = useRef<Slider | null>(null);
@@ -45,56 +45,56 @@ export default function Carousel() {
     // prevArrow: <div className='w-5 h20 bg-orange-600'></div>,
     dots: true,
     customPaging: function (i: number) {
-      return <Image src={paginationImg[i]} alt='TBC' />;
-    },
+      return <Image src={paginationImg[i]} alt="TBC" />;
+    }
   };
   return (
-    <div className='relative'>
+    <div className="relative">
       <div
-        className='absolute top-2/4 -left-10 -translate-y-1/2 z-10'
+        className="absolute top-2/4 -left-10 -translate-y-1/2 z-10 hidden sm:block"
         onClick={() => {
           carouselRef.current!.slickPrev();
         }}
       >
         <Image
           src={carousel_left}
-          alt='TBC'
-          className='cursor-pointer contrast-50 hover:contrast-100'
+          alt="TBC"
+          className="cursor-pointer contrast-50 hover:contrast-100"
         />
       </div>
       <Slider {...settings} ref={carouselRef}>
         <div>
-          <Image src={c1} alt='' />
+          <Image src={c1} alt="" />
         </div>
         <div>
-          <Image src={c2} alt='' />
+          <Image src={c2} alt="" />
         </div>
         <div>
-          <Image src={c3} alt='' />
+          <Image src={c3} alt="" />
         </div>
         <div>
-          <Image src={c1} alt='' />
+          <Image src={c1} alt="" />
         </div>
         <div>
-          <Image src={c2} alt='' />
+          <Image src={c2} alt="" />
         </div>
         <div>
-          <Image src={c3} alt='' />
+          <Image src={c3} alt="" />
         </div>
         <div>
-          <Image src={c1} alt='' />
+          <Image src={c1} alt="" />
         </div>
       </Slider>
       <div
-        className='absolute top-2/4 -right-10 -translate-y-1/2 z-10'
+        className="absolute top-2/4 -right-10 -translate-y-1/2 z-10  hidden sm:block"
         onClick={() => {
           carouselRef.current!.slickNext();
         }}
       >
         <Image
           src={carousel_right}
-          alt='TBC'
-          className='cursor-pointer contrast-50 hover:contrast-100'
+          alt="TBC"
+          className="cursor-pointer contrast-50 hover:contrast-100"
         />
       </div>
     </div>
