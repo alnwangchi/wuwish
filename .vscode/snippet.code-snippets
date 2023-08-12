@@ -29,5 +29,10 @@
     "prefix": "nr",
     "body": ["import { useRouter, usePathname, useSearchParams } from 'next/navigation';"],
     "description": "next router"
+  },
+  "clsx": {
+    "prefix": "cx",
+    "body": ["import clsx from 'clsx';"],
+    "description": "clsx"
   }
 }
