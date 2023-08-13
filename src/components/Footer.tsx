@@ -9,7 +9,14 @@ const Footer = () => {
     <div className="bg-primary-yellow pb-5 font-cubic mt-10">
       <div className="relative container mx-auto flex justify-center items-center flex-col gap-3 sm:flex-row">
         <div className="text-center text-primary-dk">
-          <Image src={mainLogo} width={300} height={115} alt="神龍變裝" className="block" />
+          <Image
+            src={mainLogo}
+            layout="responsive"
+            sizes="(max-width: 400px) 200px,
+              300px"
+            alt="神龍變裝"
+            className="block"
+          />
           <p>台北市漢中街150號2樓 </p>
           <p>0968-270178</p>
           <p>wu.wish88@gmail.com</p>
