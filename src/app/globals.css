@@ -80,9 +80,8 @@ body {
 /* 共用 module */
 .submitInput {
   background: #ec5990;
-  width: 100%;
   border-radius: 4px;
-  padding: 10px 15px;
+  padding: 10px 15px 10px 20px;
   margin-bottom: 10px;
   letter-spacing: 10px;
 }
