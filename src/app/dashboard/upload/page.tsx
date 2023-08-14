@@ -33,10 +33,11 @@ type FormValues = {
   title: string;
   number?: string;
   content?: string;
+  price?: number;
   status?: string;
 };
 
-enum BusinessType {
+export enum BusinessType {
   Sell = 'sell',
   Rent = 'rent'
 }
