@@ -5,11 +5,13 @@ import { ReactFormProps } from '@/interface';
 interface InputNumberFieldProps extends ReactFormProps {
   label: string;
   required?: boolean;
+  placeholder?: string;
 }
 
 const InputNumberField = ({
   label,
   required = true,
+  placeholder ='2000',
   ...props
 }: InputNumberFieldProps) => {
   const { field, formState } = props;
@@ -18,7 +20,7 @@ const InputNumberField = ({
       <label className={`${required ? 'labelText-required' : ''} labelText`}>
         {label}
       </label>
-      <InputNumber {...field} className='py-2 w-full' />
+      <InputNumber {...field} className='py-2 w-full' placeholder={placeholder}/>
       {formState?.errors?.[field.name] && (
         <p className={'errorInput'}>價格只能輸入數字</p>
       )}
