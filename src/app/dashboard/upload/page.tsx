@@ -12,6 +12,7 @@ import useAuthenticate from '@/hooks/useAuthenticate';
 import InputField from '@/components/Input/Input';
 import InputNumberField from '@/components/InputNumber/InputNumber';
 import AxiosInstance from '@/server';
+import { BusinessType } from '@/interface';
 
 const uploadSchema = yup.object({
   image: yup.mixed().required(),
@@ -36,11 +37,6 @@ type FormValues = {
   price?: number;
   status?: string;
 };
-
-export enum BusinessType {
-  Sell = 'sell',
-  Rent = 'rent'
-}
 
 const UploadPage = () => {
   const {
