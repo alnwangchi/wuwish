@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import useAuthenticate from '@/hooks/useAuthenticate';
 import InputField from '@/components/Input/Input';
 import InputNumberField from '@/components/InputNumber/InputNumber';
-import AxiosInstance from '@/server';
+import { postProductApi } from '@/server';
 import { BusinessType } from '@/interface';
 
 const uploadSchema = yup.object({
@@ -81,18 +81,14 @@ const UploadPage = () => {
         ...data,
         image: (data.image as any)['0']
       };
-      const form = new FormData();
-      Object.entries(postData).forEach((item) => form.append(item[0], item[1]));
+      const formData = new FormData();
+      Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
       // send api
-      AxiosInstance.post('images/upload', form)
-        .then((result) => {
-          message.success('上傳成功');
+      postProductApi(formData).then((result) => {
+        if (result !== 'fail') {
           router.push('/dashboard/list');
-        })
-        .catch((error) => {
-          console.log(error);
-          message.error('上傳失敗');
-        });
+       }
+     })
     }
   };
 
