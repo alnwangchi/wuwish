@@ -1,12 +1,13 @@
-import axios from 'axios';
+import { QueryTableParams, TableResponse, ProductInfo } from '@/interface';
+import axios, { AxiosResponse } from 'axios';
+import { message } from 'antd';
 
 const AxiosInstance = axios.create({
   baseURL: 'http://localhost:9527/',
-  timeout: 3000,
+  timeout: 3000
 });
 AxiosInstance.defaults.headers.get['Content-Type'] = 'application/json';
 AxiosInstance.defaults.headers.post['Content-Type'] = 'multipart/form-data';
-
 
 // Add a request interceptor to set up retry configuration
 AxiosInstance.interceptors.request.use(
@@ -28,5 +29,40 @@ AxiosInstance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const queryApi = async (params: QueryTableParams) => {
+  try {
+    const res: AxiosResponse<TableResponse> = await AxiosInstance.get('/images/search', { params });
+    const { data } = res;
+    return data;
+  }
+  catch {
+    message.error('讀取資料失敗！');
+    return null
+  }
+};
+
+export const deleteProductApi = async (image_id: string) => {
+  try {
+    await AxiosInstance.delete(`/images?${image_id}`);
+    message.success('刪除成功！');
+  }
+  catch {
+    message.error('刪除失敗！');
+  }
+};
+
+export const postProductApi = async (formData: any) => {
+  try {
+    const res: AxiosResponse<any> = await AxiosInstance.post('images/upload', formData);
+    const {data} = res;
+    message.success('上傳成功');
+    return res;
+  }
+  catch {
+    message.error('上傳失敗');
+    return 'fail';
+  }
+};
 
 export default AxiosInstance;
