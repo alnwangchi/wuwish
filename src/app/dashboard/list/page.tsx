@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Input, Tabs, PaginationProps, TabsProps, Button } from 'antd';
+import { Col, Row, Input, Tabs, PaginationProps, TabsProps, Button, Select, Space } from 'antd';
 import { ColumnsType } from 'antd/es/table/interface';
 import useAuthenticate from '@/hooks/useAuthenticate';
 import { useRouter } from 'next/navigation';
 import { deleteProductApi, queryApi } from '@/server';
 import DataTable from '@/components/Tables';
 import { BusinessType, TableResponse } from '@/interface';
+import { Image } from 'antd';
 
 const { Search } = Input;
 
@@ -31,12 +32,23 @@ interface DefaultParamType {
   loading: boolean;
   activeKey: string;
   pagination: PaginationProps;
-  searchItem: string;
+  searchItem: string | undefined;
+  selectOption: string;
 }
 
 const List = () => {
   const isCanViewAdmin = useAuthenticate();
   const router = useRouter();
+   const options = [
+  {
+    value: 'title',
+    label: '劇名',
+  },
+  {
+    value: 'name',
+    label: '名稱',
+  },
+];
   const defaultParam = {
     current: 1,
     pagesize: 10,
@@ -44,8 +56,10 @@ const List = () => {
     loading: true,
     activeKey: BusinessType.Sell,
     pagination: {},
-    searchItem: ''
+    searchItem: undefined,
+    selectOption: options[0].value
   };
+ 
 
   const [filterParams, setFilterParams] = useState<DefaultParamType>(defaultParam);
   const [filterData, setFilterData] = useState<TableResponse>({
@@ -58,7 +72,8 @@ const List = () => {
       title: '  圖片',
       dataIndex: 'image',
       key: 'image',
-      render: (image) => <img src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
+      width: '40',
+      render: (image) => <Image width={40} src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
     },
     {
       title: '類別',
@@ -94,7 +109,8 @@ const List = () => {
       title: '  圖片',
       dataIndex: 'image',
       key: 'image',
-      render: (image) => <img src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
+      width: '40',
+      render: (image) => <Image width={40} src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
     },
     {
       title: '類別',
@@ -152,7 +168,8 @@ const List = () => {
     }
   });
 
-  const onSearch = (value: string) => {
+
+  const onSearch = (value: string | undefined) => {
     setFilterParams({
       ...filterParams,
       loading: false
@@ -162,10 +179,11 @@ const List = () => {
       page_size: filterParams.pagesize,
       page_number: filterParams.current,
       business_type: filterParams.business_type,
-      title: value === '' ? undefined : value
+      title: filterParams.selectOption === 'title' ? value: undefined ,
+      name: filterParams.selectOption === 'name' ? value: undefined,
     }).then((result) => {
       if (result) {
-        setFilterData(result)
+        setFilterData(result);
       }
     });
   };
@@ -187,13 +205,33 @@ const List = () => {
     console.log(activeKey);
     setFilterParams({
       ...filterParams,
-      activeKey: activeKey,
+      business_type: activeKey as BusinessType,
       current: 1,
       loading: true
     });
   };
 
   const items: TabsProps['items'] = [
+     {
+      key: BusinessType.Rent,
+      label: '租借',
+      children: (
+        <DataTable
+          dataSource={dataSource || []}
+          columns={rentColumns}
+          loading={filterParams.loading}
+          onChange={(pagination, _filters, sorter, extra) => {
+            if (extra.action === 'paginate') {
+              const { current } = pagination;
+              setFilterParams({
+                ...filterParams,
+                current: current || 1
+              });
+            }
+          }}
+        />
+      )
+    },
     {
       key: BusinessType.Sell,
       label: '販售',
@@ -213,39 +251,26 @@ const List = () => {
           }}
         />
       )
-    },
-    {
-      key: BusinessType.Rent,
-      label: '租借',
-      children: (
-        <DataTable
-          dataSource={dataSource || []}
-          columns={rentColumns}
-          loading={filterParams.loading}
-          onChange={(pagination, _filters, sorter, extra) => {
-            if (extra.action === 'paginate') {
-              const { current } = pagination;
-              setFilterParams({
-                ...filterParams,
-                current: current || 1
-              });
-            }
-          }}
-        />
-      )
     }
   ];
 
   return (
-    <div className="p-4">
+    <div className="p-4 container">
+      <Space.Compact className='w-full'>
+        <Select className="w-24" defaultValue={filterParams.selectOption} options={options} onSelect={(value) => setFilterParams({
+        ...filterParams,
+        selectOption: value
+      })}/>
       <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
+      </Space.Compact>
       <Row justify="center" gutter={[16, 16]}>
         <Col md={24}>
           <Tabs
             type="card"
-            defaultActiveKey={BusinessType.Sell}
+            defaultActiveKey={BusinessType.Rent}
             onChange={changeTab}
             items={items}
+            className='bg-white'
           />
         </Col>
       </Row>
