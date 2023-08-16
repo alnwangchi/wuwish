@@ -44,7 +44,7 @@ export const queryApi = async (params: QueryTableParams) => {
 
 export const deleteProductApi = async (image_id: string) => {
   try {
-    await AxiosInstance.delete(`/images?${image_id}`);
+    await AxiosInstance.delete(`/images/${image_id}`);
     message.success('刪除成功！');
   }
   catch {
