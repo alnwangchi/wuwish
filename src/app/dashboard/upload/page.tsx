@@ -50,13 +50,13 @@ const UploadPage = () => {
   } = useForm({
     resolver: yupResolver(uploadSchema),
     defaultValues: {
-      business_type: BusinessType.Sell
+      business_type: BusinessType.Rent
     }
   });
   const [file, setFile] = useState('');
   const isCanViewAdmin = useAuthenticate();
   const router = useRouter();
-  const business_value = watch('business_type', BusinessType.Sell);
+  const business_value = watch('business_type', BusinessType.Rent);
 
   useEffect(() => {
     if (!isCanViewAdmin) {
@@ -86,7 +86,7 @@ const UploadPage = () => {
       // send api
       postProductApi(formData).then((result) => {
         if (result !== 'fail') {
-          router.push('/dashboard/list');
+          setFile('');
        }
      })
     }
@@ -99,12 +99,12 @@ const UploadPage = () => {
           <p className='labelText-required labelText'>商業類型（business type）</p>
           <div className='flex gap-4 py-2'>
             <label>
-              <input type='radio' value={BusinessType.Sell} {...register('business_type')} />
-              <span className='pl-2'>販售</span>
-            </label>
-            <label>
               <input type='radio' value={BusinessType.Rent} {...register('business_type')} />
               <span className='pl-2'>租借</span>
+            </label>
+            <label>
+              <input type='radio' value={BusinessType.Sell} {...register('business_type')} />
+              <span className='pl-2'>販售</span>
             </label>
           </div>
         </div>
