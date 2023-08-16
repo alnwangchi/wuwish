@@ -45,7 +45,7 @@ const Login = () => {
         <Controller
           control={control}
           name='password'
-          render={(props) => <InputField required label='密碼' {...props} />}
+          render={(props) => <InputField required label='密碼' {...props} type="password"/>}
         />
         <input type='submit' className='submitInput' />
       </form>

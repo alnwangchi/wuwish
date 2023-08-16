@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from 'antd';
 import { ReactFormProps } from '@/interface';
-
-const { TextArea } = Input;
-
+const { Password } = Input;
 enum InputType {
   Input = 'input',
-  Textarea = 'textarea',
+  Password = 'password'
 }
 
 interface InputFieldProps extends ReactFormProps {
@@ -24,21 +22,23 @@ const InputField = ({
   ...props
 }: InputFieldProps) => {
   const { field, formState } = props;
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   return (
-    <div className='mb-4'>
-      <label
-        className={`${required ? 'labelText-required' : ''} ${'labelText'}`}
-      >
-        {label}
-      </label>
-      {type === InputType.Textarea ? (
-        <TextArea rows={4} className='py-2' />
+    <div className="mb-4">
+      <label className={`${required ? 'labelText-required' : ''} ${'labelText'}`}>{label}</label>
+      {type === InputType.Password ? (
+        <Password
+          {...field}
+          className="py-2"
+          placeholder={placeholder}
+          visibilityToggle={{ visible: passwordVisible, onVisibleChange: setPasswordVisible }}
+        />
       ) : (
-          <Input {...field} className='py-2' placeholder={placeholder} />
+        <Input {...field} className="py-2" placeholder={placeholder} />
       )}
-      {formState?.errors?.[field.name] && (
-        <p className={'errorInput'}>{label}是必填欄位</p>
-      )}
+
+      {formState?.errors?.[field.name] && <p className={'errorInput'}>{label}是必填欄位</p>}
     </div>
   );
 };
