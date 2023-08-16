@@ -93,3 +93,7 @@ body {
   color: black;
   border-color: white;
 }
+
+.ant-select .ant-select-arrow {
+  top: 35% !important;
+}
