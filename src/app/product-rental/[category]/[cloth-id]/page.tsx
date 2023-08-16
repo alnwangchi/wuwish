@@ -13,7 +13,7 @@ export default async function RentalDetail({ params }: { params: { category: str
   const { category } = params;
   return (
     <div>
-      <div className="container mx-auto flex py-20 gap-10">
+      <div className="container flex py-20 gap-10 sm:flex-row flex-col justify-center sm:justify-start">
         <DetailCard src={tmp} />
       </div>
       <div className="relative">

@@ -11,7 +11,7 @@ import Arrows from '@/components/Arrows';
 const page = () => {
   return (
     <div>
-      <div className="container mx-auto f-center flex-col">
+      <div className="container f-center flex-col">
         {/* AB版 */}
         <div className="py-20 hidden sm:block">
           <div className="flex items-center lg:gap-5 gap-3">

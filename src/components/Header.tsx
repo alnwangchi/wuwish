@@ -21,7 +21,7 @@ const Header = () => {
   if (isAdmin) {
     return (
       <div className="bg-primary-yellow py-3">
-        <div className="container mx-auto flex justify-between">
+        <div className="container flex justify-between">
           <Link href="/">
             <Image src={main_logo} width={300} height={115} alt="神龍變裝" />
           </Link>
@@ -40,7 +40,7 @@ const Header = () => {
 
   return (
     <div className="relative bg-primary-yellow py-3 z-10">
-      <div className="relative container mx-auto flex justify-center gap-[10%]">
+      <div className="relative container flex justify-center gap-[10%]">
         <Link href="/" className="z-20">
           <Image
             src={main_logo}
