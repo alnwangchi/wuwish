@@ -23,7 +23,7 @@
 
 @layer components {
   .btn {
-    @apply bg-[#ec5990] rounded mb-3 tracking-[10px] pb-3 pr-4 pl-5;
+    @apply bg-[#ec5990] rounded mb-3 tracking-[10px] pr-4 pl-5;
   }
   .btn:hover {
     @apply cursor-pointer;
