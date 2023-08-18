@@ -13,6 +13,7 @@ import InputField from '@/components/Input/Input';
 import InputNumberField from '@/components/InputNumber/InputNumber';
 import { postProductApi } from '@/server';
 import { BusinessType } from '@/interface';
+import Button from '@/components/Button';
 
 const uploadSchema = yup.object({
   image: yup.mixed().required(),
@@ -57,6 +58,10 @@ const UploadPage = () => {
   const isCanViewAdmin = useAuthenticate();
   const router = useRouter();
   const business_value = watch('business_type', BusinessType.Rent);
+  const image_value = watch('image');
+
+  console.log('image_value', image_value)
+
 
   useEffect(() => {
     if (!isCanViewAdmin) {
@@ -70,6 +75,7 @@ const UploadPage = () => {
   };
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log({ data });
     if (file === '') {
       setError('image', {
         type: 'custom',
@@ -179,12 +185,13 @@ const UploadPage = () => {
           />
           {errors.image?.type === 'custom' && <p className='errorInput'>{errors.image.message}</p>}
         </div>
-
-        <input type='submit' className='submitInput self-end' />
+        <Button text='提交' customClass='self-end' />
       </form>
-      <div className='border border-indigo-600'>
-        <label>預覽圖片</label>
-        {file && <img src={file} className='' alt='image' />}
+      <div className='flex flex-col'>
+        <label className='labelText mb-4'>預覽圖片</label>
+        <div className='border border-white flex-1'>
+          {file && <img src={file} className='' alt='image' />}
+        </div>
       </div>
     </div>
   );
