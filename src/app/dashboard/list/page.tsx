@@ -8,9 +8,11 @@ import { useRouter } from 'next/navigation';
 import { deleteProductApi, queryApi } from '@/server';
 import DataTable from '@/components/Tables';
 import { BusinessType, TableResponse } from '@/interface';
-import { Image } from 'antd';
+import { Image, Modal } from 'antd';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 
 const { Search } = Input;
+const { confirm } = Modal;
 
 interface ListType {
   image: any;
@@ -67,6 +69,23 @@ const List = () => {
     total_count: 0
   });
 
+  const showDeleteConfirm = (image_id: string) => {
+    confirm({
+      title: '確認是否要刪除',
+      icon: <ExclamationCircleFilled />,
+      content: '',
+      okText: '確認',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        deleteProductApi(image_id);
+      },
+      onCancel() {
+        console.log('取消');
+      },
+    });
+  }; 
+
   const sellColumns: ColumnsType<ListType> = [
     {
       title: '  圖片',
@@ -94,9 +113,7 @@ const List = () => {
         <Button
           type="primary"
           danger
-          onClick={() => {
-            deleteProductApi(image_id);
-          }}
+          onClick={() => showDeleteConfirm(image_id)}
         >
           刪除
         </Button>
@@ -128,9 +145,7 @@ const List = () => {
         <Button
           type="primary"
           danger
-          onClick={() => {
-            deleteProductApi(image_id);
-          }}
+          onClick={() => showDeleteConfirm(image_id)}
         >
           刪除
         </Button>
