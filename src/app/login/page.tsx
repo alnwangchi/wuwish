@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import { useRouter } from 'next/navigation';
 import { authenticationService } from '@/hooks/useAuthenticate';
 import InputField from '@/components/Input/Input';
+import Button from '@/components/Button';
 
 const loginSchema = yup
   .object({
@@ -35,7 +36,7 @@ const Login = () => {
   return (
     <div className='container flex justify-center	p-4 mx-auto'>
       {/* <DevTool control={control} placement='top-right' /> */}
-      <form onSubmit={handleSubmit(onSubmit)} className='flex-1'>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
         <Controller
           control={control}
           name='account'
@@ -47,7 +48,7 @@ const Login = () => {
           name='password'
           render={(props) => <InputField required label='密碼' {...props} type="password"/>}
         />
-        <input type='submit' className='submitInput' />
+        <Button text="提交" />
       </form>
     </div>
   );
