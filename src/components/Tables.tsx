@@ -3,10 +3,12 @@ import {  Table as TableAntd , TableProps as TablePropsAntd} from 'antd';
 
 
 interface DataTableProps extends TablePropsAntd<any> {
-    loading: boolean;
+  loading: boolean;
+  totalAmount: number;
+  defaultPageSize: number;
 }
 
-const DataTable = ({ dataSource, columns, loading, onChange, ...props }: DataTableProps) => {
+const DataTable = ({ dataSource, columns, loading, onChange, defaultPageSize, totalAmount, ...props }: DataTableProps) => {
   return (
     <TableAntd
       rowKey={() => `${Math.random()}`}
@@ -14,6 +16,11 @@ const DataTable = ({ dataSource, columns, loading, onChange, ...props }: DataTab
       dataSource={dataSource}
       loading={loading}
       onChange={onChange}
+      pagination={{
+        defaultPageSize,
+        showQuickJumper: false,
+        total: totalAmount
+      }}
     />
   );
 };
