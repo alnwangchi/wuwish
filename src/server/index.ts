@@ -46,9 +46,11 @@ export const deleteProductApi = async (image_id: string) => {
   try {
     await AxiosInstance.delete(`/images/${image_id}`);
     message.success('刪除成功！');
+    return 'success';
   }
   catch {
     message.error('刪除失敗！');
+    return 'fail';
   }
 };
 
@@ -57,7 +59,7 @@ export const postProductApi = async (formData: any) => {
     const res: AxiosResponse<any> = await AxiosInstance.post('images/upload', formData);
     const {data} = res;
     message.success('上傳成功');
-    return res;
+    return 'success';
   }
   catch {
     message.error('上傳失敗');
