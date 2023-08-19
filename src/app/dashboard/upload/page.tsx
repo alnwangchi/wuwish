@@ -16,7 +16,10 @@ import { BusinessType } from '@/interface';
 import Button from '@/components/Button';
 
 const uploadSchema = yup.object({
-  image: yup.mixed().required(),
+  image: yup.mixed().required().test('image', "請上傳圖片", (file: any) => {
+      console.log({ file }, typeof file);
+      return file && file.length
+    }),
   business_type: yup.string().required(),
   category: yup.string().required(),
   name: yup.string().required(),
@@ -42,11 +45,11 @@ type FormValues = {
 const UploadPage = () => {
   const {
     register,
+    resetField,
     handleSubmit,
-    setError,
-    clearErrors,
     watch,
     formState: { errors },
+    clearErrors,
     control
   } = useForm({
     resolver: yupResolver(uploadSchema),
@@ -54,14 +57,10 @@ const UploadPage = () => {
       business_type: BusinessType.Rent
     }
   });
-  const [file, setFile] = useState('');
+  const [previewImg, setPreviewImg] = useState('');
   const isCanViewAdmin = useAuthenticate();
   const router = useRouter();
   const business_value = watch('business_type', BusinessType.Rent);
-  const image_value = watch('image');
-
-  console.log('image_value', image_value)
-
 
   useEffect(() => {
     if (!isCanViewAdmin) {
@@ -70,19 +69,17 @@ const UploadPage = () => {
   }, [isCanViewAdmin, router]);
 
   const handleUploadImage = (e: any) => {
-    setFile(URL.createObjectURL(e.target.files[0]));
-    clearErrors(['image']);
+    if (e.target?.files?.[0]) {
+      setPreviewImg(URL.createObjectURL(e.target.files[0]));
+      // clear image error
+      clearErrors("image") 
+    }
+    else {
+      message.error('預覽圖片失敗!')
+    }
   };
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log({ data });
-    if (file === '') {
-      setError('image', {
-        type: 'custom',
-        message: '請上傳圖片！'
-      });
-      return;
-    } else {
       const postData = {
         ...data,
         image: (data.image as any)['0']
@@ -91,11 +88,13 @@ const UploadPage = () => {
       Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
       // send api
       postProductApi(formData).then((result) => {
-        if (result !== 'fail') {
-          setFile('');
+        if (result === 'success') {
+          // clear previewImage
+          setPreviewImg('');
+          // reset image value
+          resetField('image');
        }
      })
-    }
   };
 
   return (
@@ -116,7 +115,7 @@ const UploadPage = () => {
         </div>
         <div className='mb-4'>
           <label className='labelText-required labelText'>類別</label>
-          <select {...register('category')} className='w-full py-2'>
+          <select {...register('category')} className='w-full py-2 pl-[11px] rounded-md'>
             {tmpCategory.map((c) => (
               <option key={c.en} value={c.en}>
                 {c.name}
@@ -183,14 +182,14 @@ const UploadPage = () => {
             {...register('image')}
             onChange={handleUploadImage}
           />
-          {errors.image?.type === 'custom' && <p className='errorInput'>{errors.image.message}</p>}
+          {errors.image && <p className='errorInput'>{errors.image.message}</p>}
         </div>
         <Button text='提交' customClass='self-end' />
       </form>
       <div className='flex flex-col'>
         <label className='labelText mb-4'>預覽圖片</label>
         <div className='border border-white flex-1'>
-          {file && <img src={file} className='' alt='image' />}
+          {previewImg && <img src={previewImg} alt='image' />}
         </div>
       </div>
     </div>
