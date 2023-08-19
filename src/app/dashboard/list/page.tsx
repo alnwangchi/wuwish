@@ -28,7 +28,8 @@ interface ListType {
 }
 
 interface DefaultParamType {
-  current: number;
+  rentCurrent: number;
+  sellCurrent: number;
   pagesize: number;
   business_type: BusinessType;
   loading: boolean;
@@ -52,11 +53,12 @@ const List = () => {
   },
 ];
   const defaultParam = {
-    current: 1,
+    rentCurrent: 1,
+    sellCurrent: 1,
     pagesize: 10,
-    business_type: BusinessType.Sell,
+    business_type: BusinessType.Rent,
     loading: true,
-    activeKey: BusinessType.Sell,
+    activeKey: BusinessType.Rent,
     pagination: {},
     searchItem: undefined,
     selectOption: options[0].value
@@ -78,7 +80,11 @@ const List = () => {
       okType: 'danger',
       cancelText: '取消',
       onOk() {
-        deleteProductApi(image_id);
+        deleteProductApi(image_id).then((result) => {
+          if (result === 'success') {
+            onSearch(filterParams.searchItem);
+          }
+        });
       },
       onCancel() {
         console.log('取消');
@@ -86,13 +92,44 @@ const List = () => {
     });
   }; 
 
+  const rentColumns: ColumnsType<ListType> = [
+    {
+      title: '  圖片',
+      dataIndex: 'image',
+      key: 'image',
+      render: (image) => <Image width={80} src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
+    },
+    {
+      title: '類別',
+      dataIndex: 'category',
+      key: 'category'
+    },
+    { title: '劇名', dataIndex: 'title', key: 'title' },
+    { title: '名稱', dataIndex: 'name', key: 'name' },
+    { title: '編碼', dataIndex: 'number', key: 'number', width: '120px' },
+    {
+      title: '刪除',
+      dataIndex: 'delete',
+      key: 'delete',
+      width: '100px',
+      render: (image_id) => (
+        <Button
+          type="primary"
+          danger
+          onClick={() => showDeleteConfirm(image_id)}
+        >
+          刪除
+        </Button>
+      )
+    }
+  ];
+
   const sellColumns: ColumnsType<ListType> = [
     {
       title: '  圖片',
       dataIndex: 'image',
       key: 'image',
-      width: '40',
-      render: (image) => <Image width={40} src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
+      render: (image) => <Image width={80} src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
     },
     {
       title: '類別',
@@ -104,43 +141,12 @@ const List = () => {
     { title: '內容', dataIndex: 'content', key: 'content' },
     { title: '價格', dataIndex: 'price', key: 'price' },
     { title: '狀態', dataIndex: 'status', key: 'status' },
-    { title: '編碼', dataIndex: 'number', key: 'number' },
-    {
-      title: '功能',
-      dataIndex: 'delete',
-      key: 'delete',
-      render: (image_id) => (
-        <Button
-          type="primary"
-          danger
-          onClick={() => showDeleteConfirm(image_id)}
-        >
-          刪除
-        </Button>
-      )
-    }
-  ];
-
-  const rentColumns: ColumnsType<ListType> = [
-    {
-      title: '  圖片',
-      dataIndex: 'image',
-      key: 'image',
-      width: '40',
-      render: (image) => <Image width={40} src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
-    },
-    {
-      title: '類別',
-      dataIndex: 'category',
-      key: 'category'
-    },
-    { title: '劇名', dataIndex: 'title', key: 'title' },
-    { title: '名稱', dataIndex: 'name', key: 'name' },
-    { title: '編碼', dataIndex: 'number', key: 'number' },
+    { title: '編碼', dataIndex: 'number', key: 'number', width: '120px' },
     {
       title: '刪除',
       dataIndex: 'delete',
       key: 'delete',
+      width: '100px',
       render: (image_id) => (
         <Button
           type="primary"
@@ -151,7 +157,7 @@ const List = () => {
         </Button>
       )
     }
-  ];
+  ]; 
 
   const dataSource = filterData.results.map((list) => {
     const {
@@ -192,7 +198,7 @@ const List = () => {
     // fetch api
     queryApi({
       page_size: filterParams.pagesize,
-      page_number: filterParams.current,
+      page_number: filterParams.business_type === BusinessType.Rent ? filterParams.rentCurrent : filterParams.sellCurrent,
       business_type: filterParams.business_type,
       title: filterParams.selectOption === 'title' ? value: undefined ,
       name: filterParams.selectOption === 'name' ? value: undefined,
@@ -217,11 +223,9 @@ const List = () => {
   }, [isCanViewAdmin, router]);
 
   const changeTab = (activeKey: string) => {
-    console.log(activeKey);
     setFilterParams({
       ...filterParams,
       business_type: activeKey as BusinessType,
-      current: 1,
       loading: true
     });
   };
@@ -240,10 +244,13 @@ const List = () => {
               const { current } = pagination;
               setFilterParams({
                 ...filterParams,
-                current: current || 1
+                rentCurrent: current || 1,
+                loading: true
               });
             }
           }}
+          totalAmount={filterData.total_count}
+          defaultPageSize={filterParams.pagesize}
         />
       )
     },
@@ -260,10 +267,13 @@ const List = () => {
               const { current } = pagination;
               setFilterParams({
                 ...filterParams,
-                current: current || 1
+                sellCurrent: current || 1,
+                loading: true
               });
             }
           }}
+          totalAmount={filterData.total_count}
+          defaultPageSize={filterParams.pagesize}
         />
       )
     }
