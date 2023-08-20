@@ -97,3 +97,7 @@ body {
 .ant-select .ant-select-arrow {
   top: 35% !important;
 }
+
+.ant-spin .ant-spin-dot-item{
+  background-color: white !important;
+}
