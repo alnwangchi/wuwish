@@ -25,7 +25,7 @@ const Header = () => {
           <Link href="/">
             <Image src={main_logo} width={300} height={115} alt="神龍變裝" />
           </Link>
-          <section className="flex flex-col justify-center px-10">
+          <section className="flex flex-col justify-center lg:px-2">
             <div className="flex items-center">
               <nav className="flex gap-2">
                 <NavItem text="商品上傳" href="/dashboard/upload" />
@@ -50,7 +50,7 @@ const Header = () => {
               300px"
           />
         </Link>
-        <section className="hidden sm:flex sm:flex-col sm:justify-center sm:px-10">
+        <section className="hidden md:flex sm:flex-col sm:justify-center lg:px-2">
           <div className="pl-2 flex gap-2 text-black text-4xl cursor-pointer">
             <a href="">
               <FaSquareFacebook />
@@ -78,7 +78,7 @@ const Header = () => {
           </div>
         </section>
         <GiHamburgerMenu
-          className="sm:hidden absolute text-xl right-5 top-2/4 -translate-y-1/2 cursor-pointer z-20"
+          className="md:hidden absolute text-xl right-5 top-2/4 -translate-y-1/2 cursor-pointer z-20"
           onClick={() => setIsMenuOpen((prev) => !prev)}
         />
 
