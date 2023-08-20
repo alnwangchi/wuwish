@@ -28,13 +28,14 @@ interface ProductDetail {
   title: string;
 }
 
-interface QueryTableParams{
+interface QueryParams {
+  business_type: BusinessType;
+  page_size: number;
+  page_number: number;
+  category?: string;
   title?: string;
   name?: string;
-  page_number: number;
-  page_size: number;
   number?: string;
-  business_type: BusinessType
 }
 
 export enum BusinessType {
@@ -42,4 +43,4 @@ export enum BusinessType {
   Sell = 'sell'
 }
 
-export type { ReactFormProps, TableResponse, ProductInfo,QueryTableParams };
+export type { ReactFormProps, TableResponse, ProductInfo, QueryParams };
