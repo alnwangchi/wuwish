@@ -40,6 +40,10 @@
   .f-center {
     @apply flex justify-center items-center;
   }
+  /* fill miidle section by minusing Header and Footer height */
+  .mid-fill {
+    @apply min-h-[calc(100vh_-_370px)];
+  }
 }
 
 body {
@@ -98,6 +102,6 @@ body {
   top: 35% !important;
 }
 
-.ant-spin .ant-spin-dot-item{
+.ant-spin .ant-spin-dot-item {
   background-color: white !important;
 }
