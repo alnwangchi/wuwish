@@ -7,7 +7,7 @@ import useAuthenticate from '@/hooks/useAuthenticate';
 import { useRouter } from 'next/navigation';
 import { deleteProductApi, queryApi } from '@/server';
 import DataTable from '@/components/Tables';
-import { BusinessType, TableResponse } from '@/interface';
+import { BusinessType, ProductSearchResponse } from '@/interface';
 import { Image, Modal } from 'antd';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
@@ -42,16 +42,16 @@ interface DefaultParamType {
 const List = () => {
   const isCanViewAdmin = useAuthenticate();
   const router = useRouter();
-   const options = [
-  {
-    value: 'title',
-    label: '劇名',
-  },
-  {
-    value: 'name',
-    label: '名稱',
-  },
-];
+  const options = [
+    {
+      value: 'title',
+      label: '劇名'
+    },
+    {
+      value: 'name',
+      label: '名稱'
+    }
+  ];
   const defaultParam = {
     rentCurrent: 1,
     sellCurrent: 1,
@@ -63,10 +63,9 @@ const List = () => {
     searchItem: undefined,
     selectOption: options[0].value
   };
- 
 
   const [filterParams, setFilterParams] = useState<DefaultParamType>(defaultParam);
-  const [filterData, setFilterData] = useState<TableResponse>({
+  const [filterData, setFilterData] = useState<ProductSearchResponse>({
     results: [],
     total_count: 0
   });
@@ -87,10 +86,10 @@ const List = () => {
         });
       },
       onCancel() {
-        console.log('取消');
-      },
+        return;
+      }
     });
-  }; 
+  };
 
   const rentColumns: ColumnsType<ListType> = [
     {
@@ -113,11 +112,7 @@ const List = () => {
       key: 'delete',
       width: '100px',
       render: (image_id) => (
-        <Button
-          type="primary"
-          danger
-          onClick={() => showDeleteConfirm(image_id)}
-        >
+        <Button type="primary" danger onClick={() => showDeleteConfirm(image_id)}>
           刪除
         </Button>
       )
@@ -148,16 +143,12 @@ const List = () => {
       key: 'delete',
       width: '100px',
       render: (image_id) => (
-        <Button
-          type="primary"
-          danger
-          onClick={() => showDeleteConfirm(image_id)}
-        >
+        <Button type="primary" danger onClick={() => showDeleteConfirm(image_id)}>
           刪除
         </Button>
       )
     }
-  ]; 
+  ];
 
   const dataSource = filterData.results.map((list) => {
     const {
@@ -189,7 +180,6 @@ const List = () => {
     }
   });
 
-
   const onSearch = (value: string | undefined) => {
     setFilterParams({
       ...filterParams,
@@ -198,10 +188,13 @@ const List = () => {
     // fetch api
     queryApi({
       page_size: filterParams.pagesize,
-      page_number: filterParams.business_type === BusinessType.Rent ? filterParams.rentCurrent : filterParams.sellCurrent,
+      page_number:
+        filterParams.business_type === BusinessType.Rent
+          ? filterParams.rentCurrent
+          : filterParams.sellCurrent,
       business_type: filterParams.business_type,
-      title: filterParams.selectOption === 'title' ? value: undefined ,
-      name: filterParams.selectOption === 'name' ? value: undefined,
+      title: filterParams.selectOption === 'title' ? value : undefined,
+      name: filterParams.selectOption === 'name' ? value : undefined
     }).then((result) => {
       if (result) {
         setFilterData(result);
@@ -231,7 +224,7 @@ const List = () => {
   };
 
   const items: TabsProps['items'] = [
-     {
+    {
       key: BusinessType.Rent,
       label: '租借',
       children: (
@@ -281,12 +274,19 @@ const List = () => {
 
   return (
     <div className="p-4 container">
-      <Space.Compact className='w-full'>
-        <Select className="w-24" defaultValue={filterParams.selectOption} options={options} onSelect={(value) => setFilterParams({
-        ...filterParams,
-        selectOption: value
-      })}/>
-      <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
+      <Space.Compact className="w-full">
+        <Select
+          className="w-24"
+          defaultValue={filterParams.selectOption}
+          options={options}
+          onSelect={(value) =>
+            setFilterParams({
+              ...filterParams,
+              selectOption: value
+            })
+          }
+        />
+        <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
       </Space.Compact>
       <Row justify="center" gutter={[16, 16]}>
         <Col md={24}>
@@ -295,7 +295,7 @@ const List = () => {
             defaultActiveKey={BusinessType.Rent}
             onChange={changeTab}
             items={items}
-            className='bg-white'
+            className="bg-white"
           />
         </Col>
       </Row>
