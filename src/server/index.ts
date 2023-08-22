@@ -1,9 +1,9 @@
-import { QueryParams, TableResponse, ProductInfo } from '@/interface';
+import { QueryParams, ProductSearchResponse, ProductInfo } from '@/interface';
 import axios, { AxiosResponse } from 'axios';
 import { message } from 'antd';
 
 const AxiosInstance = axios.create({
-  baseURL: 'http://localhost:9527/',
+  baseURL: 'http://127.0.0.1:9527',
   timeout: 3000
 });
 AxiosInstance.defaults.headers.get['Content-Type'] = 'application/json';
@@ -32,7 +32,19 @@ AxiosInstance.interceptors.response.use(
 
 export const queryApi = async (params: QueryParams) => {
   try {
-    const res: AxiosResponse<TableResponse> = await AxiosInstance.get('/images/search', { params });
+    const res: AxiosResponse<ProductSearchResponse> = await AxiosInstance.get('/images/search', {
+      params
+    });
+    const { data } = res;
+    return data;
+  } catch {
+    message.error('讀取資料失敗！');
+    return null;
+  }
+};
+export const getClothDetail = async (id: string) => {
+  try {
+    const res: AxiosResponse<any> = await AxiosInstance.get(`/images/${id}.jpg?details=true`);
     const { data } = res;
     return data;
   } catch {

@@ -1,20 +1,24 @@
+'use client';
 import React from 'react';
-import tmp from '@/assets/img/tmp.png';
 import Image from 'next/image';
 import detail_bg from '@/assets/img/detail_bg.png';
 import relative_bg from '@/assets/img/relative_bg.png';
 import ClothesCard from '@/components/ClothesCard';
 import DetailCard from '@/components/DetailCard';
 import ClothesContainer from '@/components/template/ClothesContainer';
+import { useParams } from 'next/navigation';
+import { useGetClotheDetail } from '@/hooks/useGetClotheDetail';
 
-const tmpData = new Array(10).fill(0);
+const SaleDetailPage = () => {
+  const params = useParams();
+  const { category, clothId } = params;
 
-export default async function RentalDetail({ params }: { params: { category: string } }) {
-  const { category } = params;
+  const { clothDetail, src } = useGetClotheDetail(clothId as string);
+
   return (
     <div>
       <div className="container flex py-20 gap-10 sm:flex-row flex-col justify-center sm:justify-start">
-        <DetailCard src={tmp} />
+        <DetailCard src={src} data={clothDetail} />
       </div>
       <div className="relative">
         <Image src={detail_bg} alt="detail_bg" />
@@ -24,10 +28,12 @@ export default async function RentalDetail({ params }: { params: { category: str
         </div>
       </div>
       <ClothesContainer>
-        {tmpData.map((p) => (
+        {/* {tmpData.map((p) => (
           <ClothesCard href={`/product-rental/${category}/id`} key="d" />
-        ))}
+        ))} */}
       </ClothesContainer>
     </div>
   );
-}
+};
+
+export default SaleDetailPage;

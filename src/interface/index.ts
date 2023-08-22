@@ -6,17 +6,16 @@ interface ReactFormProps {
   fieldState: ControllerFieldState;
 }
 
-interface TableResponse {
+// 服裝搜尋 API
+interface ProductSearchResponse {
   results: ProductInfo[];
   total_count: number;
 }
-
 interface ProductInfo {
   image_id: string;
   image_path: string;
   info: ProductDetail;
 }
-
 interface ProductDetail {
   business_type: BusinessType;
   category: string;
@@ -43,4 +42,4 @@ export enum BusinessType {
   Sell = 'sell'
 }
 
-export type { ReactFormProps, TableResponse, ProductInfo, QueryParams };
+export type { ReactFormProps, ProductSearchResponse, ProductInfo, QueryParams };

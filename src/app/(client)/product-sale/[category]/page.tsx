@@ -6,30 +6,39 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import slugify from 'slugify';
 import ClothesContainer from '@/components/template/ClothesContainer';
+import { BusinessType } from '@/interface';
+import { useGetClothes } from '@/hooks/useGetClothes';
 
-const tmp = new Array(25).fill(0);
-
-const SaleCategory = () => {
+const SaleCategoryPage = () => {
   const pathname = usePathname();
   const category = pathname.split('/').at(-1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const [current, setCurrent] = useState(1);
+  const { cloth, totalCount } = useGetClothes({
+    business_type: BusinessType.Sell,
+    category,
+    currentPage
+  });
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    // console.log(page);
-    setCurrent(page);
+    setCurrentPage(page);
   };
 
   return (
-    <ClothesContainer >
-      {tmp.map((p) => (
-        <ClothesCard href={`/product-sale/${slugify(category!, { lower: true })}/id`} key='d' />
+    <ClothesContainer>
+      {cloth?.map((p: any) => (
+        <ClothesCard
+          href={`/product-sale/${slugify(category!, { lower: true })}/${p.image_id}`}
+          src={`http://127.0.0.1:9527/${p.image_path}`}
+          key={p.image_id}
+          alt="imageUrl"
+        />
       ))}
-      <div className='col-span-full'>
-        <Pagination current={current} onChange={onChange} />
+      <div className="col-span-full">
+        <Pagination current={currentPage} onChange={onChange} total={totalCount} />
       </div>
     </ClothesContainer>
   );
 };
 
-export default SaleCategory;
+export default SaleCategoryPage;
