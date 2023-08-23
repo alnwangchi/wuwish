@@ -14,11 +14,15 @@ import InputNumberField from '@/components/InputNumber/InputNumber';
 import { postProductApi } from '@/server';
 import { BusinessType } from '@/interface';
 import Button from '@/components/Button';
+import slugify from 'slugify';
 
 const uploadSchema = yup.object({
-  image: yup.mixed().required().test('image', "請上傳圖片", (file: any) => {
+  image: yup
+    .mixed()
+    .required()
+    .test('image', '請上傳圖片', (file: any) => {
       console.log({ file }, typeof file);
-      return file && file.length
+      return file && file.length;
     }),
   business_type: yup.string().required(),
   category: yup.string().required(),
@@ -72,52 +76,51 @@ const UploadPage = () => {
     if (e.target?.files?.[0]) {
       setPreviewImg(URL.createObjectURL(e.target.files[0]));
       // clear image error
-      clearErrors("image") 
-    }
-    else {
-      message.error('預覽圖片失敗!')
+      clearErrors('image');
+    } else {
+      message.error('預覽圖片失敗!');
     }
   };
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-      const postData = {
-        ...data,
-        image: (data.image as any)['0']
-      };
-      const formData = new FormData();
-      Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
-      // send api
-      postProductApi(formData).then((result) => {
-        if (result === 'success') {
-          // clear previewImage
-          setPreviewImg('');
-          // reset image value
-          resetField('image');
-       }
-     })
+    const postData = {
+      ...data,
+      image: (data.image as any)['0']
+    };
+    const formData = new FormData();
+    Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
+    // send api
+    postProductApi(formData).then((result) => {
+      if (result === 'success') {
+        // clear previewImage
+        setPreviewImg('');
+        // reset image value
+        resetField('image');
+      }
+    });
   };
 
   return (
-    <div className='container grid grid-cols-2 gap-4 p-4'>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
-        <div className='mb-4 flex flex-col text-white'>
-          <p className='labelText-required labelText'>商業類型（business type）</p>
-          <div className='flex gap-4 py-2'>
+    <div className="container grid grid-cols-2 gap-4 p-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+        <div className="mb-4 flex flex-col text-white">
+          <p className="labelText-required labelText">商業類型（business type）</p>
+          <div className="flex gap-4 py-2">
             <label>
-              <input type='radio' value={BusinessType.Rent} {...register('business_type')} />
-              <span className='pl-2'>租借</span>
+              <input type="radio" value={BusinessType.Rent} {...register('business_type')} />
+              <span className="pl-2">租借</span>
             </label>
             <label>
-              <input type='radio' value={BusinessType.Sell} {...register('business_type')} />
-              <span className='pl-2'>販售</span>
+              <input type="radio" value={BusinessType.Sell} {...register('business_type')} />
+              <span className="pl-2">販售</span>
             </label>
           </div>
         </div>
-        <div className='mb-4'>
-          <label className='labelText-required labelText'>類別</label>
-          <select {...register('category')} className='w-full py-2 pl-[11px] rounded-md'>
+        <div className="mb-4">
+          <label className="labelText-required labelText">類別</label>
+          <select {...register('category')} className="w-full py-2 pl-[11px] rounded-md">
             {tmpCategory.map((c) => (
-              <option key={c.en} value={c.en}>
+              <option key={c.en} value={slugify(c.en, { lower: true })}>
                 {c.name}
               </option>
             ))}
@@ -126,22 +129,22 @@ const UploadPage = () => {
 
         <Controller
           control={control}
-          name='title'
-          render={(props) => <InputField label='劇名' {...props} placeholder='七龍珠' />}
+          name="title"
+          render={(props) => <InputField label="劇名" {...props} placeholder="七龍珠" />}
         />
 
         <Controller
           control={control}
-          name='name'
-          render={(props) => <InputField label='名稱' {...props} placeholder='孫悟空' />}
+          name="name"
+          render={(props) => <InputField label="名稱" {...props} placeholder="孫悟空" />}
         />
 
         {business_value === BusinessType.Sell && (
           <Controller
             control={control}
-            name='content'
+            name="content"
             render={(props) => (
-              <InputField required={false} label='內容' {...props} placeholder='上衣、下身' />
+              <InputField required={false} label="內容" {...props} placeholder="上衣、下身" />
             )}
           />
         )}
@@ -149,9 +152,9 @@ const UploadPage = () => {
         {business_value === BusinessType.Sell && (
           <Controller
             control={control}
-            name='price'
+            name="price"
             render={(props) => (
-              <InputNumberField required={false} label='價格' {...props} placeholder='2000' />
+              <InputNumberField required={false} label="價格" {...props} placeholder="2000" />
             )}
           />
         )}
@@ -159,37 +162,37 @@ const UploadPage = () => {
         {business_value === BusinessType.Sell && (
           <Controller
             control={control}
-            name='status'
+            name="status"
             render={(props) => (
-              <InputField required={false} label='狀態' {...props} placeholder='八成新' />
+              <InputField required={false} label="狀態" {...props} placeholder="八成新" />
             )}
           />
         )}
 
         <Controller
           control={control}
-          name='number'
+          name="number"
           render={(props) => (
-            <InputField required={false} label='編號' {...props} placeholder='B2201' />
+            <InputField required={false} label="編號" {...props} placeholder="B2201" />
           )}
         />
 
-        <div className='mb-4'>
-          <label className='labelText-required labelText'>上傳圖片</label>
+        <div className="mb-4">
+          <label className="labelText-required labelText">上傳圖片</label>
           <input
-            type='file'
-            accept='.jpg, .jpeg, .png, .gif, .webp, .svg, .bmp'
+            type="file"
+            accept=".jpg, .jpeg, .png, .gif, .webp, .svg, .bmp"
             {...register('image')}
             onChange={handleUploadImage}
           />
-          {errors.image && <p className='errorInput'>{errors.image.message}</p>}
+          {errors.image && <p className="errorInput">{errors.image.message}</p>}
         </div>
-        <Button text='提交' customClass='self-end' />
+        <Button text="提交" customClass="self-end" />
       </form>
-      <div className='flex flex-col'>
-        <label className='labelText mb-4'>預覽圖片</label>
-        <div className='border border-white flex-1'>
-          {previewImg && <img src={previewImg} alt='image' />}
+      <div className="flex flex-col">
+        <label className="labelText mb-4">預覽圖片</label>
+        <div className="border border-white flex-1">
+          {previewImg && <img src={previewImg} alt="image" />}
         </div>
       </div>
     </div>
