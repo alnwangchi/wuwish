@@ -40,7 +40,7 @@ const Header = () => {
 
   return (
     <div className="relative bg-primary-yellow py-3 z-10">
-      <div className="relative container flex justify-center gap-[10%]">
+      <div className="relative container flex justify-center lg:gap-[10%]">
         <Link href="/" className="z-20">
           <Image
             src={main_logo}
