@@ -2,6 +2,7 @@
 import './globals.css';
 import './form.css';
 // import type { Metadata } from 'next';
+import RootStyleRegistry from '@/components/RootStyleRegistry';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -14,9 +15,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <RootStyleRegistry>
+          <Header />
+          {children}
+          <Footer />
+        </RootStyleRegistry>
       </body>
     </html>
   );
