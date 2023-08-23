@@ -8,12 +8,18 @@ import DetailCard from '@/components/DetailCard';
 import ClothesContainer from '@/components/template/ClothesContainer';
 import { useParams } from 'next/navigation';
 import { useGetClotheDetail } from '@/hooks/useGetClotheDetail';
+import { useGetRandomClothes } from '@/hooks/useGetRandomClothes';
+import { BusinessType } from '@/interface';
 
 const SaleDetailPage = () => {
   const params = useParams();
   const { category, clothId } = params;
 
   const { clothDetail, src } = useGetClotheDetail(clothId as string);
+  const { cloth } = useGetRandomClothes({
+    category: category as string,
+    business_type: BusinessType.Sell
+  });
 
   return (
     <div>
@@ -28,9 +34,13 @@ const SaleDetailPage = () => {
         </div>
       </div>
       <ClothesContainer>
-        {/* {tmpData.map((p) => (
-          <ClothesCard href={`/product-rental/${category}/id`} key="d" />
-        ))} */}
+        {cloth?.map((p) => (
+          <ClothesCard
+            href={`/product-rental/${category}/id`}
+            key="d"
+            src={`http://127.0.0.1:9527/${p.image_path}`}
+          />
+        ))}
       </ClothesContainer>
     </div>
   );
