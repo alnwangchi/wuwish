@@ -11,8 +11,11 @@ import useAuthenticate from '@/hooks/useAuthenticate';
 import { useState } from 'react';
 import clsx from 'clsx';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { useRouter } from 'next/navigation';
+import { Input } from 'antd';
 
 const Header = () => {
+  const router = useRouter();
   const pathname = usePathname();
   const isAdmin = pathname.startsWith('/dashboard') || pathname.startsWith('/login');
 
@@ -65,10 +68,15 @@ const Header = () => {
           <div className="flex items-center gap-4">
             <div className="flex">
               <Image className="" src={search_icon} width={39} height={42} alt="line" />
-              <input
-                type="text"
-                className="font-cubic p-2 focus:outline-none placeholder:font-cubic"
+              <Input
+                className="!font-cubic p-2 placeholder:font-cubic rounded-none"
+                styles={{}}
                 placeholder="輸入文字 搜尋服裝"
+                onPressEnter={(e) => {
+                  const target = e.target as HTMLInputElement;
+                  const keyword = target.value;
+                  router.push(`/search?keyword=${keyword}`);
+                }}
               />
             </div>
             <nav className="flex gap-2">

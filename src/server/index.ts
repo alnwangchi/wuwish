@@ -31,6 +31,7 @@ AxiosInstance.interceptors.response.use(
 );
 
 export const queryApi = async (params: QueryParams) => {
+  console.log('🚀 ~ param1s:', params);
   try {
     const res: AxiosResponse<ProductSearchResponse> = await AxiosInstance.get('/images/search', {
       params
@@ -42,6 +43,27 @@ export const queryApi = async (params: QueryParams) => {
     return null;
   }
 };
+
+export const keywordSearch = async (keyword: string) => {
+  // console.log('🚀 ~ params:', params);
+  const params = {
+    page_size: 10,
+    page_number: 1,
+    name: keyword,
+    title: keyword
+  };
+  try {
+    const res: AxiosResponse<ProductSearchResponse> = await AxiosInstance.get('/images/search', {
+      params
+    });
+    const { data } = res;
+    return data;
+  } catch {
+    message.error('讀取資料失敗！');
+    return null;
+  }
+};
+
 export const getClothDetail = async (id: string) => {
   try {
     const res: AxiosResponse<any> = await AxiosInstance.get(`/images/${id}.jpg?details=true`);

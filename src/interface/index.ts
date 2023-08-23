@@ -28,9 +28,9 @@ interface ProductDetail {
 }
 
 interface QueryParams {
-  business_type: BusinessType;
   page_size: number;
   page_number: number;
+  business_type?: BusinessType;
   category?: string;
   title?: string;
   name?: string;
