@@ -31,7 +31,6 @@ AxiosInstance.interceptors.response.use(
 );
 
 export const queryApi = async (params: QueryParams) => {
-  console.log('🚀 ~ param1s:', params);
   try {
     const res: AxiosResponse<ProductSearchResponse> = await AxiosInstance.get('/images/search', {
       params
@@ -45,7 +44,6 @@ export const queryApi = async (params: QueryParams) => {
 };
 
 export const keywordSearch = async (keyword: string) => {
-  // console.log('🚀 ~ params:', params);
   const params = {
     page_size: 10,
     page_number: 1,

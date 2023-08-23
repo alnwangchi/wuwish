@@ -21,7 +21,6 @@ const uploadSchema = yup.object({
     .mixed()
     .required()
     .test('image', '請上傳圖片', (file: any) => {
-      console.log({ file }, typeof file);
       return file && file.length;
     }),
   business_type: yup.string().required(),

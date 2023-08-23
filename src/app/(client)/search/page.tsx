@@ -20,7 +20,6 @@ const SearchPage = () => {
   useEffect(() => {
     (async () => {
       const res = await keywordSearch(keyword);
-      console.log('🚀 ~ res:', res);
       setCloth(res?.results);
       setTotalCount(res?.total_count);
     })();
