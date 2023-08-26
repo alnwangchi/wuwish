@@ -2,7 +2,7 @@
 'use client';
 import React, { useEffect } from 'react';
 import { message } from 'antd';
-import { tmpCategory } from '@/constance';
+import { categoryList } from '@/constance';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -118,7 +118,7 @@ const UploadPage = () => {
         <div className="mb-4">
           <label className="labelText-required labelText">類別</label>
           <select {...register('category')} className="w-full py-2 pl-[11px] rounded-md">
-            {tmpCategory.map((c) => (
+            {categoryList.map((c) => (
               <option key={c.en} value={slugify(c.en, { lower: true })}>
                 {c.name}
               </option>

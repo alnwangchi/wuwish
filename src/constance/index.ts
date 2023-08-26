@@ -1,4 +1,4 @@
-export const tmpCategory =[
+export const categoryList = [
   { name: '訂製服裝', en: 'Custom Clothing' },
   { name: '萬聖節', en: 'Halloween' },
   { name: '聖誕節', en: 'Christmas' },
@@ -13,8 +13,8 @@ export const tmpCategory =[
   { name: '時裝/表演', en: 'Fashion/Performance' },
   { name: '動物', en: 'Animals' },
   { name: '食物', en: 'Food' },
-  { name: '男中式傳統', en: "Men Traditional Chinese" },
-  { name: '女中式傳統', en: "Women Traditional Chinese" },
+  { name: '男中式傳統', en: 'Men Traditional Chinese' },
+  { name: '女中式傳統', en: 'Women Traditional Chinese' },
   { name: '日本傳統', en: 'Japanese Traditional' },
   { name: '韓國傳統', en: 'Korean Traditional' },
   { name: '歐式傳統', en: 'European Traditional' },
@@ -24,5 +24,5 @@ export const tmpCategory =[
   { name: '配件', en: 'Accessories' },
   { name: '大型道具', en: 'Large Props' },
   { name: '芭比全系列', en: 'Barbie Series' }
-]
+];
 export const authorization = { account: 'admin', password: 'dragonpassword' };
