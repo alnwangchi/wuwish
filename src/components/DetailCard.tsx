@@ -8,7 +8,7 @@ interface DetailCardProps {
 
 const DetailCard: FC<DetailCardProps> = (props) => {
   const { src, data } = props;
-  const { business_type, category, content, name, number, price, status, title } = data;
+  const { category, content, name, number, price, status, title } = data;
   return (
     <>
       <div className="w-full sm:w-2/4 f-center">

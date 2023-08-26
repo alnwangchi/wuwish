@@ -36,7 +36,7 @@ const SaleDetailPage = () => {
       <ClothesContainer>
         {cloth?.map((p) => (
           <ClothesCard
-            href={`/product-rental/${category}/id`}
+            href={`/product-rental/${category}/${p.image_id}`}
             key="d"
             src={`http://127.0.0.1:9527/${p.image_path}`}
           />

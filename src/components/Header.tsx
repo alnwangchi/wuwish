@@ -55,13 +55,13 @@ const Header = () => {
         </Link>
         <section className="hidden md:flex sm:flex-col sm:justify-center lg:px-2">
           <div className="pl-2 flex gap-2 text-black text-4xl cursor-pointer">
-            <a href="">
+            <a href="https://www.facebook.com/Wu.wish88">
               <FaSquareFacebook />
             </a>
-            <a href="">
+            <a href="https://www.instagram.com/wu_wish88/">
               <FaInstagram />
             </a>
-            <a className="f-center" href="">
+            <a className="f-center" href="https://lin.ee/w3FAybm">
               <Image src={icon_line} width={32} height={32} alt="line" />
             </a>
           </div>

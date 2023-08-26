@@ -18,7 +18,7 @@ const page = () => {
             <Hexagon>
               <div>
                 <p>詢問估價</p>
-                <a href="">
+                <a href="https://www.instagram.com/wu_wish88/">
                   <FaInstagram className="mx-auto text-4xl" />
                 </a>
               </div>
@@ -78,7 +78,7 @@ const page = () => {
           <Hexagon>
             <div>
               <p>詢問估價</p>
-              <a href="">
+              <a href="https://www.instagram.com/wu_wish88/">
                 <FaInstagram className="mx-auto text-4xl" />
               </a>
             </div>
