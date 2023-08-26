@@ -27,7 +27,7 @@ export const useGetClothes = ({
       setCloth(res?.results);
       setTotalCount(res?.total_count);
     })();
-  }, [currentPage]);
+  }, [currentPage, business_type, category]);
 
   return { cloth, totalCount };
 };

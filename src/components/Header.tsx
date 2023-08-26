@@ -92,14 +92,14 @@ const Header = () => {
 
         <section
           className={clsx(
-            'absolute py-5 bg-primary-yellow z-10 w-full transition-all duration-500',
+            'absolute py-5 bg-primary-yellow z-10 w-screen transition-all duration-500',
             isMenuOpen && 'top-[80px]',
             !isMenuOpen && '-top-[240px]'
           )}
         >
           <nav className="flex flex-col  items-center gap-2">
-            <NavItem text="商品販售" href="/product-sale" />
-            <NavItem text="租借流程" href="/rental-process" />
+            <NavItem text="商品販售" href="/product-sale" setIsMenuOpen={setIsMenuOpen} />
+            <NavItem text="租借流程" href="/rental-process" setIsMenuOpen={setIsMenuOpen} />
           </nav>
         </section>
       </div>

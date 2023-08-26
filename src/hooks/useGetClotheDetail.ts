@@ -12,7 +12,7 @@ export const useGetClotheDetail = (id: string) => {
       setClothDetail(res?.info);
       setSrc(res?.image_path);
     })();
-  }, []);
+  }, [id]);
 
   return { clothDetail, src };
 };

@@ -20,7 +20,6 @@ export const useGetRandomClothes = ({ business_type, category }: useGetClothesPa
         category,
         is_random: true
       });
-      console.log('🚀 ~ res:', res);
 
       const total = res?.total_count || 0;
 
@@ -31,7 +30,7 @@ export const useGetRandomClothes = ({ business_type, category }: useGetClothesPa
         setCloth(res?.results);
       }
     })();
-  }, []);
+  }, [business_type, category]);
 
   return { cloth };
 };

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 import navItem_bg from '@/assets/img/navItem_bg.png';
 import ball_icon from '@/assets/img/ball_icon.png';
 import yellow from '@/assets/img/yellow.svg';
@@ -8,12 +8,13 @@ import Link from 'next/link';
 interface NavItemProps {
   href: string;
   text: string;
+  setIsMenuOpen?: Dispatch<SetStateAction<boolean>>;
   alt?: string;
 }
 
-const NavItem: FC<NavItemProps> = ({ href, text, alt }) => {
+const NavItem: FC<NavItemProps> = ({ href, text, alt, setIsMenuOpen }) => {
   return (
-    <Link href={href} className="relative group w-fit">
+    <Link href={href} className="relative group w-fit" onClick={() => setIsMenuOpen?.(false)}>
       <Image
         src={yellow}
         width={129}
