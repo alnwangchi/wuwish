@@ -23,13 +23,13 @@
 
 @layer components {
   .btn {
-    @apply bg-[#ec5990] rounded mb-3 tracking-[10px] pr-4 pl-5;
+    @apply bg-[#ec5990] rounded mb-3 tracking-[10px] pr-4 pl-5 !important;
   }
   .btn:hover {
-    @apply cursor-pointer;
+    @apply cursor-pointer text-black !important;;
   }
   .btn:active {
-    @apply opacity-80	translate-y-[3px] transition-all;
+    @apply opacity-80	translate-y-[3px] transition-all !important;
   }
 }
 
