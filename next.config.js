@@ -7,6 +7,12 @@ const nextConfig = {
         hostname: '127.0.0.1',
         port: '9527',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.wuwish.com.tw',
+        port: '9527',
+        pathname: '/**'
       }
     ]
   }
