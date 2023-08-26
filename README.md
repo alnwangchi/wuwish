@@ -34,8 +34,10 @@
 
 ## 指令
 
-sudo docker build wuwish-fe .
-sudo docker run -p 3000:3000 wuwish-fe
+build: sudo docker build wuwish-fe .
+看 container 哪些正在運行: sudo docker ps
+停掉 container 找到的對應 ID(動態的): sudo docker stop $Id
+啟動: sudo docker run -p 3000:3000 wuwish-fe
 
 ## 檢討
 
