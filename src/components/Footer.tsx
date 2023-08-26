@@ -23,13 +23,13 @@ const Footer = () => {
         </div>
 
         <div className="flex gap-3 sm:absolute sm:bottom-0 sm:left-0">
-          <a href="https://www.facebook.com/Wu.wish88">
+          <a target="_blank" href="https://www.facebook.com/Wu.wish88">
             <Image src={footer_fb} width={75} height={105} alt="神龍變裝 facebook" />
           </a>
-          <a href="https://www.instagram.com/wu_wish88/">
+          <a target="_blank" href="https://www.instagram.com/wu_wish88/">
             <Image src={footer_ig} width={75} height={105} alt="神龍變裝 instagram" />
           </a>
-          <a href="https://lin.ee/w3FAybm">
+          <a target="_blank" href="https://lin.ee/w3FAybm">
             <Image src={footer_line} width={75} height={105} alt="神龍變裝 line" />
           </a>
         </div>
