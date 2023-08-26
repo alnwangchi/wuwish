@@ -75,6 +75,7 @@ const Header = () => {
                 onPressEnter={(e) => {
                   const target = e.target as HTMLInputElement;
                   const keyword = target.value;
+                  if (!keyword.trim()) return;
                   router.push(`/search?keyword=${keyword}`);
                 }}
               />

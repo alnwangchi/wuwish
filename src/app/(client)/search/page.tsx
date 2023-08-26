@@ -18,6 +18,7 @@ const SearchPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    if (!keyword) return;
     (async () => {
       const res = await keywordSearch(keyword);
       setCloth(res?.results);

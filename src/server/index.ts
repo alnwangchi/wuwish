@@ -49,7 +49,8 @@ export const keywordSearch = async (keyword: string) => {
     page_size: 10,
     page_number: 1,
     name: keyword,
-    title: keyword
+    title: keyword,
+    is_search_bar: true
   };
   try {
     const res: AxiosResponse<ProductSearchResponse> = await AxiosInstance.get('/images/search', {
