@@ -32,6 +32,11 @@
 
 ## 其他
 
+## 指令
+
+sudo docker build wuwish-fe .
+sudo docker run -p 3000:3000 wuwish-fe
+
 ## 檢討
 
 - 應該特別定義一下所有資料的欄位名稱(大小寫、空白處理)
