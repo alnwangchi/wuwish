@@ -15,7 +15,11 @@
 
 ### local API integration
 
-連上 vm 下指令 `sudo docker logs image-server_image_container_1`
+連上 vm 下指令
+
+```
+sudo docker logs image-server_image_container_1
+```
 
 ## 問題排除
 
@@ -34,10 +38,29 @@
 
 ## 指令
 
-build: `sudo docker build -t wuwish-fe .`
-看 container 哪些正在運行: `sudo docker ps`
-停掉 container 找到的對應 ID(動態的): `sudo docker stop $Id`
-啟動: `sudo docker run -p 3000:3000 wuwish-fe`
+build:
+
+```
+sudo docker build -t wuwish-fe .
+```
+
+看 container 哪些正在運行:
+
+```
+sudo docker ps
+```
+
+停掉 container 找到的對應 ID(動態的):
+
+```
+sudo docker stop $Id
+```
+
+啟動:
+
+```
+sudo docker run -p 3000:3000 wuwish-fe
+```
 
 ## 檢討
 
