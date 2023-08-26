@@ -35,6 +35,7 @@ interface QueryParams {
   title?: string;
   name?: string;
   number?: string;
+  is_random?: boolean;
 }
 
 export enum BusinessType {

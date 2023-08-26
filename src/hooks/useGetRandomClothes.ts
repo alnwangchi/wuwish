@@ -16,9 +16,11 @@ export const useGetRandomClothes = ({ business_type, category }: useGetClothesPa
       const res = await queryApi({
         business_type,
         page_number: 1,
-        page_size: 30,
-        category
+        page_size: 10,
+        category,
+        is_random: true
       });
+      console.log('🚀 ~ res:', res);
 
       const total = res?.total_count || 0;
 

@@ -64,7 +64,7 @@ export const keywordSearch = async (keyword: string) => {
 
 export const getClothDetail = async (id: string) => {
   try {
-    const res: AxiosResponse<any> = await AxiosInstance.get(`/images/${id}.jpg?details=true`);
+    const res: AxiosResponse<any> = await AxiosInstance.get(`/images/${id}?details=true`);
     const { data } = res;
     return data;
   } catch {
