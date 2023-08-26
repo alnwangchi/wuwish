@@ -96,7 +96,7 @@ const List = () => {
       title: '  圖片',
       dataIndex: 'image',
       key: 'image',
-      render: (image) => <Image width={80} src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
+      render: (image) => <Image width={80} src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`} alt="imageUrl" />
     },
     {
       title: '類別',
@@ -124,7 +124,7 @@ const List = () => {
       title: '  圖片',
       dataIndex: 'image',
       key: 'image',
-      render: (image) => <Image width={80} src={`http://127.0.0.1:9527/${image}`} alt="imageUrl" />
+      render: (image) => <Image width={80} src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`} alt="imageUrl" />
     },
     {
       title: '類別',

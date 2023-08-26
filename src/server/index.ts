@@ -1,9 +1,10 @@
+'use client';
 import { QueryParams, ProductSearchResponse, ProductInfo } from '@/interface';
 import axios, { AxiosResponse } from 'axios';
 import { message } from 'antd';
 
 const AxiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:9527',
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}`,
   timeout: 3000
 });
 AxiosInstance.defaults.headers.get['Content-Type'] = 'application/json';

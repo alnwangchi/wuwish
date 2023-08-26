@@ -12,7 +12,7 @@ const DetailCard: FC<DetailCardProps> = (props) => {
   return (
     <>
       <div className="w-full sm:w-2/4 f-center">
-        <Image src={`http://127.0.0.1:9527/${src}`} alt="TBC" width={460} height={500} />
+        <Image src={`${process.env.NEXT_PUBLIC_BASE_URL}/${src}`} alt="TBC" width={460} height={500} />
       </div>
       <div className="space-y-3 pt-5 text-white font-cubic text-3xl text-center sm:text-left">
         <p>

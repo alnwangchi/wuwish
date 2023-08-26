@@ -38,7 +38,7 @@ const SaleDetailPage = () => {
           <ClothesCard
             href={`/product-rental/${category}/${p.image_id}`}
             key="d"
-            src={`http://127.0.0.1:9527/${p.image_path}`}
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
           />
         ))}
       </ClothesContainer>

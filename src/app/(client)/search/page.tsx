@@ -34,7 +34,7 @@ const SearchPage = () => {
       {cloth?.map((p: any) => (
         <ClothesCard
           href={`/product-sale/${slugify(p.info.category!, { lower: true })}/${p.image_id}`}
-          src={`http://127.0.0.1:9527/${p.image_path}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
           key={p.image_id}
           alt="imageUrl"
         />
