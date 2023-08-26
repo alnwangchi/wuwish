@@ -44,10 +44,16 @@ export const queryApi = async (params: QueryParams) => {
   }
 };
 
-export const keywordSearch = async (keyword: string) => {
+export const keywordSearch = async ({
+  keyword,
+  currentPage
+}: {
+  keyword: string;
+  currentPage: number;
+}) => {
   const params = {
     page_size: 25,
-    page_number: 1,
+    page_number: currentPage,
     name: keyword,
     title: keyword,
     is_search_bar: true

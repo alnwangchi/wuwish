@@ -20,11 +20,11 @@ const SearchPage = () => {
   useEffect(() => {
     if (!keyword) return;
     (async () => {
-      const res = await keywordSearch(keyword);
+      const res = await keywordSearch({ keyword, currentPage });
       setCloth(res?.results);
       setTotalCount(res?.total_count);
     })();
-  }, [keyword]);
+  }, [keyword, currentPage]);
 
   const onChange: PaginationProps['onChange'] = (page) => {
     setCurrentPage(page);
