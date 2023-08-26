@@ -46,7 +46,7 @@ export const queryApi = async (params: QueryParams) => {
 
 export const keywordSearch = async (keyword: string) => {
   const params = {
-    page_size: 10,
+    page_size: 25,
     page_number: 1,
     name: keyword,
     title: keyword,
