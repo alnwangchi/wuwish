@@ -25,4 +25,11 @@ export const categoryList = [
   { name: '大型道具', en: 'Large Props' },
   { name: '芭比全系列', en: 'Barbie Series' }
 ];
+
+export const saleCategoryList = [
+  { name: '萬聖節', en: 'Halloween' },
+  { name: '卡通/動漫', en: 'Cartoons/Animations' },
+  { name: '電影/影集', en: 'Movies/TV Series' }
+];
+
 export const authorization = { account: 'admin', password: 'dragonpassword' };

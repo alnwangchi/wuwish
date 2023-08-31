@@ -1,5 +1,5 @@
 import CategoryItem from '@/components/CategoryItem';
-import { categoryList } from '@/constance';
+import { saleCategoryList } from '@/constance';
 import React from 'react';
 import slugify from 'slugify';
 import CategoryContainer from '@/components/template/CategoryContainer';
@@ -7,7 +7,7 @@ import CategoryContainer from '@/components/template/CategoryContainer';
 const page = () => {
   return (
     <CategoryContainer>
-      {categoryList.map((c) => (
+      {saleCategoryList.map((c) => (
         <CategoryItem
           text={c.name}
           key={c.name}
