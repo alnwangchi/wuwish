@@ -30,7 +30,8 @@ module.exports = {
             lineHeight: '2rem',
             letterSpacing: '0.05em'
           }
-        ]
+        ],
+        clamp1: 'clamp(1rem, 2.5vw, 2.5rem)'
       }
     }
   },
