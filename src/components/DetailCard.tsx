@@ -36,18 +36,24 @@ const DetailCard: FC<DetailCardProps> = (props) => {
           <span>名稱 : </span>
           <span>{name}</span>
         </p>
-        <p className="!mb-10">
-          <span>內容 : </span>
-          <span>{content}</span>
-        </p>
-        <p>
-          <span>價格 : </span>
-          <span>{price}</span>
-        </p>
-        <p>
-          <span>狀態 : </span>
-          <span>{status}</span>
-        </p>
+        {content && (
+          <p className="!mb-10">
+            <span>內容 : </span>
+            <span>{content}</span>
+          </p>
+        )}
+        {price && (
+          <p>
+            <span>價格 : </span>
+            <span>{price}</span>
+          </p>
+        )}
+        {status && (
+          <p>
+            <span>狀態 : </span>
+            <span>{status}</span>
+          </p>
+        )}
       </div>
     </>
   );
