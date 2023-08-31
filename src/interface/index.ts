@@ -43,4 +43,4 @@ export enum BusinessType {
   Sell = 'sell'
 }
 
-export type { ReactFormProps, ProductSearchResponse, ProductInfo, QueryParams };
+export type { ReactFormProps, ProductSearchResponse, ProductInfo, QueryParams, ProductDetail };

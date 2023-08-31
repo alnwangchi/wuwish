@@ -6,9 +6,15 @@ import { useEffect, useState } from 'react';
 interface useGetClothesParamsType {
   business_type: BusinessType;
   category?: string;
+  title?: string;
 }
 
-export const useGetRandomClothes = ({ business_type, category }: useGetClothesParamsType) => {
+// 推薦相同劇名的
+export const useGetRandomClothes = ({
+  business_type,
+  category,
+  title
+}: useGetClothesParamsType) => {
   const [cloth, setCloth] = useState<ProductInfo[] | undefined>([]);
 
   useEffect(() => {
@@ -18,6 +24,7 @@ export const useGetRandomClothes = ({ business_type, category }: useGetClothesPa
         page_number: 1,
         page_size: 10,
         category,
+        title,
         is_random: true
       });
 
@@ -30,7 +37,7 @@ export const useGetRandomClothes = ({ business_type, category }: useGetClothesPa
         setCloth(res?.results);
       }
     })();
-  }, [business_type, category]);
+  }, [business_type, category, title]);
 
   return { cloth };
 };

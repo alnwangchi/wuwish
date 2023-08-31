@@ -10,6 +10,7 @@ import { useParams } from 'next/navigation';
 import { useGetClotheDetail } from '@/hooks/useGetClotheDetail';
 import { BusinessType } from '@/interface';
 import { useGetRandomClothes } from '@/hooks/useGetRandomClothes';
+import { Spin } from 'antd';
 
 const RentalDetailPage = () => {
   const params = useParams();
@@ -18,13 +19,21 @@ const RentalDetailPage = () => {
   const { clothDetail, src } = useGetClotheDetail(clothId as string);
   const { cloth } = useGetRandomClothes({
     category: category as string,
-    business_type: BusinessType.Rent
+    business_type: BusinessType.Rent,
+    title: clothDetail?.title
   });
 
   return (
     <div>
       <div className="container flex py-8 gap-10 sm:flex-row flex-col justify-center sm:justify-start">
-        <DetailCard src={src} data={clothDetail} />
+        {clothDetail ? (
+          <DetailCard src={src} data={clothDetail} />
+        ) : (
+          <div className="grow min-h-[40vh] f-center">
+            <Spin size="large"></Spin>
+            <p className="text-white">載入中....</p>
+          </div>
+        )}
       </div>
       <div className="relative">
         <Image src={detail_bg} alt="detail_bg" />

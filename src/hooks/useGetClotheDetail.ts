@@ -1,9 +1,9 @@
-import { BusinessType, ProductInfo } from '@/interface';
+import { ProductDetail } from '@/interface';
 import { getClothDetail } from '@/server';
 import { useEffect, useState } from 'react';
 
 export const useGetClotheDetail = (id: string) => {
-  const [clothDetail, setClothDetail] = useState<ProductInfo[] | undefined>([]);
+  const [clothDetail, setClothDetail] = useState<ProductDetail | undefined>();
   const [src, setSrc] = useState('');
 
   useEffect(() => {
