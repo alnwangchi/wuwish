@@ -3,11 +3,12 @@ import Image from 'next/image';
 import footer_fb from '@/assets/img/footer_fb.png';
 import footer_ig from '@/assets/img/footer_ig.png';
 import footer_line from '@/assets/img/footer_line.png';
+import footer_comment from '@/assets/img/footer_comment.png';
 
 const Footer = () => {
   return (
     <div className="bg-primary-yellow pb-5 font-cubic mt-10">
-      <div className="relative container flex justify-center items-center flex-col gap-3 sm:flex-row">
+      <div className="relative container flex justify-center items-center flex-col gap-3 md:flex-row">
         <div className="text-center text-primary-dk">
           <Image
             src={mainLogo}
@@ -31,6 +32,9 @@ const Footer = () => {
           </a>
           <a target="_blank" href="https://lin.ee/w3FAybm">
             <Image src={footer_line} width={75} height={105} alt="神龍變裝 line" />
+          </a>
+          <a target="_blank" href="https://reurl.cc/gD9mK4">
+            <Image src={footer_comment} width={75} height={105} alt="神龍變裝 評論" />
           </a>
         </div>
       </div>
