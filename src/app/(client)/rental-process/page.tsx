@@ -7,6 +7,7 @@ import step4 from '@/assets/img/step4.png';
 import rental_bg from '@/assets/img/rental_bg.png';
 import { FaInstagram } from 'react-icons/fa6';
 import Arrows from '@/components/Arrows';
+import Link from 'next/link';
 
 const page = () => {
   return (
@@ -15,21 +16,23 @@ const page = () => {
         {/* AB版 */}
         <div className="py-20 hidden sm:block">
           <div className="flex items-center lg:gap-5 gap-3">
-            <Hexagon>
-              <div>
-                <p>詢問估價</p>
-                <a target="_blank" href="https://www.instagram.com/wu_wish88/">
+            <a target="_blank" href="https://www.instagram.com/wu_wish88/">
+              <Hexagon>
+                <div>
+                  <p>詢問估價</p>
                   <FaInstagram className="mx-auto text-4xl" />
-                </a>
-              </div>
-            </Hexagon>
+                </div>
+              </Hexagon>
+            </a>
             <Arrows />
-            <Hexagon>
-              <div>
-                <p>試裝</p>
-                <Image src={step2} alt="試裝" />
-              </div>
-            </Hexagon>
+            <Link href="/">
+              <Hexagon>
+                <div>
+                  <p>試裝</p>
+                  <Image src={step2} alt="試裝" />
+                </div>
+              </Hexagon>
+            </Link>
             <Arrows />
             <Hexagon>
               <div>
@@ -75,20 +78,22 @@ const page = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2 py-10 sm:hidden">
-          <Hexagon>
-            <div>
-              <p>詢問估價</p>
-              <a target="_blank" href="https://www.instagram.com/wu_wish88/">
+          <a target="_blank" href="https://www.instagram.com/wu_wish88/">
+            <Hexagon>
+              <div>
+                <p>詢問估價</p>
                 <FaInstagram className="mx-auto text-4xl" />
-              </a>
-            </div>
-          </Hexagon>
-          <Hexagon>
-            <div>
-              <p>試裝</p>
-              <Image src={step2} alt="試裝" />
-            </div>
-          </Hexagon>
+              </div>
+            </Hexagon>
+          </a>
+          <Link href="/">
+            <Hexagon>
+              <div>
+                <p>試裝</p>
+                <Image src={step2} alt="試裝" />
+              </div>
+            </Hexagon>
+          </Link>
           <Hexagon>
             <div>
               <p>付訂金</p>
