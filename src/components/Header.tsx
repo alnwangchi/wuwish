@@ -98,7 +98,18 @@ const Header = () => {
             !isMenuOpen && '-top-[240px]'
           )}
         >
-          <nav className="flex flex-col  items-center gap-2">
+          <nav className="flex flex-col  items-center gap-2 px-5">
+            <Input
+              className="!font-cubic p-2 placeholder:font-cubic rounded-none"
+              styles={{}}
+              placeholder="輸入文字 搜尋服裝"
+              onPressEnter={(e) => {
+                const target = e.target as HTMLInputElement;
+                const keyword = target.value;
+                if (!keyword.trim()) return;
+                router.push(`/search?keyword=${keyword}`);
+              }}
+            />
             <NavItem text="商品販售" href="/product-sale" setIsMenuOpen={setIsMenuOpen} />
             <NavItem text="租借流程" href="/rental-process" setIsMenuOpen={setIsMenuOpen} />
           </nav>
