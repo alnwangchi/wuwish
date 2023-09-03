@@ -31,7 +31,7 @@ module.exports = {
             letterSpacing: '0.05em'
           }
         ],
-        clamp1: 'clamp(1rem, 2.5vw, 2.5rem)',
+        clamp1: 'clamp(1.5rem, 3.5vw, 2.5rem)',
         clamp2: 'clamp(1rem, 2vw, 1.5rem)'
       }
     }
