@@ -35,7 +35,7 @@ interface DefaultParamType {
   loading: boolean;
   activeKey: string;
   pagination: PaginationProps;
-  searchItem: string | undefined;
+  searchValue: string | undefined;
   selectOption: string;
 }
 
@@ -60,7 +60,7 @@ const List = () => {
     loading: true,
     activeKey: BusinessType.Rent,
     pagination: {},
-    searchItem: undefined,
+    searchValue: undefined,
     selectOption: options[0].value
   };
 
@@ -81,7 +81,7 @@ const List = () => {
       onOk() {
         deleteProductApi(image_id).then((result) => {
           if (result === 'success') {
-            onSearch(filterParams.searchItem);
+            onSearch(filterParams.searchValue);
           }
         });
       },
@@ -96,7 +96,9 @@ const List = () => {
       title: '  圖片',
       dataIndex: 'image',
       key: 'image',
-      render: (image) => <Image width={80} src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`} alt="imageUrl" />
+      render: (image) => (
+        <Image width={80} src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`} alt="imageUrl" />
+      )
     },
     {
       title: '類別',
@@ -124,7 +126,9 @@ const List = () => {
       title: '  圖片',
       dataIndex: 'image',
       key: 'image',
-      render: (image) => <Image width={80} src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`} alt="imageUrl" />
+      render: (image) => (
+        <Image width={80} src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`} alt="imageUrl" />
+      )
     },
     {
       title: '類別',
@@ -181,8 +185,10 @@ const List = () => {
   });
 
   const onSearch = (value: string | undefined) => {
+    const searchValue = value ? value.trim() : undefined;
     setFilterParams({
       ...filterParams,
+      searchValue,
       loading: false
     });
     // fetch api
@@ -193,8 +199,7 @@ const List = () => {
           ? filterParams.rentCurrent
           : filterParams.sellCurrent,
       business_type: filterParams.business_type,
-      title: filterParams.selectOption === 'title' ? value : undefined,
-      name: filterParams.selectOption === 'name' ? value : undefined
+      [filterParams.selectOption]: searchValue
     }).then((result) => {
       if (result) {
         setFilterData(result);
@@ -204,7 +209,7 @@ const List = () => {
 
   useEffect(() => {
     if (filterParams.loading) {
-      onSearch(filterParams.searchItem);
+      onSearch(filterParams.searchValue);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterParams]);
