@@ -1,6 +1,5 @@
 import React from 'react';
-import {  Table as TableAntd , TableProps as TablePropsAntd} from 'antd';
-
+import { Table as TableAntd, TableProps as TablePropsAntd } from 'antd';
 
 interface DataTableProps extends TablePropsAntd<any> {
   loading: boolean;
@@ -8,7 +7,15 @@ interface DataTableProps extends TablePropsAntd<any> {
   defaultPageSize: number;
 }
 
-const DataTable = ({ dataSource, columns, loading, onChange, defaultPageSize, totalAmount, ...props }: DataTableProps) => {
+const DataTable = ({
+  dataSource,
+  columns,
+  loading,
+  onChange,
+  defaultPageSize,
+  totalAmount,
+  ...props
+}: DataTableProps) => {
   return (
     <TableAntd
       rowKey={() => `${Math.random()}`}
@@ -19,7 +26,8 @@ const DataTable = ({ dataSource, columns, loading, onChange, defaultPageSize, to
       pagination={{
         defaultPageSize,
         showQuickJumper: false,
-        total: totalAmount
+        total: totalAmount,
+        showSizeChanger: false
       }}
     />
   );
