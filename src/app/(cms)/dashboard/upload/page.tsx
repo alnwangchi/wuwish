@@ -183,6 +183,7 @@ const UploadPage = () => {
             accept=".jpg, .jpeg, .png, .gif, .webp, .svg, .bmp"
             {...register('image')}
             onChange={handleUploadImage}
+            className="text-white"
           />
           {errors.image && <p className="errorInput">{errors.image.message}</p>}
         </div>
