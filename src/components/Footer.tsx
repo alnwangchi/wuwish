@@ -8,7 +8,7 @@ import footer_comment from '@/assets/img/footer_comment.png';
 const Footer = () => {
   return (
     <div className="bg-primary-yellow pb-5 font-cubic mt-10">
-      <div className="relative container flex justify-center items-center flex-col gap-3 md:flex-row">
+      <div className="relative container flex justify-center items-center flex-col gap-3 lg:flex-row">
         <div className="text-center text-primary-dk">
           <Image
             src={mainLogo}
@@ -23,7 +23,7 @@ const Footer = () => {
           <p>wu.wish88@gmail.com</p>
         </div>
 
-        <div className="flex gap-3 sm:absolute sm:bottom-0 sm:left-0">
+        <div className="flex gap-3 lg:absolute lg:bottom-0 lg:left-0">
           <a target="_blank" href="https://www.facebook.com/Wu.wish88">
             <Image src={footer_fb} width={75} height={105} alt="神龍變裝 facebook" />
           </a>
