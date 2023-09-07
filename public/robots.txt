@@ -1,0 +1,14 @@
+# test-bot
+User-agent: test-bot
+Allow: /
+
+# black-listed-bot
+User-agent: black-listed-bot
+Disallow: /dashboard
+Disallow: /login
+
+# Host
+Host: https://www.wuwish.com.tw/
+
+# Sitemaps
+Sitemap: https://www.wuwish.com.tw/sitemap.xml
