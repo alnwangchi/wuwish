@@ -28,7 +28,7 @@ const SaleCategoryPage = () => {
     <ClothesContainer>
       {cloth?.map((p: any) => (
         <ClothesCard
-          href={`/product-sale/${slugify(category!, { lower: true })}/${p.image_id}`}
+          href={`/product-sell/${slugify(category!, { lower: true })}/${p.image_id}`}
           src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
           key={p.image_id}
           alt="imageUrl"

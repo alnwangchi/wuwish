@@ -8,18 +8,18 @@ import DetailCard from '@/components/DetailCard';
 import ClothesContainer from '@/components/template/ClothesContainer';
 import { useParams } from 'next/navigation';
 import { useGetClotheDetail } from '@/hooks/useGetClotheDetail';
-import { useGetRandomClothes } from '@/hooks/useGetRandomClothes';
 import { BusinessType } from '@/interface';
+import { useGetRandomClothes } from '@/hooks/useGetRandomClothes';
 import { Spin } from 'antd';
 
-const SaleDetailPage = () => {
+const RentalDetailPage = () => {
   const params = useParams();
   const { category, clothId } = params;
 
   const { clothDetail, src } = useGetClotheDetail(clothId as string);
   const { cloth } = useGetRandomClothes({
     category: category as string,
-    business_type: BusinessType.Sell,
+    business_type: BusinessType.Rent,
     title: clothDetail?.title
   });
 
@@ -45,7 +45,7 @@ const SaleDetailPage = () => {
       <ClothesContainer>
         {cloth?.map((p) => (
           <ClothesCard
-            href={`/product-rental/${category}/${p.image_id}`}
+            href={`/product-rent/${category}/${p.image_id}`}
             key="d"
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
           />
@@ -55,4 +55,4 @@ const SaleDetailPage = () => {
   );
 };
 
-export default SaleDetailPage;
+export default RentalDetailPage;

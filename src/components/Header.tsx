@@ -81,8 +81,8 @@ const Header = () => {
               />
             </div>
             <nav className="flex gap-2">
-              <NavItem text="商品販售" href="/product-sale" />
-              <NavItem text="租借流程" href="/rental-process" />
+              <NavItem text="商品販售" href="/product-sell" />
+              <NavItem text="租借流程" href="/rent-process" />
             </nav>
           </div>
         </section>
@@ -110,8 +110,8 @@ const Header = () => {
                 router.push(`/search?keyword=${keyword}`);
               }}
             />
-            <NavItem text="商品販售" href="/product-sale" setIsMenuOpen={setIsMenuOpen} />
-            <NavItem text="租借流程" href="/rental-process" setIsMenuOpen={setIsMenuOpen} />
+            <NavItem text="商品販售" href="/product-sell" setIsMenuOpen={setIsMenuOpen} />
+            <NavItem text="租借流程" href="/rent-process" setIsMenuOpen={setIsMenuOpen} />
           </nav>
         </section>
       </div>

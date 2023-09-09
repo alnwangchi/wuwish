@@ -23,7 +23,7 @@ export default function Home() {
           <CategoryItem
             text={c.name}
             key={c.name}
-            href={`/product-rental/${slugify(c.en, { lower: true })}`}
+            href={`/product-rent/${slugify(c.en, { lower: true })}`}
           />
         ))}
       </CategoryContainer>

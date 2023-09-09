@@ -11,7 +11,7 @@ const page = () => {
         <CategoryItem
           text={c.name}
           key={c.name}
-          href={`/product-sale/${slugify(c.en, { lower: true })}`}
+          href={`/product-sell/${slugify(c.en, { lower: true })}`}
         />
       ))}
     </CategoryContainer>

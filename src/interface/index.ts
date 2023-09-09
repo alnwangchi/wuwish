@@ -1,5 +1,8 @@
 import { ControllerFieldState, ControllerRenderProps, UseFormStateReturn } from 'react-hook-form';
-
+export enum BusinessType {
+  Rent = 'rent',
+  Sell = 'sell'
+}
 interface ReactFormProps {
   field: ControllerRenderProps<any, any>;
   formState: UseFormStateReturn<any>;
@@ -36,11 +39,6 @@ interface QueryParams {
   name?: string;
   number?: string;
   is_random?: boolean;
-}
-
-export enum BusinessType {
-  Rent = 'rent',
-  Sell = 'sell'
 }
 
 export type { ReactFormProps, ProductSearchResponse, ProductInfo, QueryParams, ProductDetail };
