@@ -39,7 +39,7 @@ const SaleDetailPage = () => {
         <Image src={detail_bg} alt="detail_bg" />
         <div className="absolute top-1/4 left-2/4 -translate-y-1/2 -translate-x-1/2">
           <Image src={relative_bg} width={400} alt="relative_bg" />
-          <p className="ab-center text-white font-cubic text-clamp1">相關推薦</p>
+          <p className="ab-center text-white font-cubic text-clamp1 whitespace-nowrap">相關推薦</p>
         </div>
       </div>
       <ClothesContainer>
