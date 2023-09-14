@@ -34,6 +34,8 @@ sudo docker logs image-server_image_container_1
 
 這問題應該是某時段 cpu 利用率爆表造成，之後可能要啟用更高等級的個體類型 (目前倒數第二便宜的)
 
+## 降費率
+
 ## 其他
 
 ## 指令
