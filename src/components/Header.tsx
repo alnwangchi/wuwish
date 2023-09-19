@@ -8,7 +8,7 @@ import { FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
 import NavItem from './NavItem';
 import { usePathname } from 'next/navigation';
 import useAuthenticate from '@/hooks/useAuthenticate';
-import { useState } from 'react';
+import { useState, KeyboardEvent } from 'react';
 import clsx from 'clsx';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { useRouter } from 'next/navigation';
@@ -20,6 +20,14 @@ const Header = () => {
   const isAdmin = pathname.startsWith('/dashboard') || pathname.startsWith('/login');
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const onSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    const keyword = target.value;
+    if (!keyword.trim()) return;
+    router.push(`/search?keyword=${keyword}`);
+    setIsMenuOpen?.(false);
+  };
 
   if (isAdmin) {
     return (
@@ -72,12 +80,7 @@ const Header = () => {
                 className="!font-cubic p-2 placeholder:font-cubic rounded-none"
                 styles={{}}
                 placeholder="輸入文字 搜尋服裝"
-                onPressEnter={(e) => {
-                  const target = e.target as HTMLInputElement;
-                  const keyword = target.value;
-                  if (!keyword.trim()) return;
-                  router.push(`/search?keyword=${keyword}`);
-                }}
+                onPressEnter={onSearch}
               />
             </div>
             <nav className="flex gap-2">
@@ -103,12 +106,7 @@ const Header = () => {
               className="!font-cubic p-2 placeholder:font-cubic rounded-none"
               styles={{}}
               placeholder="輸入文字 搜尋服裝"
-              onPressEnter={(e) => {
-                const target = e.target as HTMLInputElement;
-                const keyword = target.value;
-                if (!keyword.trim()) return;
-                router.push(`/search?keyword=${keyword}`);
-              }}
+              onPressEnter={onSearch}
             />
             <NavItem text="商品販售" href="/product-sell" setIsMenuOpen={setIsMenuOpen} />
             <NavItem text="租借流程" href="/rent-process" setIsMenuOpen={setIsMenuOpen} />
