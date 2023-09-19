@@ -25,7 +25,7 @@ const RentalDetailPage = () => {
 
   return (
     <div>
-      <div className="container flex py-8 gap-10 sm:flex-row flex-col justify-center sm:justify-start">
+      <div className="container flex py-8 sm:gap-10 sm:flex-row flex-col justify-center sm:justify-start">
         {clothDetail ? (
           <DetailCard src={src} data={clothDetail} />
         ) : (

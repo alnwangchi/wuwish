@@ -122,10 +122,10 @@ const page = () => {
             </div>
           </Hexagon>
         </div>
-        <div className="relative w-full py-20 sm:py-0">
-          <Image src={rental_bg} className="w-full invisible sm:visible" alt="deco" />
-          <div className="ab-center w-3/4 font-cubic leading-loose text-white text-clamp2">
-            <h2 className="text-center mb-10 text-[4vw]">租借細則</h2>
+        <div className="relative w-full sm:py-20 sm:py-0">
+          <Image src={rental_bg} className="w-full hidden sm:block" alt="deco" />
+          <div className="mx-auto sm:ab-center w-3/4 font-cubic leading-loose text-white text-clamp2">
+            <h2 className="text-center mb-10 clamp1">租借細則</h2>
             <p>
               1.訂單確認後，每套服裝需先預繳1/2之訂金，
               <span className="text-red-600">如訂單取消，訂金不退還。</span>
