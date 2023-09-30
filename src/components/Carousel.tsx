@@ -21,6 +21,10 @@ import 'slick-carousel/slick/slick-theme.css';
 import c1 from '@/assets/img/c1.jpg';
 import c2 from '@/assets/img/c2.jpg';
 import c3 from '@/assets/img/c3.jpg';
+import c4 from '@/assets/img/c4.jpg';
+import c5 from '@/assets/img/c5.jpg';
+import c6 from '@/assets/img/c6.jpg';
+import c7 from '@/assets/img/c7.jpg';
 
 const paginationImg = [
   draganball_1,
@@ -39,6 +43,7 @@ export default function Carousel() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplaySpeed: 5000,
     // 官網範例有夠爛 根本沒用
     arrows: false,
     // nextArrow: <div className='w-5 h20 bg-orange-600'></div>,
@@ -73,16 +78,16 @@ export default function Carousel() {
           <Image src={c3} alt="" />
         </div>
         <div>
-          <Image src={c1} alt="" />
+          <Image src={c4} alt="" />
         </div>
         <div>
-          <Image src={c2} alt="" />
+          <Image src={c5} alt="" />
         </div>
         <div>
-          <Image src={c3} alt="" />
+          <Image src={c6} alt="" />
         </div>
         <div>
-          <Image src={c1} alt="" />
+          <Image src={c7} alt="" />
         </div>
       </Slider>
       <div
