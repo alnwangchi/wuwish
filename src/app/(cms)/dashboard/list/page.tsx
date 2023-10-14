@@ -5,7 +5,7 @@ import { Col, Row, Input, Tabs, PaginationProps, TabsProps, Button, Select, Spac
 import { ColumnsType } from 'antd/es/table/interface';
 import useAuthenticate from '@/hooks/useAuthenticate';
 import { useRouter } from 'next/navigation';
-import { deleteProductApi, queryApi } from '@/server';
+import { deleteProductApi, deleteMultipleProductApi, queryApi } from '@/server';
 import DataTable from '@/components/Tables';
 import { BusinessType, ProductSearchResponse } from '@/interface';
 import { Image, Modal } from 'antd';
@@ -39,6 +39,11 @@ interface DefaultParamType {
   selectOption: string;
 }
 
+enum DeleteType {
+  Single = 'single',
+  Multiple = 'multiple'
+}
+
 const List = () => {
   const isCanViewAdmin = useAuthenticate();
   const router = useRouter();
@@ -69,8 +74,18 @@ const List = () => {
     results: [],
     total_count: 0
   });
+  const [showBatchDeleteBtn, setShowBatchDeleteBtn] = useState(false);
+  const [selectedImageIds, setSelectedImageIds] = useState<string[]>([]);
 
-  const showDeleteConfirm = (image_id: string) => {
+  const showDeleteConfirm = ({
+    image_id,
+    image_ids,
+    type
+  }: {
+    image_id?: string;
+    image_ids?: string[];
+    type: DeleteType;
+  }) => {
     confirm({
       title: '確認是否要刪除',
       icon: <ExclamationCircleFilled />,
@@ -79,11 +94,23 @@ const List = () => {
       okType: 'danger',
       cancelText: '取消',
       onOk() {
-        deleteProductApi(image_id).then((result) => {
-          if (result === 'success') {
-            onSearch(filterParams.searchValue);
-          }
-        });
+        if (type === DeleteType.Single && image_id) {
+          deleteProductApi(image_id).then((result) => {
+            if (result === 'success') {
+              onSearch(filterParams.searchValue);
+            }
+          });
+          removeSelectImageIds({ type: DeleteType.Single, image_id });
+        }
+        // batch delete
+        if (type === DeleteType.Multiple && image_ids?.length) {
+          deleteMultipleProductApi(image_ids).then((result) => {
+            if (result === 'success') {
+              onSearch(filterParams.searchValue);
+            }
+          });
+          removeSelectImageIds({ type: DeleteType.Multiple });
+        }
       },
       onCancel() {
         return;
@@ -93,7 +120,7 @@ const List = () => {
 
   const rentColumns: ColumnsType<ListType> = [
     {
-      title: '  圖片',
+      title: '圖片',
       dataIndex: 'image',
       key: 'image',
       render: (image) => (
@@ -114,7 +141,11 @@ const List = () => {
       key: 'delete',
       width: '100px',
       render: (image_id) => (
-        <Button type="primary" danger onClick={() => showDeleteConfirm(image_id)}>
+        <Button
+          type="primary"
+          danger
+          onClick={() => showDeleteConfirm({ image_id, type: DeleteType.Single })}
+        >
           刪除
         </Button>
       )
@@ -147,7 +178,11 @@ const List = () => {
       key: 'delete',
       width: '100px',
       render: (image_id) => (
-        <Button type="primary" danger onClick={() => showDeleteConfirm(image_id)}>
+        <Button
+          type="primary"
+          danger
+          onClick={() => showDeleteConfirm({ image_id, type: DeleteType.Single })}
+        >
           刪除
         </Button>
       )
@@ -162,6 +197,7 @@ const List = () => {
     } = list;
     if (business_type === BusinessType.Sell) {
       return {
+        key: image_id,
         image: image_path,
         category,
         name,
@@ -174,6 +210,7 @@ const List = () => {
       };
     } else {
       return {
+        key: image_id,
         image: image_path,
         category,
         name,
@@ -207,6 +244,30 @@ const List = () => {
     });
   };
 
+  const changeTab = (activeKey: string) => {
+    setFilterParams({
+      ...filterParams,
+      business_type: activeKey as BusinessType,
+      loading: true
+    });
+  };
+
+  const onSelect = (selectedRowKeys: React.Key[]) => {
+    if (selectedRowKeys.length) {
+      setSelectedImageIds(selectedRowKeys.map((item) => String(item)));
+    } else {
+      setSelectedImageIds([]);
+    }
+  };
+
+  const removeSelectImageIds = ({ type, image_id }: { type: DeleteType; image_id?: string }) => {
+    if (type === DeleteType.Single) {
+      setSelectedImageIds(selectedImageIds.filter((item) => item !== image_id));
+    } else {
+      setSelectedImageIds([]);
+    }
+  };
+
   useEffect(() => {
     if (filterParams.loading) {
       onSearch(filterParams.searchValue);
@@ -220,13 +281,12 @@ const List = () => {
     }
   }, [isCanViewAdmin, router]);
 
-  const changeTab = (activeKey: string) => {
-    setFilterParams({
-      ...filterParams,
-      business_type: activeKey as BusinessType,
-      loading: true
-    });
-  };
+  // handle batch delete button status
+  useEffect(() => {
+    if (selectedImageIds.length) {
+      setShowBatchDeleteBtn(true);
+    } else setShowBatchDeleteBtn(false);
+  }, [selectedImageIds]);
 
   const items: TabsProps['items'] = [
     {
@@ -245,10 +305,12 @@ const List = () => {
                 rentCurrent: current || 1,
                 loading: true
               });
+              setSelectedImageIds([]);
             }
           }}
           totalAmount={filterData.total_count}
           defaultPageSize={filterParams.pagesize}
+          rowSelection={{ onChange: onSelect, selectedRowKeys: selectedImageIds }}
         />
       )
     },
@@ -268,10 +330,12 @@ const List = () => {
                 sellCurrent: current || 1,
                 loading: true
               });
+              setSelectedImageIds([]);
             }
           }}
           totalAmount={filterData.total_count}
           defaultPageSize={filterParams.pagesize}
+          rowSelection={{ onChange: onSelect, selectedRowKeys: selectedImageIds }}
         />
       )
     }
@@ -293,7 +357,20 @@ const List = () => {
         />
         <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
       </Space.Compact>
-      <Row justify="center" gutter={[16, 16]}>
+      <Row justify="end" gutter={[16, 16]}>
+        <Col>
+          {showBatchDeleteBtn ? (
+            <Button
+              type="primary"
+              danger
+              onClick={() =>
+                showDeleteConfirm({ image_ids: selectedImageIds, type: DeleteType.Multiple })
+              }
+            >
+              全部刪除
+            </Button>
+          ) : null}
+        </Col>
         <Col md={24}>
           <Tabs
             type="card"

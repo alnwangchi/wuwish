@@ -92,6 +92,22 @@ export const deleteProductApi = async (image_id: string) => {
   }
 };
 
+
+export const deleteMultipleProductApi = async (image_ids: string[]) => {
+  try {
+    await AxiosInstance.delete(`/images`, {
+      data: {
+        image_ids
+      }
+    });
+    message.success('刪除成功！');
+    return 'success';
+  } catch {
+    message.error('刪除失敗！');
+    return 'fail';
+  }
+};
+
 export const postProductApi = async (formData: any) => {
   try {
     const res: AxiosResponse<any> = await AxiosInstance.post('images/upload', formData);

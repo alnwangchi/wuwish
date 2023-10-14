@@ -14,11 +14,10 @@ const DataTable = ({
   onChange,
   defaultPageSize,
   totalAmount,
-  ...props
+  rowSelection
 }: DataTableProps) => {
   return (
     <TableAntd
-      rowKey={() => `${Math.random()}`}
       columns={columns}
       dataSource={dataSource}
       loading={loading}
@@ -29,6 +28,7 @@ const DataTable = ({
         total: totalAmount,
         showSizeChanger: false
       }}
+      rowSelection={rowSelection}
     />
   );
 };
