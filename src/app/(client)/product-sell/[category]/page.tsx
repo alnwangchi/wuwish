@@ -8,6 +8,7 @@ import slugify from 'slugify';
 import ClothesContainer from '@/components/template/ClothesContainer';
 import { BusinessType } from '@/interface';
 import { useGetClothes } from '@/hooks/useGetClothes';
+import { scrollToTop } from '@/util';
 
 const SaleCategoryPage = () => {
   const pathname = usePathname();
@@ -21,6 +22,7 @@ const SaleCategoryPage = () => {
   });
 
   const onChange: PaginationProps['onChange'] = (page) => {
+    scrollToTop();
     setCurrentPage(page);
   };
 

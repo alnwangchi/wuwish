@@ -4,6 +4,7 @@ import Pagination from '@/components/Pagination';
 import ClothesContainer from '@/components/template/ClothesContainer';
 import { useGetClothes } from '@/hooks/useGetClothes';
 import { BusinessType } from '@/interface';
+import { scrollToTop } from '@/util';
 import type { PaginationProps } from 'antd';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -21,6 +22,7 @@ const RentalCategoryPage = () => {
   });
 
   const onChange: PaginationProps['onChange'] = (page) => {
+    scrollToTop();
     setCurrentPage(page);
   };
 

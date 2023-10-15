@@ -4,6 +4,7 @@ import Pagination from '@/components/Pagination';
 import ClothesContainer from '@/components/template/ClothesContainer';
 import { ProductInfo } from '@/interface';
 import { keywordSearch } from '@/server';
+import { scrollToTop } from '@/util';
 import type { PaginationProps } from 'antd';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -27,6 +28,7 @@ const SearchPage = () => {
   }, [keyword, currentPage]);
 
   const onChange: PaginationProps['onChange'] = (page) => {
+    scrollToTop();
     setCurrentPage(page);
   };
 
