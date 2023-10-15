@@ -77,7 +77,7 @@ const page = () => {
             </Hexagon>
           </div>
         </div>
-        <div className="flex flex-col gap-2 py-10 sm:hidden">
+        <div className="flex flex-col gap-2 sm:hidden">
           <a target="_blank" href="https://www.instagram.com/wu_wish88/">
             <Hexagon>
               <div>

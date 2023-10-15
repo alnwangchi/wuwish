@@ -1,7 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Input, Tabs, PaginationProps, TabsProps, Button, Select, Space } from 'antd';
+import {
+  Col,
+  Row,
+  Input,
+  Tabs,
+  PaginationProps,
+  TabsProps,
+  Button,
+  Select,
+  Space,
+  Card
+} from 'antd';
 import { ColumnsType } from 'antd/es/table/interface';
 import useAuthenticate from '@/hooks/useAuthenticate';
 import { useRouter } from 'next/navigation';
@@ -118,28 +129,28 @@ const List = () => {
     });
   };
 
-  const rentColumns: ColumnsType<ListType> = [
+  // sell 有的欄位 rent 都會有
+  const commonColumns: ColumnsType<ListType> = [
     {
       title: '圖片',
       dataIndex: 'image',
-      key: 'image',
       render: (image) => (
         <Image width={80} src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`} alt="imageUrl" />
       )
     },
     {
       title: '類別',
-      dataIndex: 'category',
-      key: 'category'
+      dataIndex: 'category'
     },
-    { title: '劇名', dataIndex: 'title', key: 'title' },
-    { title: '名稱', dataIndex: 'name', key: 'name' },
-    { title: '編碼', dataIndex: 'number', key: 'number', width: '120px' },
+    { title: '劇名', dataIndex: 'title' },
+    { title: '名稱', dataIndex: 'name' },
+    { title: '編碼', dataIndex: 'number', width: '120px' }
+  ];
+
+  const actionColumn: ColumnsType<ListType> = [
     {
-      title: '刪除',
-      dataIndex: 'delete',
-      key: 'delete',
-      width: '100px',
+      title: '操作',
+      dataIndex: 'action',
       render: (image_id) => (
         <Button
           type="primary"
@@ -152,42 +163,15 @@ const List = () => {
     }
   ];
 
-  const sellColumns: ColumnsType<ListType> = [
-    {
-      title: '  圖片',
-      dataIndex: 'image',
-      key: 'image',
-      render: (image) => (
-        <Image width={80} src={`${process.env.NEXT_PUBLIC_BASE_URL}/${image}`} alt="imageUrl" />
-      )
-    },
-    {
-      title: '類別',
-      dataIndex: 'category',
-      key: 'category'
-    },
-    { title: '劇名', dataIndex: 'title', key: 'title' },
-    { title: '名稱', dataIndex: 'name', key: 'name' },
-    { title: '內容', dataIndex: 'content', key: 'content' },
-    { title: '價格', dataIndex: 'price', key: 'price' },
-    { title: '狀態', dataIndex: 'status', key: 'status' },
-    { title: '編碼', dataIndex: 'number', key: 'number', width: '120px' },
-    {
-      title: '刪除',
-      dataIndex: 'delete',
-      key: 'delete',
-      width: '100px',
-      render: (image_id) => (
-        <Button
-          type="primary"
-          danger
-          onClick={() => showDeleteConfirm({ image_id, type: DeleteType.Single })}
-        >
-          刪除
-        </Button>
-      )
-    }
-  ];
+  const rentColumns = commonColumns.concat(actionColumn);
+
+  const sellColumns = commonColumns
+    .concat([
+      { title: '內容', dataIndex: 'content' },
+      { title: '價格', dataIndex: 'price' },
+      { title: '狀態', dataIndex: 'status' }
+    ])
+    .concat(actionColumn);
 
   const dataSource = filterData.results.map((list) => {
     const {
@@ -297,7 +281,7 @@ const List = () => {
           dataSource={dataSource || []}
           columns={rentColumns}
           loading={filterParams.loading}
-          onChange={(pagination, _filters, sorter, extra) => {
+          onChange={(pagination, _filters, _sorter, extra) => {
             if (extra.action === 'paginate') {
               const { current } = pagination;
               setFilterParams({
@@ -322,7 +306,7 @@ const List = () => {
           dataSource={dataSource || []}
           columns={sellColumns}
           loading={filterParams.loading}
-          onChange={(pagination, _filters, sorter, extra) => {
+          onChange={(pagination, _filters, _sorter, extra) => {
             if (extra.action === 'paginate') {
               const { current } = pagination;
               setFilterParams({
@@ -342,45 +326,47 @@ const List = () => {
   ];
 
   return (
-    <div className="p-4 container">
-      <Space.Compact className="w-full">
-        <Select
-          className="w-24"
-          defaultValue={filterParams.selectOption}
-          options={options}
-          onSelect={(value) =>
-            setFilterParams({
-              ...filterParams,
-              selectOption: value
-            })
-          }
-        />
-        <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
-      </Space.Compact>
-      <Row justify="end" gutter={[16, 16]}>
-        <Col>
-          {showBatchDeleteBtn ? (
-            <Button
-              type="primary"
-              danger
-              onClick={() =>
-                showDeleteConfirm({ image_ids: selectedImageIds, type: DeleteType.Multiple })
-              }
-            >
-              全部刪除
-            </Button>
-          ) : null}
-        </Col>
-        <Col md={24}>
-          <Tabs
-            type="card"
-            defaultActiveKey={BusinessType.Rent}
-            onChange={changeTab}
-            items={items}
-            className="bg-white"
+    <div className="container">
+      <Card bordered={false} className="w-full">
+        <Space.Compact className="w-full">
+          <Select
+            className="w-24"
+            defaultValue={filterParams.selectOption}
+            options={options}
+            onSelect={(value) =>
+              setFilterParams({
+                ...filterParams,
+                selectOption: value
+              })
+            }
           />
-        </Col>
-      </Row>
+          <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
+        </Space.Compact>
+        <Row justify="end" gutter={[16, 16]}>
+          <Col>
+            {showBatchDeleteBtn ? (
+              <Button
+                type="primary"
+                danger
+                onClick={() =>
+                  showDeleteConfirm({ image_ids: selectedImageIds, type: DeleteType.Multiple })
+                }
+              >
+                全部刪除
+              </Button>
+            ) : null}
+          </Col>
+          <Col md={24}>
+            <Tabs
+              type="card"
+              defaultActiveKey={BusinessType.Rent}
+              onChange={changeTab}
+              items={items}
+              className="bg-white"
+            />
+          </Col>
+        </Row>
+      </Card>
     </div>
   );
 };

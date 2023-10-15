@@ -14,10 +14,12 @@ const DataTable = ({
   onChange,
   defaultPageSize,
   totalAmount,
-  rowSelection
+  rowSelection,
+  size = 'small'
 }: DataTableProps) => {
   return (
     <TableAntd
+      size={size}
       columns={columns}
       dataSource={dataSource}
       loading={loading}
