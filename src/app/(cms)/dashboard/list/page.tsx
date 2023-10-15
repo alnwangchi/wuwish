@@ -1,31 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import React, { useEffect, useState } from 'react';
+import EditModal from '@/components/EditModal';
+import DataTable from '@/components/Tables';
+import useAuthenticate from '@/hooks/useAuthenticate';
+import { BusinessType, ProductSearchResponse } from '@/interface';
+import { deleteMultipleProductApi, deleteProductApi, queryApi } from '@/server';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 import {
-  Col,
-  Row,
-  Input,
-  Tabs,
-  PaginationProps,
-  TabsProps,
   Button,
+  Card,
+  Image,
+  Input,
+  Modal,
+  PaginationProps,
   Select,
   Space,
-  Card
+  Tabs,
+  TabsProps
 } from 'antd';
 import { ColumnsType } from 'antd/es/table/interface';
-import useAuthenticate from '@/hooks/useAuthenticate';
 import { useRouter } from 'next/navigation';
-import { deleteProductApi, deleteMultipleProductApi, queryApi } from '@/server';
-import DataTable from '@/components/Tables';
-import { BusinessType, ProductSearchResponse } from '@/interface';
-import { Image, Modal } from 'antd';
-import { ExclamationCircleFilled } from '@ant-design/icons';
+import React, { useEffect, useRef, useState } from 'react';
 
 const { Search } = Input;
 const { confirm } = Modal;
 
-interface ListType {
+export interface ListType {
   image: any;
   business_type: string;
   category: string;
@@ -36,6 +36,7 @@ interface ListType {
   price?: number;
   status?: string;
   delete: any;
+  image_id?: string;
 }
 
 interface DefaultParamType {
@@ -87,6 +88,9 @@ const List = () => {
   });
   const [showBatchDeleteBtn, setShowBatchDeleteBtn] = useState(false);
   const [selectedImageIds, setSelectedImageIds] = useState<string[]>([]);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editTargetData, setEditTargetData] = useState<ListType | undefined>();
 
   const showDeleteConfirm = ({
     image_id,
@@ -151,15 +155,32 @@ const List = () => {
     {
       title: '操作',
       dataIndex: 'action',
-      render: (image_id) => (
-        <Button
-          type="primary"
-          danger
-          onClick={() => showDeleteConfirm({ image_id, type: DeleteType.Single })}
-        >
-          刪除
-        </Button>
-      )
+      width: '160px',
+      align: 'center',
+      render: (image_id, record) => {
+        console.log('🚀 ~ image_id:', image_id);
+
+        return (
+          <div className="f-center gap-3">
+            <Button
+              type="primary"
+              danger
+              onClick={() => showDeleteConfirm({ image_id, type: DeleteType.Single })}
+            >
+              刪除
+            </Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                setEditTargetData({ ...record, image_id });
+                setIsEditModalOpen(true);
+              }}
+            >
+              編輯
+            </Button>
+          </div>
+        );
+      }
     }
   ];
 
@@ -181,6 +202,7 @@ const List = () => {
     } = list;
     if (business_type === BusinessType.Sell) {
       return {
+        business_type,
         key: image_id,
         image: image_path,
         category,
@@ -190,17 +212,18 @@ const List = () => {
         price,
         status,
         number,
-        delete: image_id
+        action: image_id
       };
     } else {
       return {
+        business_type,
         key: image_id,
         image: image_path,
         category,
         name,
         title,
         number,
-        delete: image_id
+        action: image_id
       };
     }
   });
@@ -342,31 +365,32 @@ const List = () => {
           />
           <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
         </Space.Compact>
-        <Row justify="end" gutter={[16, 16]}>
-          <Col>
-            {showBatchDeleteBtn ? (
-              <Button
-                type="primary"
-                danger
-                onClick={() =>
-                  showDeleteConfirm({ image_ids: selectedImageIds, type: DeleteType.Multiple })
-                }
-              >
-                全部刪除
-              </Button>
-            ) : null}
-          </Col>
-          <Col md={24}>
-            <Tabs
-              type="card"
-              defaultActiveKey={BusinessType.Rent}
-              onChange={changeTab}
-              items={items}
-              className="bg-white"
-            />
-          </Col>
-        </Row>
+        <div className="w-fit ml-auto mb-4">
+          {showBatchDeleteBtn ? (
+            <Button
+              type="primary"
+              danger
+              onClick={() =>
+                showDeleteConfirm({ image_ids: selectedImageIds, type: DeleteType.Multiple })
+              }
+            >
+              全部刪除
+            </Button>
+          ) : null}
+        </div>
+        <Tabs
+          type="card"
+          defaultActiveKey={BusinessType.Rent}
+          onChange={changeTab}
+          items={items}
+          className="bg-white"
+        />
       </Card>
+      <EditModal
+        open={isEditModalOpen}
+        setOpen={setIsEditModalOpen}
+        data={editTargetData}
+      ></EditModal>
     </div>
   );
 };

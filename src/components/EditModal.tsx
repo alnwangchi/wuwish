@@ -1,48 +1,48 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import React, { useEffect } from 'react';
-import { Card, message } from 'antd';
-import { categoryList } from '@/constance';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import useAuthenticate from '@/hooks/useAuthenticate';
+import { ListType } from '@/app/(cms)/dashboard/list/page';
+import Button from '@/components/Button';
 import InputField from '@/components/Input/Input';
 import InputNumberField from '@/components/InputNumber/InputNumber';
-import { postProductApi } from '@/server';
-import { BusinessType } from '@/interface';
-import Button from '@/components/Button';
-import slugify from 'slugify';
+import { categoryList } from '@/constance';
 import { createAndEditSchema, FormValues } from '@/constance/schema';
+import { BusinessType } from '@/interface';
+import { putProductApi } from '@/server';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { message, Modal } from 'antd';
+import Image from 'next/image';
+import React, { FC, useEffect, useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import slugify from 'slugify';
 
-const UploadPage = () => {
+interface EditModalProps {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  data?: ListType;
+}
+
+const EditModal: FC<EditModalProps> = ({ open, setOpen, data }) => {
+  console.log(data);
+  const [previewImg, setPreviewImg] = useState(data?.image);
   const {
     register,
-    resetField,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
     clearErrors,
     control
   } = useForm({
     resolver: yupResolver(createAndEditSchema),
     defaultValues: {
-      business_type: BusinessType.Rent
+      business_type: BusinessType.Rent,
+      category: data?.category,
+      name: data?.name,
+      number: data?.number,
+      title: data?.title
     }
   });
-  const [previewImg, setPreviewImg] = useState('');
-  const isCanViewAdmin = useAuthenticate();
-  const router = useRouter();
   const business_value = watch('business_type', BusinessType.Rent);
-
-  useEffect(() => {
-    if (!isCanViewAdmin) {
-      router.push('/login');
-    }
-  }, [isCanViewAdmin, router]);
-
   const handleUploadImage = (e: any) => {
     if (e.target?.files?.[0]) {
       setPreviewImg(URL.createObjectURL(e.target.files[0]));
@@ -53,37 +53,61 @@ const UploadPage = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = (d) => {
     const postData = {
-      ...data,
-      image: (data.image as any)['0']
+      ...d,
+      image: (d.image as any)['0']
     };
     const formData = new FormData();
     Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
     // send api
-    postProductApi(formData).then((result) => {
-      if (result === 'success') {
-        // clear previewImage
-        setPreviewImg('');
-        // reset image value
-        resetField('image');
-      }
+    putProductApi(data?.image_id, formData).then((result) => {
+      if (result === 'success') setOpen(false);
     });
   };
 
+  // reset 用來帶入預設
+  useEffect(() => {
+    reset({
+      business_type: data?.business_type,
+      category: data?.category,
+      name: data?.name,
+      number: data?.number,
+      title: data?.title
+    });
+    // 清除未 submit 的預覽圖
+    return () => setPreviewImg('');
+  }, [data]);
+
   return (
-    <div className="container grid grid-cols-2 gap-4 p-4">
-      <Card bordered={false} className="w-full">
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+    <Modal
+      onOk={handleSubmit(onSubmit)}
+      onCancel={() => setOpen(false)}
+      open={open}
+      destroyOnClose={true}
+    >
+      <div className="flex gap-3">
+        <form className="flex flex-col w-3/6">
           <div className="mb-4 flex flex-col">
             <p className="labelText-required labelText">商業類型（business type）</p>
+
             <div className="flex gap-4 py-2">
               <label>
-                <input type="radio" value={BusinessType.Rent} {...register('business_type')} />
+                <input
+                  disabled
+                  type="radio"
+                  value={BusinessType.Rent}
+                  {...register('business_type')}
+                />
                 <span className="pl-2">租借</span>
               </label>
               <label>
-                <input type="radio" value={BusinessType.Sell} {...register('business_type')} />
+                <input
+                  disabled
+                  type="radio"
+                  value={BusinessType.Sell}
+                  {...register('business_type')}
+                />
                 <span className="pl-2">販售</span>
               </label>
             </div>
@@ -155,20 +179,26 @@ const UploadPage = () => {
               accept=".jpg, .jpeg, .png, .gif, .webp, .svg, .bmp"
               {...register('image')}
               onChange={handleUploadImage}
+              className="text-white"
             />
             {errors.image && <p className="errorInput">{errors.image.message}</p>}
           </div>
-          <Button text="提交" customClass="self-end" />
         </form>
-      </Card>
-      <div className="flex flex-col gap-4">
-        <label className="text-white">預覽圖片</label>
-        <div className="border border-white flex-1">
-          {previewImg && <img src={previewImg} alt="image" />}
+        <div className="grow f-center">
+          {previewImg ? (
+            <img src={previewImg} alt="image" />
+          ) : (
+            <Image
+              width={500}
+              height={500}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${data?.image}`}
+              alt="imageUrl"
+            />
+          )}
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 
-export default UploadPage;
+export default EditModal;

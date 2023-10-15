@@ -92,7 +92,6 @@ export const deleteProductApi = async (image_id: string) => {
   }
 };
 
-
 export const deleteMultipleProductApi = async (image_ids: string[]) => {
   try {
     await AxiosInstance.delete(`/images`, {
@@ -116,6 +115,18 @@ export const postProductApi = async (formData: any) => {
     return 'success';
   } catch {
     message.error('上傳失敗');
+    return 'fail';
+  }
+};
+export const putProductApi = async (image_id: string | undefined, formData: any) => {
+  try {
+    const res: AxiosResponse<any> = await AxiosInstance.put(`images/${image_id}`, formData);
+    console.log('🚀 ~ res:', res);
+    const { data } = res;
+    message.success('更新成功');
+    return 'success';
+  } catch {
+    message.error('更新失敗');
     return 'fail';
   }
 };
