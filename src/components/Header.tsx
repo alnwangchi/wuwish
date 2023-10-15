@@ -99,7 +99,7 @@ const Header = () => {
         <section
           className={clsx(
             'absolute py-5 bg-primary-yellow z-10 w-screen transition-all duration-500',
-            isMenuOpen && 'top-[112px]',
+            isMenuOpen && 'top-[80px] sm:top-[112px]',
             !isMenuOpen && '-top-[240px]'
           )}
         >

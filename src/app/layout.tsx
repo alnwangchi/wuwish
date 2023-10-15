@@ -17,7 +17,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <RootStyleRegistry>
           <Header />
-          {children}
+          {/* minus Header and Footer */}
+          <div className="min-h-[calc(100vh-340px)]">{children}</div>
           <Footer />
         </RootStyleRegistry>
       </body>
