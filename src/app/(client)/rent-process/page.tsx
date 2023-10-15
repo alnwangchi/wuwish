@@ -122,7 +122,7 @@ const page = () => {
             </div>
           </Hexagon>
         </div>
-        <div className="relative w-full sm:py-20 sm:py-0">
+        <div className="relative w-full sm:py-0">
           <Image src={rental_bg} className="w-full hidden sm:block" alt="deco" />
           <div className="mx-auto sm:ab-center w-3/4 font-cubic leading-loose text-white text-clamp2">
             <h2 className="text-center mb-10 clamp1">租借細則</h2>

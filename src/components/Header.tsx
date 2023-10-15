@@ -1,18 +1,16 @@
 'use client';
-import main_logo from '@/assets/img/main_logo.png';
 import icon_line from '@/assets/img/icon_line.png';
+import main_logo from '@/assets/img/main_logo.png';
 import search_icon from '@/assets/img/search_icon.png';
+import { Input } from 'antd';
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
-import NavItem from './NavItem';
-import { usePathname } from 'next/navigation';
-import useAuthenticate from '@/hooks/useAuthenticate';
-import { useState, KeyboardEvent } from 'react';
-import clsx from 'clsx';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { useRouter } from 'next/navigation';
-import { Input } from 'antd';
+import NavItem from './NavItem';
 
 const Header = () => {
   const router = useRouter();
@@ -20,6 +18,10 @@ const Header = () => {
   const isAdmin = pathname.startsWith('/dashboard') || pathname.startsWith('/login');
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   const onSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -97,7 +99,7 @@ const Header = () => {
         <section
           className={clsx(
             'absolute py-5 bg-primary-yellow z-10 w-screen transition-all duration-500',
-            isMenuOpen && 'top-[80px]',
+            isMenuOpen && 'top-[112px]',
             !isMenuOpen && '-top-[240px]'
           )}
         >
