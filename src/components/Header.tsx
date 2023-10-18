@@ -11,6 +11,7 @@ import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import NavItem from './NavItem';
+import type { InputRef } from 'antd';
 
 const Header = () => {
   const router = useRouter();
@@ -18,17 +19,28 @@ const Header = () => {
   const isAdmin = pathname.startsWith('/dashboard') || pathname.startsWith('/login');
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const inputRef = useRef<InputRef>(null);
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
+  const handleSearch = (keyword: string | undefined) => {
+    if (!!keyword && !!keyword.trim()) {
+      router.push(`/search?keyword=${keyword}`);
+      setIsMenuOpen?.(false);
+    }
+  };
+
   const onSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const keyword = target.value;
-    if (!keyword.trim()) return;
-    router.push(`/search?keyword=${keyword}`);
-    setIsMenuOpen?.(false);
+    handleSearch(keyword);
+  };
+
+  const onClick = () => {
+    const keyword = inputRef.current?.input?.value;
+    handleSearch(keyword);
   };
 
   if (isAdmin) {
@@ -77,13 +89,18 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-4">
             <div className="flex">
-              <Image className="" src={search_icon} width={39} height={42} alt="line" />
-              <Input
-                className="!font-cubic p-2 placeholder:font-cubic rounded-none"
-                styles={{}}
-                placeholder="輸入文字 搜尋服裝"
-                onPressEnter={onSearch}
-              />
+              <div className="relative">
+                <Input
+                  className="!font-cubic p-2 placeholder:font-cubic placeholder:text-xs rounded-none"
+                  styles={{}}
+                  placeholder="輸入文字 搜尋服裝"
+                  onPressEnter={onSearch}
+                  ref={inputRef}
+                />
+                <span onClick={onClick} className="p-1 absolute top-1/2 right-0 -translate-y-1/2">
+                  <Image className="" src={search_icon} width={25} height={25} alt="line" />
+                </span>
+              </div>
             </div>
             <nav className="flex gap-2">
               <NavItem text="商品販售" href="/product-sell" />
@@ -104,12 +121,18 @@ const Header = () => {
           )}
         >
           <nav className="flex flex-col  items-center gap-2 px-5">
-            <Input
-              className="!font-cubic p-2 placeholder:font-cubic rounded-none"
-              styles={{}}
-              placeholder="輸入文字 搜尋服裝"
-              onPressEnter={onSearch}
-            />
+            <div className="relative w-full">
+              <Input
+                className="!font-cubic p-2 placeholder:font-cubic rounded-none"
+                styles={{}}
+                placeholder="輸入文字 搜尋服裝"
+                onPressEnter={onSearch}
+                ref={inputRef}
+              />
+              <span onClick={onClick} className="p-1 absolute top-1/2 right-0 -translate-y-1/2">
+                <Image className="" src={search_icon} width={25} height={25} alt="line" />
+              </span>
+            </div>
             <NavItem text="商品販售" href="/product-sell" setIsMenuOpen={setIsMenuOpen} />
             <NavItem text="租借流程" href="/rent-process" setIsMenuOpen={setIsMenuOpen} />
           </nav>
