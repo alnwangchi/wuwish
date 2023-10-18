@@ -5,7 +5,7 @@ import Button from '@/components/Button';
 import InputField from '@/components/Input/Input';
 import InputNumberField from '@/components/InputNumber/InputNumber';
 import { categoryList } from '@/constance';
-import { createAndEditSchema, FormValues } from '@/constance/schema';
+import { EditSchema, FormValues } from '@/constance/schema';
 import { BusinessType } from '@/interface';
 import { putProductApi } from '@/server';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,7 +22,8 @@ interface EditModalProps {
 }
 
 const EditModal: FC<EditModalProps> = ({ open, setOpen, data }) => {
-  console.log(data);
+  console.log('🚀 ~ data:', data);
+
   const [previewImg, setPreviewImg] = useState(data?.image);
   const {
     register,
@@ -33,7 +34,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data }) => {
     clearErrors,
     control
   } = useForm({
-    resolver: yupResolver(createAndEditSchema),
+    resolver: yupResolver(EditSchema),
     defaultValues: {
       business_type: BusinessType.Rent,
       category: data?.category,
@@ -53,17 +54,22 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data }) => {
     }
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (d) => {
-    const postData = {
-      ...d,
-      image: (d.image as any)['0']
-    };
-    const formData = new FormData();
-    Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
-    // send api
-    putProductApi(data?.image_id, formData).then((result) => {
-      if (result === 'success') setOpen(false);
-    });
+  const onSubmit: SubmitHandler<FormValues> = async (d) => {
+    try {
+      const formData = new FormData();
+      for (const key in d) {
+        formData.append(key, d[key as keyof FormValues]);
+      }
+      const result = await putProductApi(data?.image_id, formData);
+
+      if (result === 'success') {
+        setOpen(false);
+      } else {
+        console.error('something went wrong');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   // reset 用來帶入預設
@@ -181,7 +187,6 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data }) => {
               onChange={handleUploadImage}
               className="text-white"
             />
-            {errors.image && <p className="errorInput">{errors.image.message}</p>}
           </div>
         </form>
         <div className="grow f-center">

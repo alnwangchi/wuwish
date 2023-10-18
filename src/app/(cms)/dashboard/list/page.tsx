@@ -158,8 +158,6 @@ const List = () => {
       width: '160px',
       align: 'center',
       render: (image_id, record) => {
-        console.log('🚀 ~ image_id:', image_id);
-
         return (
           <div className="f-center gap-3">
             <Button

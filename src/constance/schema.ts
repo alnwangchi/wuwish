@@ -12,13 +12,7 @@ export type FormValues = {
   status?: string;
 };
 
-export const createAndEditSchema = yup.object({
-  image: yup
-    .mixed()
-    .required()
-    .test('image', '請上傳圖片', (file: any) => {
-      return file && file.length;
-    }),
+const baseSchema = yup.object({
   business_type: yup.string().required(),
   category: yup.string().required(),
   name: yup.string().required(),
@@ -27,4 +21,17 @@ export const createAndEditSchema = yup.object({
   content: yup.string(),
   price: yup.number(),
   status: yup.string()
+});
+
+export const createSchema = baseSchema.shape({
+  image: yup
+    .mixed()
+    .required()
+    .test('image', '請上傳圖片', (file: any) => {
+      return file && file.length;
+    })
+});
+
+export const EditSchema = baseSchema.shape({
+  image: yup.mixed()
 });

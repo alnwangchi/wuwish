@@ -15,7 +15,7 @@ import { postProductApi } from '@/server';
 import { BusinessType } from '@/interface';
 import Button from '@/components/Button';
 import slugify from 'slugify';
-import { createAndEditSchema, FormValues } from '@/constance/schema';
+import { createSchema, FormValues } from '@/constance/schema';
 
 const UploadPage = () => {
   const {
@@ -27,7 +27,7 @@ const UploadPage = () => {
     clearErrors,
     control
   } = useForm({
-    resolver: yupResolver(createAndEditSchema),
+    resolver: yupResolver(createSchema),
     defaultValues: {
       business_type: BusinessType.Rent
     }
