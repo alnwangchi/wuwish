@@ -38,7 +38,10 @@ const InputField = ({
         <Input {...field} className="py-2" placeholder={placeholder} />
       )}
 
-      {formState?.errors?.[field.name] && <p className={'errorInput'}>{label}是必填欄位</p>}
+      {formState?.errors?.[field.name] && (
+        <p className={'errorInput'}>{String(formState?.errors?.[field.name]?.message)}</p>
+      )}
+      <p>{undefined}</p>
     </div>
   );
 };

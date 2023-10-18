@@ -15,8 +15,8 @@ export type FormValues = {
 const baseSchema = yup.object({
   business_type: yup.string().required(),
   category: yup.string().required(),
-  name: yup.string().required(),
-  title: yup.string().required(),
+  name: yup.string().required('名稱是必填欄位'),
+  title: yup.string().required('劇名是必填欄位'),
   number: yup.string(),
   content: yup.string(),
   price: yup.number(),
