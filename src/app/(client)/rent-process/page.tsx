@@ -8,6 +8,12 @@ import rental_bg from '@/assets/img/rental_bg.png';
 import { FaInstagram } from 'react-icons/fa6';
 import Arrows from '@/components/Arrows';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '神龍變裝租借流程說明',
+  description: '歡迎來到神龍變裝，請詳閱以下租借的流程，歡迎隨時透過 FB IG LINE 聯繫我們哦'
+};
 
 const page = () => {
   return (

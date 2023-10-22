@@ -11,7 +11,7 @@ import { putProductApi } from '@/server';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { message, Modal } from 'antd';
 import Image from 'next/image';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useId, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import slugify from 'slugify';
 
@@ -19,21 +19,15 @@ interface EditModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   data?: ListType;
+  filterParams: any;
+  onSearch: any;
+  setKey: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const EditModal: FC<EditModalProps> = ({ open, setOpen, data }) => {
-  console.log('🚀 ~ data:', data);
-
-  const [previewImg, setPreviewImg] = useState(data?.image);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-    clearErrors,
-    control
-  } = useForm({
+const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSearch, setKey }) => {
+  const randonKey = useId();
+  const [localPreviewImg, setLocalPreviewImg] = useState(data?.image);
+  const { register, handleSubmit, watch, reset, control } = useForm({
     resolver: yupResolver(EditSchema),
     defaultValues: {
       business_type: BusinessType.Rent,
@@ -46,30 +40,28 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data }) => {
   const business_value = watch('business_type', BusinessType.Rent);
   const handleUploadImage = (e: any) => {
     if (e.target?.files?.[0]) {
-      setPreviewImg(URL.createObjectURL(e.target.files[0]));
-      // clear image error
-      clearErrors('image');
+      setLocalPreviewImg(URL.createObjectURL(e.target.files[0]));
     } else {
       message.error('預覽圖片失敗!');
     }
   };
 
-  const onSubmit: SubmitHandler<FormValues> = async (d) => {
-    try {
-      const formData = new FormData();
-      for (const key in d) {
-        formData.append(key, d[key as keyof FormValues]);
-      }
-      const result = await putProductApi(data?.image_id, formData);
-
+  const onSubmit: SubmitHandler<FormValues> = (d) => {
+    const postData = {
+      ...d,
+      image: (d.image as any)['0']
+    };
+    const formData = new FormData();
+    Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
+    // send api
+    putProductApi(data?.image_id, formData).then((result) => {
       if (result === 'success') {
+        setLocalPreviewImg('');
         setOpen(false);
-      } else {
-        console.error('something went wrong');
+        onSearch(filterParams.searchValue);
+        setKey(randonKey);
       }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    });
   };
 
   // reset 用來帶入預設
@@ -82,16 +74,11 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data }) => {
       title: data?.title
     });
     // 清除未 submit 的預覽圖
-    return () => setPreviewImg('');
+    return () => setLocalPreviewImg('');
   }, [data]);
 
   return (
-    <Modal
-      onOk={handleSubmit(onSubmit)}
-      onCancel={() => setOpen(false)}
-      open={open}
-      destroyOnClose={true}
-    >
+    <Modal onOk={handleSubmit(onSubmit)} onCancel={() => setOpen(false)} open={open}>
       <div className="flex gap-3">
         <form className="flex flex-col w-3/6">
           <div className="mb-4 flex flex-col">
@@ -190,13 +177,13 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data }) => {
           </div>
         </form>
         <div className="grow f-center">
-          {previewImg ? (
-            <img src={previewImg} alt="image" />
+          {localPreviewImg ? (
+            <img src={localPreviewImg} alt="image" />
           ) : (
             <Image
               width={500}
               height={500}
-              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${data?.image}`}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${data?.image}?key=${randonKey}`}
               alt="imageUrl"
             />
           )}

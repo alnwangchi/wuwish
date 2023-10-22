@@ -9,6 +9,7 @@ const AxiosInstance = axios.create({
 });
 AxiosInstance.defaults.headers.get['Content-Type'] = 'application/json';
 AxiosInstance.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+AxiosInstance.defaults.headers.put['Content-Type'] = 'multipart/form-data';
 
 // Add a request interceptor to set up retry configuration
 AxiosInstance.interceptors.request.use(
@@ -121,8 +122,6 @@ export const postProductApi = async (formData: any) => {
 export const putProductApi = async (image_id: string | undefined, formData: any) => {
   try {
     const res: AxiosResponse<any> = await AxiosInstance.put(`images/${image_id}`, formData);
-    console.log('🚀 ~ res:', res);
-    const { data } = res;
     message.success('更新成功');
     return 'success';
   } catch {

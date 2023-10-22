@@ -20,7 +20,7 @@ import {
 } from 'antd';
 import { ColumnsType } from 'antd/es/table/interface';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 
 const { Search } = Input;
 const { confirm } = Modal;
@@ -56,30 +56,31 @@ enum DeleteType {
   Multiple = 'multiple'
 }
 
+const options = [
+  {
+    value: 'title',
+    label: '劇名'
+  },
+  {
+    value: 'name',
+    label: '名稱'
+  }
+];
+const defaultParam = {
+  rentCurrent: 1,
+  sellCurrent: 1,
+  pagesize: 10,
+  business_type: BusinessType.Rent,
+  loading: true,
+  activeKey: BusinessType.Rent,
+  pagination: {},
+  searchValue: undefined,
+  selectOption: options[0].value
+};
+
 const List = () => {
   const isCanViewAdmin = useAuthenticate();
   const router = useRouter();
-  const options = [
-    {
-      value: 'title',
-      label: '劇名'
-    },
-    {
-      value: 'name',
-      label: '名稱'
-    }
-  ];
-  const defaultParam = {
-    rentCurrent: 1,
-    sellCurrent: 1,
-    pagesize: 10,
-    business_type: BusinessType.Rent,
-    loading: true,
-    activeKey: BusinessType.Rent,
-    pagination: {},
-    searchValue: undefined,
-    selectOption: options[0].value
-  };
 
   const [filterParams, setFilterParams] = useState<DefaultParamType>(defaultParam);
   const [filterData, setFilterData] = useState<ProductSearchResponse>({
@@ -91,6 +92,8 @@ const List = () => {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editTargetData, setEditTargetData] = useState<ListType | undefined>();
+  // to force rerender
+  const [key, setKey] = useState('');
 
   const showDeleteConfirm = ({
     image_id,
@@ -382,13 +385,18 @@ const List = () => {
           onChange={changeTab}
           items={items}
           className="bg-white"
+          key={key}
         />
       </Card>
       <EditModal
+        key={key}
         open={isEditModalOpen}
         setOpen={setIsEditModalOpen}
         data={editTargetData}
-      ></EditModal>
+        filterParams={filterParams}
+        onSearch={onSearch}
+        setKey={setKey}
+      />
     </div>
   );
 };
