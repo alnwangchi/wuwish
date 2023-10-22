@@ -12,7 +12,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '神龍變裝租借流程說明',
-  description: '歡迎來到神龍變裝，請詳閱以下租借的流程，歡迎隨時透過 FB IG LINE 聯繫我們哦'
+  description: '歡迎來到神龍變裝，請詳閱以下租借的流程，歡迎隨時透過 FB IG LINE 聯繫我們哦',
+  creator: 'Allen Wang',
+  alternates: {
+    canonical: 'https://www.wuwish.com.tw/rent-process'
+  }
 };
 
 const page = () => {
