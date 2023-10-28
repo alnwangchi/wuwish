@@ -2,16 +2,16 @@
 import icon_line from '@/assets/img/icon_line.png';
 import main_logo from '@/assets/img/main_logo.png';
 import search_icon from '@/assets/img/search_icon.png';
+import type { InputRef } from 'antd';
 import { Input } from 'antd';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import NavItem from './NavItem';
-import type { InputRef } from 'antd';
 
 const Header = () => {
   const router = useRouter();
@@ -64,8 +64,8 @@ const Header = () => {
   }
 
   return (
-    <div className="relative bg-primary-yellow py-3 z-10">
-      <div className="relative container flex justify-center lg:gap-[10%]">
+    <div className="relative z-10 bg-primary-yellow py-3">
+      <div className="container relative flex justify-center lg:gap-[10%]">
         <Link href="/" className="z-20">
           <Image
             src={main_logo}
@@ -75,8 +75,8 @@ const Header = () => {
               300px"
           />
         </Link>
-        <section className="hidden md:flex sm:flex-col sm:justify-center lg:px-2">
-          <div className="pl-2 flex gap-2 text-black text-4xl cursor-pointer">
+        <section className="hidden sm:flex-col sm:justify-center md:flex lg:px-2">
+          <div className="flex cursor-pointer gap-2 pl-2 text-4xl text-black">
             <a target="_blank" href="https://www.facebook.com/Wu.wish88">
               <FaSquareFacebook />
             </a>
@@ -91,14 +91,20 @@ const Header = () => {
             <div className="flex">
               <div className="relative">
                 <Input
-                  className="!font-cubic p-2 placeholder:font-cubic placeholder:text-xs rounded-none"
+                  className="rounded-none p-2 !font-cubic placeholder:font-cubic placeholder:text-xs"
                   styles={{}}
                   placeholder="輸入文字 搜尋服裝"
                   onPressEnter={onSearch}
                   ref={inputRef}
                 />
-                <span onClick={onClick} className="p-1 absolute top-1/2 right-0 -translate-y-1/2">
-                  <Image className="" src={search_icon} width={25} height={25} alt="line" />
+                <span onClick={onClick} className="absolute right-0 top-1/2 -translate-y-1/2 p-1">
+                  <Image
+                    className="cursor-pointer"
+                    src={search_icon}
+                    width={25}
+                    height={25}
+                    alt="line"
+                  />
                 </span>
               </div>
             </div>
@@ -109,13 +115,13 @@ const Header = () => {
           </div>
         </section>
         <GiHamburgerMenu
-          className="md:hidden absolute text-xl right-5 top-2/4 -translate-y-1/2 cursor-pointer z-20"
+          className="absolute right-5 top-2/4 z-20 -translate-y-1/2 cursor-pointer text-xl md:hidden"
           onClick={() => setIsMenuOpen((prev) => !prev)}
         />
 
         <section
           className={clsx(
-            'absolute py-5 bg-primary-yellow z-10 w-screen transition-all duration-500',
+            'absolute z-10 w-screen bg-primary-yellow py-5 transition-all duration-500',
             isMenuOpen && 'top-[80px] sm:top-[112px]',
             !isMenuOpen && '-top-[240px]'
           )}
@@ -123,14 +129,20 @@ const Header = () => {
           <nav className="flex flex-col  items-center gap-2 px-5">
             <div className="relative w-full">
               <Input
-                className="!font-cubic p-2 placeholder:font-cubic rounded-none"
+                className="rounded-none p-2 !font-cubic placeholder:font-cubic"
                 styles={{}}
                 placeholder="輸入文字 搜尋服裝"
                 onPressEnter={onSearch}
                 ref={inputRef}
               />
-              <span onClick={onClick} className="p-1 absolute top-1/2 right-0 -translate-y-1/2">
-                <Image className="" src={search_icon} width={25} height={25} alt="line" />
+              <span onClick={onClick} className="absolute right-0 top-1/2 -translate-y-1/2 p-1">
+                <Image
+                  className="cursor-pointer"
+                  src={search_icon}
+                  width={25}
+                  height={25}
+                  alt="line"
+                />
               </span>
             </div>
             <NavItem text="商品販售" href="/product-sell" setIsMenuOpen={setIsMenuOpen} />

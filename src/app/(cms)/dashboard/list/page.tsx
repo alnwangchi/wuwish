@@ -366,7 +366,7 @@ const List = () => {
           />
           <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
         </Space.Compact>
-        <div className="w-fit ml-auto mb-4">
+        <div className="mb-4 ml-auto w-fit">
           {showBatchDeleteBtn ? (
             <Button
               type="primary"

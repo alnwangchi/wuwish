@@ -14,16 +14,16 @@ interface NavItemProps {
 
 const NavItem: FC<NavItemProps> = ({ href, text, alt, setIsMenuOpen }) => {
   return (
-    <Link href={href} className="relative group w-fit" onClick={() => setIsMenuOpen?.(false)}>
+    <Link href={href} className="group relative w-fit" onClick={() => setIsMenuOpen?.(false)}>
       <Image
         src={yellow}
         width={129}
         height={60}
         alt="TBC"
-        className="ab-center opacity-0 group-hover:opacity-100 transition"
+        className="ab-center opacity-0 transition group-hover:opacity-100"
       />
       <Image src={navItem_bg} width={150} height={60} alt="TBC" />
-      <div className="ab-center font-bold text-lg w-full flex justify-center">
+      <div className="ab-center flex w-full justify-center text-lg font-bold">
         <Image src={ball_icon} width={30} height={30} alt="TBC" />
         <span className="pr-2">{text}</span>
       </div>

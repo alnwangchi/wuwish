@@ -11,9 +11,9 @@ interface NavItemProps {
 
 const CategoryItem: FC<NavItemProps> = ({ href, text, alt }) => {
   return (
-    <Link href={href} className="relative group hover:hue-rotate-[220deg]">
+    <Link href={href} className="group relative hover:hue-rotate-[220deg]">
       <Image src={category_item} width={230} height={140} alt="TBC" />
-      <span className="absolute top-2/4 left-2/4 -translate-y-1/2 -translate-x-1/2 w-full flex justify-center pl-9 font-cubic text-2xl group-hover:text-primary-dk text-white">
+      <span className="absolute left-2/4 top-2/4 flex w-full -translate-x-1/2 -translate-y-1/2 justify-center pl-9 font-cubic text-2xl text-white group-hover:text-primary-dk">
         {text}
       </span>
     </Link>

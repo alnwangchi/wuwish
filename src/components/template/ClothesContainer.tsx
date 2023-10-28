@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 
 const ClothesContainer = ({ children }: { children: ReactNode }) => {
   return (
-    <section className="container grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5 lg:gap-5 place-items-center mid-fill">
+    <section className="mid-fill container  grid grid-cols-2 place-items-center gap-2 py-10 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5 lg:gap-5">
       {children}
     </section>
   );

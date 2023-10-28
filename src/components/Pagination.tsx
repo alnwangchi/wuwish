@@ -26,7 +26,7 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total, onChange }) 
           return (
             <div className="relative">
               <Image src={pagination_bg} width={53} height={61} alt="pagination" />
-              <p className="ab-center font-timer font-bold text-xl">
+              <p className="ab-center font-timer text-xl font-bold">
                 <MdKeyboardDoubleArrowLeft />
               </p>
             </div>
@@ -36,7 +36,7 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total, onChange }) 
           return (
             <div className="relative">
               <Image src={pagination_bg} width={53} height={61} alt="pagination" />
-              <p className="ab-center font-timer font-bold text-xl">
+              <p className="ab-center font-timer text-xl font-bold">
                 <MdKeyboardDoubleArrowRight />
               </p>
             </div>
@@ -50,7 +50,7 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total, onChange }) 
             <p
               // page === 1 是為了 timer 這個爛字型佔位個別調整
               className={clsx(
-                'ab-center font-timer font-bold text-xl',
+                'ab-center font-timer text-xl font-bold',
                 page === 1 && '!left-[43%]'
               )}
             >

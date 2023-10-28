@@ -3,10 +3,7 @@ import { authorization } from '@/constance';
 import { getCookie, setCookie } from 'cookies-next';
 
 export const authenticationService = (account: string, password: string) => {
-  if (
-    account === authorization.account &&
-    password === authorization.password
-  ) {
+  if (account === authorization.account && password === authorization.password) {
     setCookie('account', authorization.account);
     setCookie('password', authorization.password);
     return true;

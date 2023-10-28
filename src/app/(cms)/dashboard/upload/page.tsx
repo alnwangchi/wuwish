@@ -92,7 +92,7 @@ const UploadPage = () => {
             <label className="labelText-required labelText">類別</label>
             <select
               {...register('category')}
-              className="w-full py-2 pl-[11px] rounded-md border border-[#d9d9d9]"
+              className="w-full rounded-md border border-[#d9d9d9] py-2 pl-[11px]"
             >
               {categoryList.map((c) => (
                 <option key={c.en} value={slugify(c.en, { lower: true })}>
@@ -163,7 +163,7 @@ const UploadPage = () => {
       </Card>
       <div className="flex flex-col gap-4">
         <label className="text-white">預覽圖片</label>
-        <div className="border border-white flex-1">
+        <div className="flex-1 border border-white">
           {previewImg && <img src={previewImg} alt="image" />}
         </div>
       </div>

@@ -2,8 +2,8 @@ import React, { ReactNode } from 'react';
 
 const Hexagon = ({ children }: { children?: ReactNode }) => {
   return (
-    <div className="relative hexagon lg:w-[275px] lg:h-[235px] sm:w-[235px] sm:h-[205px] w-[180px] h-[145px] bg-deco-blue">
-      <div className="ab-center font-cubic text-center lg:text-2xl sm:text-xl text-sm">
+    <div className="hexagon relative h-[145px] w-[180px] bg-deco-blue sm:h-[205px] sm:w-[235px] lg:h-[235px] lg:w-[275px]">
+      <div className="ab-center text-center font-cubic text-sm sm:text-xl lg:text-2xl">
         {children}
       </div>
     </div>

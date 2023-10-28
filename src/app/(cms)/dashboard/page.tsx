@@ -16,9 +16,9 @@ const Dashboard = () => {
   }, [isCanViewAdmin, router]);
 
   return (
-    <div className='flex flex-col gap-4 items-center'>
-      <Spin size='large'></Spin>
-      <p className='text-white'>身份驗證中....</p>
+    <div className="flex flex-col items-center gap-4">
+      <Spin size="large"></Spin>
+      <p className="text-white">身份驗證中....</p>
     </div>
   );
 };

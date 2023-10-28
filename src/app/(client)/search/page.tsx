@@ -33,7 +33,7 @@ const SearchPage = () => {
   };
 
   if (cloth?.length === 0) {
-    return <div className="text-white mid-fill f-center">部分服裝尚未更新請至IG/FB詢問</div>;
+    return <div className="mid-fill f-center text-white">部分服裝尚未更新請至IG/FB詢問</div>;
   }
 
   return (

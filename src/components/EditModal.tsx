@@ -80,7 +80,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
   return (
     <Modal onOk={handleSubmit(onSubmit)} onCancel={() => setOpen(false)} open={open}>
       <div className="flex gap-3">
-        <form className="flex flex-col w-3/6">
+        <form className="flex w-3/6 flex-col">
           <div className="mb-4 flex flex-col">
             <p className="labelText-required labelText">商業類型（business type）</p>
 
@@ -109,7 +109,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
             <label className="labelText-required labelText">類別</label>
             <select
               {...register('category')}
-              className="w-full py-2 pl-[11px] rounded-md border border-[#d9d9d9]"
+              className="w-full rounded-md border border-[#d9d9d9] py-2 pl-[11px]"
             >
               {categoryList.map((c) => (
                 <option key={c.en} value={slugify(c.en, { lower: true })}>
@@ -176,7 +176,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
             />
           </div>
         </form>
-        <div className="grow f-center">
+        <div className="f-center grow">
           {localPreviewImg ? (
             <img src={localPreviewImg} alt="image" />
           ) : (

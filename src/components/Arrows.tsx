@@ -12,12 +12,12 @@ const Arrows: FC<ArrowsProps> = ({ direction = 'right' }) => {
       className={clsx(
         'flex',
         direction === 'left' && 'rotate-180',
-        direction === 'down' && 'rotate-90',
+        direction === 'down' && 'rotate-90'
       )}
     >
-      <IoTriangleSharp className='text-deco-blue rotate-90' />
-      <IoTriangleSharp className='text-deco-blue rotate-90' />
-      <IoTriangleSharp className='text-deco-blue rotate-90' />
+      <IoTriangleSharp className="rotate-90 text-deco-blue" />
+      <IoTriangleSharp className="rotate-90 text-deco-blue" />
+      <IoTriangleSharp className="rotate-90 text-deco-blue" />
     </div>
   );
 };

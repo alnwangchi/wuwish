@@ -56,7 +56,7 @@ export default function Carousel() {
   return (
     <div className="relative">
       <div
-        className="absolute top-2/4 -left-10 -translate-y-1/2 z-10 hidden sm:block"
+        className="absolute -left-10 top-2/4 z-10 hidden -translate-y-1/2 sm:block"
         onClick={() => {
           carouselRef.current!.slickPrev();
         }}
@@ -91,7 +91,7 @@ export default function Carousel() {
         </div>
       </Slider>
       <div
-        className="absolute top-2/4 -right-10 -translate-y-1/2 z-10  hidden sm:block"
+        className="absolute -right-10 top-2/4 z-10 hidden  -translate-y-1/2 sm:block"
         onClick={() => {
           carouselRef.current!.slickNext();
         }}

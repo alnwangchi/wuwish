@@ -11,19 +11,15 @@ interface InputNumberFieldProps extends ReactFormProps {
 const InputNumberField = ({
   label,
   required = true,
-  placeholder ='2000',
+  placeholder = '2000',
   ...props
 }: InputNumberFieldProps) => {
   const { field, formState } = props;
   return (
-    <div className='mb-4'>
-      <label className={`${required ? 'labelText-required' : ''} labelText`}>
-        {label}
-      </label>
-      <InputNumber {...field} className='py-2 w-full' placeholder={placeholder}/>
-      {formState?.errors?.[field.name] && (
-        <p className={'errorInput'}>價格只能輸入數字</p>
-      )}
+    <div className="mb-4">
+      <label className={`${required ? 'labelText-required' : ''} labelText`}>{label}</label>
+      <InputNumber {...field} className="w-full py-2" placeholder={placeholder} />
+      {formState?.errors?.[field.name] && <p className={'errorInput'}>價格只能輸入數字</p>}
     </div>
   );
 };

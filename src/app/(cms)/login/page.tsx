@@ -12,7 +12,7 @@ import Button from '@/components/Button';
 const loginSchema = yup
   .object({
     account: yup.string().required(),
-    password: yup.string().required(),
+    password: yup.string().required()
   })
   .required();
 
@@ -24,7 +24,7 @@ type FormValues = {
 const Login = () => {
   const router = useRouter();
   const { handleSubmit, control } = useForm({
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(loginSchema)
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
@@ -34,19 +34,19 @@ const Login = () => {
     }
   };
   return (
-    <div className='container flex justify-center	p-4 mx-auto'>
+    <div className="container mx-auto flex	justify-center p-4">
       {/* <DevTool control={control} placement='top-right' /> */}
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         <Controller
           control={control}
-          name='account'
-          render={(props) => <InputField required label='帳號' {...props} />}
+          name="account"
+          render={(props) => <InputField required label="帳號" {...props} />}
         />
 
         <Controller
           control={control}
-          name='password'
-          render={(props) => <InputField required label='密碼' {...props} type="password"/>}
+          name="password"
+          render={(props) => <InputField required label="密碼" {...props} type="password" />}
         />
         <Button text="提交" />
       </form>

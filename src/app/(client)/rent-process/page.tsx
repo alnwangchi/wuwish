@@ -22,10 +22,10 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <div>
-      <div className="container f-center flex-col">
+      <div className="f-center container flex-col">
         {/* AB版 */}
-        <div className="py-20 hidden sm:block">
-          <div className="flex items-center lg:gap-5 gap-3">
+        <div className="hidden py-10 sm:block">
+          <div className="flex items-center gap-3 lg:gap-5">
             <a target="_blank" href="https://www.instagram.com/wu_wish88/">
               <Hexagon>
                 <div>
@@ -52,9 +52,9 @@ const page = () => {
               </div>
             </Hexagon>
           </div>
-          <div className="flex justify-center items-center lg:gap-5 gap-3">
+          <div className="flex items-center justify-center gap-3 lg:gap-5">
             {/* 佔位置 workaround */}
-            <div className="flex items-center lg:gap-5 gap-3 h-[100px] invisible">
+            <div className="invisible flex h-[100px] items-center gap-3 lg:gap-5">
               <Hexagon />
               <Arrows />
               <Hexagon />
@@ -62,7 +62,7 @@ const page = () => {
             </div>
             <Arrows direction="down" />
           </div>
-          <div className="flex items-center lg:gap-5 gap-3">
+          <div className="flex items-center gap-3 lg:gap-5">
             <Hexagon>
               <div>
                 <p>歸還檢查</p>
@@ -133,9 +133,9 @@ const page = () => {
           </Hexagon>
         </div>
         <div className="relative w-full sm:py-0">
-          <Image src={rental_bg} className="w-full hidden sm:block" alt="deco" />
-          <div className="mx-auto sm:ab-center w-3/4 font-cubic leading-loose text-white text-clamp2">
-            <h2 className="text-center mb-10 clamp1">租借細則</h2>
+          <Image src={rental_bg} className="hidden w-full sm:block" alt="deco" />
+          <div className="sm:ab-center mx-auto w-3/4 font-cubic text-clamp2 leading-loose text-white">
+            <h2 className="clamp1 mb-10 text-center">租借細則</h2>
             <p>
               1.訂單確認後，每套服裝需先預繳1/2之訂金，
               <span className="text-red-600">如訂單取消，訂金不退還。</span>

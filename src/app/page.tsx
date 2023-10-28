@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <div className="relative">
-        <Image src={carousel_bg} sizes="100vw" alt="TBC" />
+        <Image src={carousel_bg} sizes="100vw" alt="神龍變裝輪播圖" />
         <div className="ab-center">
           <div className="w-[70vw]">
             <Carousel />

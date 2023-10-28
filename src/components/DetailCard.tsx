@@ -11,7 +11,7 @@ const DetailCard: FC<DetailCardProps> = (props) => {
   const { category, content, name, number, price, status, title } = data;
   return (
     <>
-      <div className="w-full sm:w-2/4 f-center">
+      <div className="f-center w-full sm:w-2/4">
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_URL}/${src}`}
           alt="TBC"
@@ -19,7 +19,7 @@ const DetailCard: FC<DetailCardProps> = (props) => {
           height={500}
         />
       </div>
-      <div className="space-y-3 pt-5 text-white font-cubic text-2xl sm:text-3xl text-center sm:text-left">
+      <div className="space-y-3 pt-5    text-center font-cubic text-2xl text-white sm:text-left sm:text-3xl">
         <p>
           <span>編號 : </span>
           <span>{number}</span>

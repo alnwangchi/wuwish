@@ -9,7 +9,7 @@ import Link from 'next/link';
 const Footer = () => {
   return (
     <div className="bg-primary-yellow pb-5 font-cubic">
-      <div className="relative container flex justify-center items-center flex-col gap-3 lg:flex-row">
+      <div className="container relative flex flex-col items-center justify-center gap-3 lg:flex-row">
         <div className="text-center text-primary-dk">
           <Link href="/" className="z-20">
             <Image
