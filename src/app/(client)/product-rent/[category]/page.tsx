@@ -4,26 +4,25 @@ import Pagination from '@/components/Pagination';
 import ClothesContainer from '@/components/template/ClothesContainer';
 import { useGetClothes } from '@/hooks/useGetClothes';
 import { BusinessType } from '@/interface';
-import { scrollToTop } from '@/util';
 import type { PaginationProps } from 'antd';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import slugify from 'slugify';
 
 const RentalCategoryPage = () => {
+  const router = useRouter();
   const pathname = usePathname();
   const category = pathname.split('/').at(-1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const searchParams = useSearchParams();
+  const currentPage = searchParams.get('page') || 1;
 
   const { cloth, totalCount } = useGetClothes({
     business_type: BusinessType.Rent,
     category,
-    currentPage
+    currentPage: Number(currentPage)
   });
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    scrollToTop();
-    setCurrentPage(page);
+    router.push(`${pathname}?page=${page}`);
   };
 
   return (
@@ -37,7 +36,7 @@ const RentalCategoryPage = () => {
         />
       ))}
       <div className="col-span-full">
-        <Pagination current={currentPage} onChange={onChange} total={totalCount} />
+        <Pagination current={Number(currentPage)} onChange={onChange} total={totalCount} />
       </div>
     </ClothesContainer>
   );

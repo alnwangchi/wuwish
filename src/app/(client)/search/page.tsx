@@ -4,35 +4,35 @@ import Pagination from '@/components/Pagination';
 import ClothesContainer from '@/components/template/ClothesContainer';
 import { ProductInfo } from '@/interface';
 import { keywordSearch } from '@/server';
-import { scrollToTop } from '@/util';
+import _ from 'lodash';
 import type { PaginationProps } from 'antd';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import slugify from 'slugify';
 
 const SearchPage = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const keyword = searchParams.get('keyword') || '';
   const [cloth, setCloth] = useState<ProductInfo[] | undefined>([]);
   const [totalCount, setTotalCount] = useState<number | undefined>(25);
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = searchParams.get('page') || 1;
 
   useEffect(() => {
     if (!keyword) return;
     (async () => {
-      const res = await keywordSearch({ keyword, currentPage });
+      const res = await keywordSearch({ keyword, currentPage: Number(currentPage) });
       setCloth(res?.results);
       setTotalCount(res?.total_count);
     })();
   }, [keyword, currentPage]);
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    scrollToTop();
-    setCurrentPage(page);
+    router.push(`${pathname}?keyword=${keyword}&page=${page}`);
   };
 
-  if (cloth?.length === 0) {
+  if (_.isEmpty(cloth)) {
     return <div className="mid-fill f-center text-white">部分服裝尚未更新請至IG/FB詢問</div>;
   }
 
@@ -49,7 +49,7 @@ const SearchPage = () => {
         />
       ))}
       <div className="col-span-full">
-        <Pagination current={currentPage} onChange={onChange} total={totalCount} />
+        <Pagination current={Number(currentPage)} onChange={onChange} total={totalCount} />
       </div>
     </ClothesContainer>
   );
