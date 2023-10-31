@@ -3,7 +3,7 @@
 import EditModal from '@/components/EditModal';
 import DataTable from '@/components/Tables';
 import useAuthenticate from '@/hooks/useAuthenticate';
-import { BusinessType, ProductSearchResponse } from '@/interface';
+import { BusinessType, ListType, ProductSearchResponse } from '@/interface';
 import { deleteMultipleProductApi, deleteProductApi, queryApi } from '@/server';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import {
@@ -24,20 +24,6 @@ import React, { useEffect, useId, useRef, useState } from 'react';
 
 const { Search } = Input;
 const { confirm } = Modal;
-
-export interface ListType {
-  image: any;
-  business_type: string;
-  category: string;
-  name: string;
-  title: string;
-  number?: string;
-  content?: string;
-  price?: number;
-  status?: string;
-  delete: any;
-  image_id?: string;
-}
 
 interface DefaultParamType {
   rentCurrent: number;
@@ -66,6 +52,7 @@ const options = [
     label: '名稱'
   }
 ];
+
 const defaultParam = {
   rentCurrent: 1,
   sellCurrent: 1,
@@ -201,32 +188,26 @@ const List = () => {
       image_id,
       info: { business_type, category, name, title, content, price, status, number }
     } = list;
-    if (business_type === BusinessType.Sell) {
-      return {
-        business_type,
-        key: image_id,
-        image: image_path,
-        category,
-        name,
-        title,
-        content,
-        price,
-        status,
-        number,
-        action: image_id
-      };
-    } else {
-      return {
-        business_type,
-        key: image_id,
-        image: image_path,
-        category,
-        name,
-        title,
-        number,
-        action: image_id
-      };
-    }
+
+    const rentData = {
+      business_type,
+      key: image_id,
+      image: image_path,
+      category,
+      name,
+      title,
+      number,
+      action: image_id
+    };
+
+    const sellData = {
+      ...rentData,
+      content,
+      price,
+      status
+    };
+
+    return business_type === BusinessType.Rent ? rentData : sellData;
   });
 
   const onSearch = (value: string | undefined) => {
@@ -236,6 +217,7 @@ const List = () => {
       searchValue,
       loading: false
     });
+
     // fetch api
     queryApi({
       page_size: filterParams.pagesize,
@@ -268,6 +250,15 @@ const List = () => {
     }
   };
 
+  const onPagination = (current: number, propertyType: 'rentCurrent' | 'sellCurrent') => {
+    setFilterParams({
+      ...filterParams,
+      [propertyType]: current || 1,
+      loading: true
+    });
+    setSelectedImageIds([]);
+  };
+
   const removeSelectImageIds = ({ type, image_id }: { type: DeleteType; image_id?: string }) => {
     if (type === DeleteType.Single) {
       setSelectedImageIds(selectedImageIds.filter((item) => item !== image_id));
@@ -291,9 +282,8 @@ const List = () => {
 
   // handle batch delete button status
   useEffect(() => {
-    if (selectedImageIds.length) {
-      setShowBatchDeleteBtn(true);
-    } else setShowBatchDeleteBtn(false);
+    const isShowBatchDeleteBtn = selectedImageIds.length !== 0;
+    setShowBatchDeleteBtn(isShowBatchDeleteBtn);
   }, [selectedImageIds]);
 
   const items: TabsProps['items'] = [
@@ -308,12 +298,7 @@ const List = () => {
           onChange={(pagination, _filters, _sorter, extra) => {
             if (extra.action === 'paginate') {
               const { current } = pagination;
-              setFilterParams({
-                ...filterParams,
-                rentCurrent: current || 1,
-                loading: true
-              });
-              setSelectedImageIds([]);
+              onPagination(current || 1, 'rentCurrent');
             }
           }}
           totalAmount={filterData.total_count}
@@ -333,12 +318,7 @@ const List = () => {
           onChange={(pagination, _filters, _sorter, extra) => {
             if (extra.action === 'paginate') {
               const { current } = pagination;
-              setFilterParams({
-                ...filterParams,
-                sellCurrent: current || 1,
-                loading: true
-              });
-              setSelectedImageIds([]);
+              onPagination(current || 1, 'sellCurrent');
             }
           }}
           totalAmount={filterData.total_count}

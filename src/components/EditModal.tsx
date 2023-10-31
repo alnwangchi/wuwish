@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import { ListType } from '@/app/(cms)/dashboard/list/page';
-import Button from '@/components/Button';
 import InputField from '@/components/Input/Input';
 import InputNumberField from '@/components/InputNumber/InputNumber';
 import { categoryList } from '@/constance';
 import { EditSchema, FormValues } from '@/constance/schema';
-import { BusinessType } from '@/interface';
+import { BusinessType, ListType } from '@/interface';
 import { putProductApi } from '@/server';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { message, Modal } from 'antd';

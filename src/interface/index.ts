@@ -41,4 +41,25 @@ interface QueryParams {
   is_random?: boolean;
 }
 
-export type { ReactFormProps, ProductSearchResponse, ProductInfo, QueryParams, ProductDetail };
+interface ListType {
+  image: any;
+  business_type: string;
+  category: string;
+  name: string;
+  title: string;
+  number?: string;
+  content?: string;
+  price?: number;
+  status?: string;
+  delete: any;
+  image_id?: string;
+}
+
+export type {
+  ReactFormProps,
+  ProductSearchResponse,
+  ProductInfo,
+  QueryParams,
+  ProductDetail,
+  ListType
+};
