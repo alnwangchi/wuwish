@@ -57,6 +57,7 @@ export const keywordSearch = async ({
     page_number: currentPage,
     name: keyword,
     title: keyword,
+    number: keyword,
     is_search_bar: true
   };
   try {

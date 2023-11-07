@@ -64,6 +64,10 @@ const options = [
   {
     value: 'name',
     label: '名稱'
+  },
+  {
+    value: 'number',
+    label: '編號'
   }
 ];
 const defaultParam = {
@@ -350,7 +354,7 @@ const List = () => {
   ];
 
   return (
-    <div className="container">
+    <div className="container py-10">
       <Card bordered={false} className="w-full">
         <Space.Compact className="w-full">
           <Select
