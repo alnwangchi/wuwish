@@ -27,7 +27,8 @@ interface EditModalProps {
 const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSearch, setKey }) => {
   const randonKey = useId();
   const [localPreviewImg, setLocalPreviewImg] = useState(data?.image);
-  const { register, handleSubmit, watch, reset, control } = useForm({
+  const [file, setFile] = useState('');
+  const { register, handleSubmit, watch, reset, control, setValue } = useForm({
     resolver: yupResolver(EditSchema),
     defaultValues: {
       business_type: BusinessType.Rent,
@@ -38,18 +39,22 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
     }
   });
   const business_value = watch('business_type', BusinessType.Rent);
+
   const handleUploadImage = (e: any) => {
     if (e.target?.files?.[0]) {
       setLocalPreviewImg(URL.createObjectURL(e.target.files[0]));
+      // 檔案另存 為了解決在用拖曳的時候會使 image 變 undefined 可能跟 RHF 有關
+      setFile(e.target.files[0]);
     } else {
       message.error('預覽圖片失敗!');
     }
   };
 
   const onSubmit: SubmitHandler<FormValues> = (d) => {
+    console.log(d);
     const postData = {
       ...d,
-      image: (d.image as any)['0']
+      image: file
     };
     const formData = new FormData();
     Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
