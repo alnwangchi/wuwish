@@ -57,7 +57,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
       image: file
     };
     const formData = new FormData();
-    Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
+    Object.entries(postData).forEach((item) => formData.append(item[0], item[1].toString()));
     // send api
     putProductApi(data?.image_id, formData).then((result) => {
       if (result === 'success') {
