@@ -50,23 +50,39 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
     }
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (d) => {
-    console.log(d);
-    const postData = {
-      ...d,
-      image: file
-    };
-    const formData = new FormData();
-    Object.entries(postData).forEach((item) => formData.append(item[0], item[1].toString()));
-    // send api
-    putProductApi(data?.image_id, formData).then((result) => {
+  const onSubmit: SubmitHandler<FormValues> = async (d) => {
+    try {
+      const formData = new FormData();
+      Object.entries(d).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          formData.append(key, value);
+        }
+      });
+
+      if (file) {
+        formData.append('image', file);
+      }
+
+      if (!data?.image_id) {
+        throw new Error('Image ID is missing');
+      }
+
+      const result = await putProductApi(data.image_id, formData);
+
       if (result === 'success') {
         setLocalPreviewImg('');
+        setFile('');
         setOpen(false);
         onSearch(filterParams.searchValue);
         setKey(randonKey);
+        message.success('產品更新成功');
+      } else {
+        throw new Error('Update failed');
       }
-    });
+    } catch (error) {
+      console.error('提交表單時發生錯誤:', error);
+      message.error('更新產品失敗，請重試');
+    }
   };
 
   // reset 用來帶入預設
