@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
+import { enToNameMap } from '@/constance';
 
 interface DetailCardProps {
   src: any;
@@ -9,6 +10,7 @@ interface DetailCardProps {
 const DetailCard: FC<DetailCardProps> = (props) => {
   const { src, data } = props;
   const { category, content, name, number, price, status, title } = data;
+
   return (
     <>
       <div className="f-center w-full sm:w-2/4">
@@ -26,7 +28,7 @@ const DetailCard: FC<DetailCardProps> = (props) => {
         </p>
         <p>
           <span>類別 : </span>
-          <span>{category}</span>
+          <span>{enToNameMap[category]}</span>
         </p>
         <p>
           <span>劇名 : </span>

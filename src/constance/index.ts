@@ -1,3 +1,6 @@
+import { toLower } from 'lodash';
+import slugify from 'slugify';
+
 export const categoryList = [
   { name: '訂製服裝', en: 'Custom Clothing' },
   { name: '萬聖節', en: 'Halloween' },
@@ -25,6 +28,14 @@ export const categoryList = [
   { name: '大型道具', en: 'Large Props' },
   { name: '芭比全系列', en: 'Barbie Series' }
 ];
+
+export const enToNameMap = categoryList.reduce(
+  (map, category) => {
+    map[toLower(slugify(category.en))] = category.name;
+    return map;
+  },
+  {} as Record<string, string>
+);
 
 export const saleCategoryList = [
   { name: '萬聖節', en: 'Halloween' },
