@@ -21,7 +21,7 @@ const DetailCard: FC<DetailCardProps> = (props) => {
           height={500}
         />
       </div>
-      <div className="space-y-3 pt-5    text-center font-cubic text-2xl text-white sm:text-left sm:text-3xl">
+      <div className="space-y-3 pt-5 text-center font-cubic text-2xl text-white sm:text-left sm:text-3xl">
         <p>
           <span>編號 : </span>
           <span>{number}</span>
