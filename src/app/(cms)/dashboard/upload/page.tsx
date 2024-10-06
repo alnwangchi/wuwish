@@ -1,21 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import React, { useEffect } from 'react';
-import { Card, message } from 'antd';
-import { categoryList } from '@/constance';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import useAuthenticate from '@/hooks/useAuthenticate';
 import InputField from '@/components/Input/Input';
 import InputNumberField from '@/components/InputNumber/InputNumber';
-import { postProductApi } from '@/server';
-import { BusinessType } from '@/interface';
-import Button from '@/components/Button';
-import slugify from 'slugify';
+import { categoryOptions } from '@/constance';
 import { createSchema, FormValues } from '@/constance/schema';
+import useAuthenticate from '@/hooks/useAuthenticate';
+import { BusinessType } from '@/interface';
+import { postProductApi } from '@/server';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Card, message, Select } from 'antd';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 const UploadPage = () => {
   const {
@@ -29,10 +25,12 @@ const UploadPage = () => {
   } = useForm({
     resolver: yupResolver(createSchema),
     defaultValues: {
-      business_type: BusinessType.Rent
+      business_type: BusinessType.Rent,
+      category: []
     }
   });
   const [previewImg, setPreviewImg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const isCanViewAdmin = useAuthenticate();
   const router = useRouter();
   const business_value = watch('business_type', BusinessType.Rent);
@@ -53,22 +51,45 @@ const UploadPage = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const postData = {
-      ...data,
-      image: (data.image as any)['0']
-    };
-    const formData = new FormData();
-    Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
-    // send api
-    postProductApi(formData).then((result) => {
-      if (result === 'success') {
-        // clear previewImage
-        setPreviewImg('');
-        // reset image value
-        resetField('image');
-      }
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    // console.log('🚀 ~ data:', data);
+    const { category, image } = data;
+
+    const uploadPromises = category.map((c) => {
+      const postData = {
+        ...data,
+        category: c,
+        image: (image as any)['0']
+      };
+      const formData = new FormData();
+      Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
+      return postProductApi(formData);
     });
+
+    setIsLoading(true);
+
+    try {
+      const results = await Promise.allSettled(uploadPromises);
+
+      const successCount = results.filter((result) => result.status === 'fulfilled').length;
+      const failCount = results.length - successCount;
+
+      if (successCount > 0) {
+        message.success(`成功上傳 ${successCount} 個類別`);
+      }
+
+      if (failCount > 0) {
+        message.error(`${failCount} 個類別上傳失敗`);
+      }
+
+      setPreviewImg('');
+      resetField('image');
+    } catch (error) {
+      console.error('Upload process failed:', error);
+      message.error('上傳過程中發生錯誤');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -88,18 +109,28 @@ const UploadPage = () => {
               </label>
             </div>
           </div>
+          {/* 1131006 需要一圖多類 */}
           <div className="mb-4">
             <label className="labelText-required labelText">類別</label>
-            <select
-              {...register('category')}
-              className="w-full rounded-md border border-[#d9d9d9] py-2 pl-[11px]"
-            >
-              {categoryList.map((c) => (
-                <option key={c.en} value={slugify(c.en, { lower: true })}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
+            <Controller
+              name="category"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <Select
+                  className="w-full"
+                  mode="multiple"
+                  allowClear
+                  placeholder="Please select"
+                  maxCount={3}
+                  options={categoryOptions}
+                  value={value as string[]}
+                  onChange={(newValue: string[]) => {
+                    onChange(newValue);
+                  }}
+                />
+              )}
+            />
+            {errors.category && <p className="errorInput">{errors.category.message}</p>}
           </div>
 
           <Controller
@@ -158,7 +189,9 @@ const UploadPage = () => {
             />
             {errors.image && <p className="errorInput">{errors.image.message}</p>}
           </div>
-          <Button text="提交" customClass="self-end" />
+          <Button htmlType="submit" className="self-end" type="primary" loading={isLoading}>
+            {isLoading ? '上傳中' : '提交'}
+          </Button>
         </form>
       </Card>
       <div className="flex flex-col gap-4">

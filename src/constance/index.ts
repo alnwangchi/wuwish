@@ -29,6 +29,11 @@ export const categoryList = [
   { name: '芭比全系列', en: 'Barbie Series' }
 ];
 
+export const categoryOptions = categoryList.map((item) => ({
+  label: item.name,
+  value: item.en
+}));
+
 export const enToNameMap = categoryList.reduce(
   (map, category) => {
     map[toLower(slugify(category.en))] = category.name;

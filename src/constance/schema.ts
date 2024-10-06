@@ -3,7 +3,7 @@ import * as yup from 'yup';
 export type FormValues = {
   image: any;
   business_type: string;
-  category: string;
+  category: string[];
   name: string;
   title: string;
   number?: string;
@@ -14,7 +14,12 @@ export type FormValues = {
 
 const baseSchema = yup.object({
   business_type: yup.string().required(),
-  category: yup.string().required(),
+  category: yup
+    .array()
+    .of(yup.string().required())
+    .min(1, '類別是必填欄位')
+    .max(3, '最多選擇三個類別') // restrict in UI
+    .required('類別是必填欄位'),
   name: yup.string().required('名稱是必填欄位'),
   title: yup.string().required('劇名是必填欄位'),
   number: yup.string(),
