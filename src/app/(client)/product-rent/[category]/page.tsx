@@ -27,14 +27,16 @@ const RentalCategoryPage = () => {
 
   return (
     <ClothesContainer>
-      {cloth?.map((p: any) => (
-        <ClothesCard
-          href={`/product-rent/${slugify(category!, { lower: true })}/${p.image_id}`}
-          src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
-          key={p.image_id}
-          alt="imageUrl"
-        />
-      ))}
+      {cloth
+        ?.filter((p) => p.info.category === category)
+        ?.map((p: any) => (
+          <ClothesCard
+            href={`/product-rent/${slugify(category!, { lower: true })}/${p.image_id}`}
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
+            key={p.image_id}
+            alt="imageUrl"
+          />
+        ))}
       <div className="col-span-full">
         <Pagination current={Number(currentPage)} onChange={onChange} total={totalCount} />
       </div>
