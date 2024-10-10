@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import { ListType } from '@/app/(cms)/dashboard/list/page';
-import Button from '@/components/Button';
 import InputField from '@/components/Input/Input';
 import InputNumberField from '@/components/InputNumber/InputNumber';
-import { categoryList } from '@/constance';
-import { EditSchema, FormValues } from '@/constance/schema';
+import { categoryOptions } from '@/constance';
+import { EditFormValues, EditSchema } from '@/constance/schema';
 import { BusinessType } from '@/interface';
 import { putProductApi } from '@/server';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,7 +12,6 @@ import { message, Modal } from 'antd';
 import Image from 'next/image';
 import React, { FC, useEffect, useId, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import slugify from 'slugify';
 
 interface EditModalProps {
   open: boolean;
@@ -50,7 +48,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
     }
   };
 
-  const onSubmit: SubmitHandler<FormValues> = async (d) => {
+  const onSubmit: SubmitHandler<EditFormValues> = async (d) => {
     try {
       const formData = new FormData();
       Object.entries(d).forEach(([key, value]) => {
@@ -96,7 +94,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
     });
     // 清除未 submit 的預覽圖
     return () => setLocalPreviewImg('');
-  }, [data]);
+  }, [data, reset]);
 
   return (
     <Modal onOk={handleSubmit(onSubmit)} onCancel={() => setOpen(false)} open={open}>
@@ -132,9 +130,9 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
               {...register('category')}
               className="w-full rounded-md border border-[#d9d9d9] py-2 pl-[11px]"
             >
-              {categoryList.map((c) => (
-                <option key={c.en} value={slugify(c.en, { lower: true })}>
-                  {c.name}
+              {categoryOptions.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.label}
                 </option>
               ))}
             </select>

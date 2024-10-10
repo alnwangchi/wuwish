@@ -3,7 +3,7 @@
 import InputField from '@/components/Input/Input';
 import InputNumberField from '@/components/InputNumber/InputNumber';
 import { categoryOptions } from '@/constance';
-import { createSchema, FormValues } from '@/constance/schema';
+import { createSchema, CreateFormValues } from '@/constance/schema';
 import useAuthenticate from '@/hooks/useAuthenticate';
 import { BusinessType } from '@/interface';
 import { postProductApi } from '@/server';
@@ -51,7 +51,7 @@ const UploadPage = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  const onSubmit: SubmitHandler<CreateFormValues> = async (data) => {
     // console.log('🚀 ~ data:', data);
     const { category, image } = data;
 

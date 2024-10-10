@@ -31,7 +31,7 @@ export const categoryList = [
 
 export const categoryOptions = categoryList.map((item) => ({
   label: item.name,
-  value: item.en
+  value: slugify(item.en, { lower: true })
 }));
 
 export const enToNameMap = categoryList.reduce(
