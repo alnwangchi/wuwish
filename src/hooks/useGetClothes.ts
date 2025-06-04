@@ -13,7 +13,7 @@ export const useGetClothes = ({
   category,
   currentPage
 }: useGetClothesParamsType) => {
-  const [cloth, setCloth] = useState<ProductInfo[] | undefined>([]);
+  const [cloth, setCloth] = useState<ProductInfo[] | undefined>(undefined);
   const [totalCount, setTotalCount] = useState<number | undefined>(25);
 
   useEffect(() => {

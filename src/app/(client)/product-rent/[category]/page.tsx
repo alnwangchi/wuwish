@@ -5,6 +5,7 @@ import ClothesContainer from '@/components/template/ClothesContainer';
 import { useGetClothes } from '@/hooks/useGetClothes';
 import { BusinessType } from '@/interface';
 import type { PaginationProps } from 'antd';
+import _ from 'lodash';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import slugify from 'slugify';
 
@@ -24,6 +25,22 @@ const RentalCategoryPage = () => {
   const onChange: PaginationProps['onChange'] = (page) => {
     router.push(`${pathname}?page=${page}`);
   };
+
+  if (!cloth) {
+    return (
+      <div className="f-center mid-fill">
+        <h1 className="text-center text-white">載入中...</h1>
+      </div>
+    );
+  }
+
+  if (cloth.length === 0) {
+    return (
+      <div className="f-center mid-fill">
+        <h1 className="text-center text-white">目前無此類租借服裝</h1>
+      </div>
+    );
+  }
 
   return (
     <ClothesContainer>
