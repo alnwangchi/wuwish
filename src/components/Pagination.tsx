@@ -25,7 +25,7 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total = 0, onChange
     }
   };
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-col gap-10 pt-4 md:flex-row md:gap-2">
       <AntdPagination
         current={current}
         onChange={onChange}
@@ -84,7 +84,7 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total = 0, onChange
               width={53}
               height={61}
               alt="pagination"
-              className="hue-rotate-[45deg] saturate-200"
+              className="hue-rotate-[-160deg] saturate-200"
             />
             <input
               className="ab-center w-full border-none bg-transparent text-center font-timer text-xl font-bold outline-none"
@@ -92,7 +92,7 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total = 0, onChange
               maxLength={2}
               onChange={(e) => {
                 const value = e.target.value;
-                if (/^\d*$/.test(value) && Number(value) <= total) {
+                if (/^\d*$/.test(value) && Number(value) <= Math.ceil(total / DEFAULT_SIZE)) {
                   setJumpValue(value);
                 }
               }}
@@ -112,7 +112,7 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total = 0, onChange
               width={53}
               height={61}
               alt="pagination"
-              className="hue-rotate-[45deg] saturate-200"
+              className="hue-rotate-[-160deg] saturate-200"
             />
             <p className="ab-center font-timer text-xl font-bold">Go</p>
           </button>
