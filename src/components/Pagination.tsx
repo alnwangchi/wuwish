@@ -33,14 +33,14 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total = 0, onChange
         pageSize={DEFAULT_SIZE}
         showSizeChanger={false}
         // showQuickJumper={{
-        //   goButton: <Image src={pagination_bg} width={53} height={61} alt="pagination" />
+        //   goButton: <Image src={pagination_bg} width={45} height={51} alt="pagination" />
         // }}
         itemRender={(page, type) => {
           // type: 'page' | 'prev' | 'next' | 'jump-prev'| 'jump-next'
           if (type === 'jump-prev') {
             return (
               <div className="relative">
-                <Image src={pagination_bg} width={53} height={61} alt="pagination" />
+                <Image src={pagination_bg} width={45} height={51} alt="pagination" />
                 <p className="ab-center font-timer text-xl font-bold">
                   <MdKeyboardDoubleArrowLeft />
                 </p>
@@ -50,7 +50,7 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total = 0, onChange
           if (type === 'jump-next') {
             return (
               <div className="relative">
-                <Image src={pagination_bg} width={53} height={61} alt="pagination" />
+                <Image src={pagination_bg} width={45} height={51} alt="pagination" />
                 <p className="ab-center font-timer text-xl font-bold">
                   <MdKeyboardDoubleArrowRight />
                 </p>
@@ -61,12 +61,12 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total = 0, onChange
           if (type !== 'page') return null;
           return (
             <div className="relative">
-              <Image src={pagination_bg} width={53} height={61} alt="pagination" />
+              <Image src={pagination_bg} width={45} height={51} alt="pagination" />
               <p
-                // page === 1 是為了 timer 這個爛字型佔位個別調整
+                // (page === 1 || page > 9) 是為了 timer 這個爛字型佔位個別調整
                 className={clsx(
                   'ab-center font-timer text-xl font-bold',
-                  page === 1 && '!left-[43%]'
+                  (page === 1 || page > 9) && '!left-[43%]'
                 )}
               >
                 {page}
@@ -75,14 +75,14 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total = 0, onChange
           );
         }}
       />
-      {total > DEFAULT_SIZE * 5 && (
+      {total > DEFAULT_SIZE * 7 && (
         <div className="custom-quick-jumper flex items-center justify-center gap-2 text-white">
           <span>跳至</span>
           <div className="relative">
             <Image
               src={pagination_bg}
-              width={53}
-              height={61}
+              width={45}
+              height={51}
               alt="pagination"
               className="hue-rotate-[-160deg] saturate-200"
             />
@@ -109,8 +109,8 @@ const Pagination: FC<PaginationPropsCustomize> = ({ current, total = 0, onChange
           >
             <Image
               src={pagination_bg}
-              width={53}
-              height={61}
+              width={45}
+              height={51}
               alt="pagination"
               className="hue-rotate-[-160deg] saturate-200"
             />
