@@ -24,6 +24,7 @@ export default function Home() {
             text={c.name}
             key={c.name}
             href={`/product-rent/${slugify(c.en, { lower: true })}`}
+            alt={c.name + '按鈕'}
           />
         ))}
       </CategoryContainer>
