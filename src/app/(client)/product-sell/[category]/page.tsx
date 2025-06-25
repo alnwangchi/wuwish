@@ -1,4 +1,5 @@
 'use client';
+import Head from 'next/head'; // 引入 Head 元件
 import ClothesCard from '@/components/ClothesCard';
 import Pagination from '@/components/Pagination';
 import ClothesContainer from '@/components/template/ClothesContainer';
@@ -26,28 +27,28 @@ const SaleCategoryPage = () => {
     router.push(`${pathname}?page=${page}`);
   };
 
-  if (_.isEmpty(cloth)) {
-    return (
-      <div className="f-center mid-fill">
-        <h1 className="text-center text-white">目前無此類販售服裝</h1>
-      </div>
-    );
-  }
-
   return (
-    <ClothesContainer>
-      {cloth?.map((p: any) => (
-        <ClothesCard
-          href={`/product-sell/${slugify(category!, { lower: true })}/${p.image_id}`}
-          src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
-          key={p.image_id}
-          alt="imageUrl"
-        />
-      ))}
-      <div className="col-span-full">
-        <Pagination current={Number(currentPage)} onChange={onChange} total={totalCount} />
-      </div>
-    </ClothesContainer>
+    <>
+      {_.isEmpty(cloth) ? (
+        <div className="f-center mid-fill">
+          <h1 className="text-center text-white">目前無此類販售服裝</h1>
+        </div>
+      ) : (
+        <ClothesContainer>
+          {cloth?.map((p: any) => (
+            <ClothesCard
+              href={`/product-sell/${slugify(category!, { lower: true })}/${p.image_id}`}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
+              key={p.image_id}
+              alt="imageUrl"
+            />
+          ))}
+          <div className="col-span-full">
+            <Pagination current={Number(currentPage)} onChange={onChange} total={totalCount} />
+          </div>
+        </ClothesContainer>
+      )}
+    </>
   );
 };
 
