@@ -87,8 +87,8 @@ const Header = () => {
               target="_blank"
               href="https://www.facebook.com/Wu.wish88"
               onClick={() => {
-                eventTracker('social-media', {
-                  event_category: 'header-social',
+                eventTracker('social_media', {
+                  event_category: 'header_social',
                   event_label: 'FB',
                   value: 1
                 });
@@ -100,8 +100,8 @@ const Header = () => {
               target="_blank"
               href="https://www.instagram.com/wu_wish88/"
               onClick={() => {
-                eventTracker('social-media', {
-                  event_category: 'header-social',
+                eventTracker('social_media', {
+                  event_category: 'header_social',
                   event_label: 'IG',
                   value: 1
                 });
@@ -114,8 +114,8 @@ const Header = () => {
               className="f-center"
               href="https://lin.ee/w3FAybm"
               onClick={() => {
-                eventTracker('social-media', {
-                  event_category: 'header-social',
+                eventTracker('social_media', {
+                  event_category: 'header_social',
                   event_label: 'LINE',
                   value: 1
                 });
