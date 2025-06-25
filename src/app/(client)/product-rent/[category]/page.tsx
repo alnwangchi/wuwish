@@ -2,8 +2,10 @@
 import ClothesCard from '@/components/ClothesCard';
 import Pagination from '@/components/Pagination';
 import ClothesContainer from '@/components/template/ClothesContainer';
+import { enToNameMap } from '@/constance';
 import { useGetClothes } from '@/hooks/useGetClothes';
 import { BusinessType } from '@/interface';
+import { generateImgAlt } from '@/util';
 import type { PaginationProps } from 'antd';
 import _ from 'lodash';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -51,7 +53,7 @@ const RentalCategoryPage = () => {
             href={`/product-rent/${slugify(category!, { lower: true })}/${p.image_id}`}
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
             key={p.image_id}
-            alt="imageUrl"
+            alt={generateImgAlt('服裝租借 ', p.info.category, p.info.title, p.info.name)}
           />
         ))}
       <div className="col-span-full">
