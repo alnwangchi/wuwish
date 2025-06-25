@@ -12,6 +12,7 @@ import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import NavItem from './NavItem';
+import { eventTracker } from '@/ga/utils/eventTracker';
 
 const Header = () => {
   const router = useRouter();
@@ -35,6 +36,11 @@ const Header = () => {
   const onSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const keyword = target.value;
+    eventTracker('search', {
+      event_category: 'product_search',
+      event_label: keyword,
+      value: 1
+    });
     handleSearch(keyword);
   };
 
@@ -77,13 +83,44 @@ const Header = () => {
         </Link>
         <section className="hidden sm:flex-col sm:justify-center md:flex lg:px-2">
           <div className="flex cursor-pointer gap-2 pl-2 text-4xl text-black">
-            <a target="_blank" href="https://www.facebook.com/Wu.wish88">
+            <a
+              target="_blank"
+              href="https://www.facebook.com/Wu.wish88"
+              onClick={() => {
+                eventTracker('social-media', {
+                  event_category: 'header-social',
+                  event_label: 'FB',
+                  value: 1
+                });
+              }}
+            >
               <FaSquareFacebook />
             </a>
-            <a target="_blank" href="https://www.instagram.com/wu_wish88/">
+            <a
+              target="_blank"
+              href="https://www.instagram.com/wu_wish88/"
+              onClick={() => {
+                eventTracker('social-media', {
+                  event_category: 'header-social',
+                  event_label: 'IG',
+                  value: 1
+                });
+              }}
+            >
               <FaInstagram />
             </a>
-            <a target="_blank" className="f-center" href="https://lin.ee/w3FAybm">
+            <a
+              target="_blank"
+              className="f-center"
+              href="https://lin.ee/w3FAybm"
+              onClick={() => {
+                eventTracker('social-media', {
+                  event_category: 'header-social',
+                  event_label: 'LINE',
+                  value: 1
+                });
+              }}
+            >
               <Image src={icon_line} width={32} height={32} alt="line" />
             </a>
           </div>

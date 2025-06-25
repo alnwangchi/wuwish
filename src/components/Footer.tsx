@@ -1,3 +1,4 @@
+'use client';
 import mainLogo from '@/assets/img/main_logo.png';
 import Image from 'next/image';
 import footer_fb from '@/assets/img/footer_fb.png';
@@ -5,6 +6,7 @@ import footer_ig from '@/assets/img/footer_ig.png';
 import footer_line from '@/assets/img/footer_line.png';
 import footer_comment from '@/assets/img/footer_comment.png';
 import Link from 'next/link';
+import { eventTracker } from '@/ga/utils/eventTracker';
 
 const Footer = () => {
   return (
@@ -28,13 +30,43 @@ const Footer = () => {
         </div>
 
         <div className="flex gap-3 lg:absolute lg:bottom-0 lg:left-0">
-          <a target="_blank" href="https://www.facebook.com/Wu.wish88">
+          <a
+            target="_blank"
+            href="https://www.facebook.com/Wu.wish88"
+            onClick={() => {
+              eventTracker('social-media', {
+                event_category: 'footer-social',
+                event_label: 'FB',
+                value: 1
+              });
+            }}
+          >
             <Image src={footer_fb} width={75} height={105} alt="神龍變裝 facebook" />
           </a>
-          <a target="_blank" href="https://www.instagram.com/wu_wish88/">
+          <a
+            target="_blank"
+            href="https://www.instagram.com/wu_wish88/"
+            onClick={() => {
+              eventTracker('social-media', {
+                event_category: 'footer-social',
+                event_label: 'IG',
+                value: 1
+              });
+            }}
+          >
             <Image src={footer_ig} width={75} height={105} alt="神龍變裝 instagram" />
           </a>
-          <a target="_blank" href="https://lin.ee/w3FAybm">
+          <a
+            target="_blank"
+            href="https://lin.ee/w3FAybm"
+            onClick={() => {
+              eventTracker('social-media', {
+                event_category: 'footer-social',
+                event_label: 'LINE',
+                value: 1
+              });
+            }}
+          >
             <Image src={footer_line} width={75} height={105} alt="神龍變裝 line" />
           </a>
           <a target="_blank" href="https://reurl.cc/gD9mK4">

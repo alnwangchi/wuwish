@@ -15,10 +15,10 @@ const CategoryItem: FC<NavItemProps> = ({ href, text, alt = '神龍變裝類別�
     <Link
       href={href}
       className="group relative hover:hue-rotate-[220deg]"
-      onClick={(e) => {
+      onClick={() => {
         eventTracker('click', {
-          category: text,
-          label: text,
+          event_category: 'rent_category_button',
+          event_label: text || 'unTrack',
           value: 1
         });
       }}
