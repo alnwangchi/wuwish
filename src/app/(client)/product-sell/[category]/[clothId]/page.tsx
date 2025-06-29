@@ -11,6 +11,7 @@ import { useGetClotheDetail } from '@/hooks/useGetClotheDetail';
 import { useGetRandomClothes } from '@/hooks/useGetRandomClothes';
 import { BusinessType } from '@/interface';
 import { Spin } from 'antd';
+import { generateImgAlt } from '@/util';
 
 const SaleDetailPage = () => {
   const params = useParams();
@@ -48,6 +49,7 @@ const SaleDetailPage = () => {
             href={`/product-rent/${category}/${p.image_id}`}
             key="d"
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
+            alt={generateImgAlt('服裝販售 ', p.info.category, p.info.title, p.info.name)}
           />
         ))}
       </ClothesContainer>

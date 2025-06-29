@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
 import { enToNameMap } from '@/constance';
+import { generateImgAlt } from '@/util';
 
 interface DetailCardProps {
   src: any;
@@ -16,7 +17,7 @@ const DetailCard: FC<DetailCardProps> = (props) => {
       <div className="f-center w-full sm:w-2/4">
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_URL}/${src}`}
-          alt="TBC"
+          alt={generateImgAlt('服裝租借 ', category, title, name)}
           width={460}
           height={500}
         />

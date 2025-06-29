@@ -11,6 +11,7 @@ import { useGetClotheDetail } from '@/hooks/useGetClotheDetail';
 import { BusinessType } from '@/interface';
 import { useGetRandomClothes } from '@/hooks/useGetRandomClothes';
 import { Spin } from 'antd';
+import { generateImgAlt } from '@/util';
 
 const RentalDetailPage = () => {
   const params = useParams();
@@ -48,6 +49,7 @@ const RentalDetailPage = () => {
             href={`/product-rent/${category}/${p.image_id}`}
             key="d"
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
+            alt={generateImgAlt('服裝租借 ', p.info.category, p.info.title, p.info.name)}
           />
         ))}
       </ClothesContainer>
