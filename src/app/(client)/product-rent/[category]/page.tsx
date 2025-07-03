@@ -1,12 +1,15 @@
 'use client';
+import Breadcrumb from '@/components/Breadcrumb';
+import ClothEmpty from '@/components/ClothEmpty';
 import ClothesCard from '@/components/ClothesCard';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import Pagination from '@/components/Pagination';
 import ClothesContainer from '@/components/template/ClothesContainer';
 import { enToNameMap } from '@/constance';
 import { useGetClothes } from '@/hooks/useGetClothes';
 import { BusinessType } from '@/interface';
 import { generateImgAlt } from '@/util';
-import type { PaginationProps } from 'antd';
+import { type PaginationProps } from 'antd';
 import _ from 'lodash';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import slugify from 'slugify';
@@ -24,42 +27,59 @@ const RentalCategoryPage = () => {
     currentPage: Number(currentPage)
   });
 
+  const breadcrumbItems = [
+    {
+      title: (
+        <a className="breadcrumb" href="/">
+          首頁
+        </a>
+      )
+    },
+    {
+      title: (
+        <a className="breadcrumb" href="/product-rent">
+          服裝租借
+        </a>
+      )
+    },
+    {
+      title: <span className="text-white">{enToNameMap[category as string]}</span>
+    }
+  ];
+
   const onChange: PaginationProps['onChange'] = (page) => {
     router.push(`${pathname}?page=${page}`);
   };
 
   if (!cloth) {
-    return (
-      <div className="f-center mid-fill">
-        <h1 className="text-center text-white">載入中...</h1>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
-  if (cloth.length === 0) {
-    return (
-      <div className="f-center mid-fill">
-        <h1 className="text-center text-white">目前無此類租借服裝</h1>
-      </div>
-    );
+  if (_.isEmpty(cloth)) {
+    return <ClothEmpty />;
   }
 
   return (
-    <ClothesContainer>
-      {cloth
-        ?.filter((p) => p.info.category === category)
-        ?.map((p: any) => (
-          <ClothesCard
-            href={`/product-rent/${slugify(category!, { lower: true })}/${p.image_id}`}
-            src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
-            key={p.image_id}
-            alt={generateImgAlt('服裝租借 ', p.info.category, p.info.title, p.info.name)}
-          />
-        ))}
-      <div className="col-span-full">
-        <Pagination current={Number(currentPage)} onChange={onChange} total={totalCount} />
+    <>
+      <div className="container">
+        <Breadcrumb items={breadcrumbItems} />
       </div>
-    </ClothesContainer>
+      <ClothesContainer>
+        {cloth
+          ?.filter((p) => p.info.category === category)
+          ?.map((p: any) => (
+            <ClothesCard
+              href={`/product-rent/${slugify(category!, { lower: true })}/${p.image_id}`}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
+              key={p.image_id}
+              alt={generateImgAlt('服裝租借 ', p.info.category, p.info.title, p.info.name)}
+            />
+          ))}
+        <div className="col-span-full">
+          <Pagination current={Number(currentPage)} onChange={onChange} total={totalCount} />
+        </div>
+      </ClothesContainer>
+    </>
   );
 };
 

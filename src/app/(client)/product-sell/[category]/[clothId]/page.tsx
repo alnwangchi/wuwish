@@ -10,7 +10,9 @@ import { useParams } from 'next/navigation';
 import { useGetClotheDetail } from '@/hooks/useGetClotheDetail';
 import { useGetRandomClothes } from '@/hooks/useGetRandomClothes';
 import { BusinessType } from '@/interface';
-import { Spin } from 'antd';
+import Breadcrumb from '@/components/Breadcrumb';
+import LoadingSpinner from '@/components/LoadingSpinner'; // 引入 LoadingSpinner
+import { enToNameMap } from '@/constance';
 import { generateImgAlt } from '@/util';
 
 const SaleDetailPage = () => {
@@ -24,17 +26,40 @@ const SaleDetailPage = () => {
     title: clothDetail?.title
   });
 
+  const breadcrumbItems = [
+    {
+      title: (
+        <a className="breadcrumb" href="/">
+          首頁
+        </a>
+      )
+    },
+    {
+      title: (
+        <a className="breadcrumb" href="/product-sell">
+          服裝販售
+        </a>
+      )
+    },
+    {
+      title: (
+        <a className="breadcrumb" href={`/product-sell/${category}`}>
+          {enToNameMap[category as string]}
+        </a>
+      )
+    },
+    {
+      title: <span className="text-white">{clothDetail?.name}</span>
+    }
+  ];
+
   return (
     <div>
-      <div className="container flex flex-col justify-center py-8 sm:flex-row sm:justify-start sm:gap-10">
-        {clothDetail ? (
-          <DetailCard src={src} data={clothDetail} />
-        ) : (
-          <div className="f-center min-h-[40vh] grow">
-            <Spin size="large"></Spin>
-            <p className="text-white">載入中....</p>
-          </div>
-        )}
+      <div className="container">
+        <Breadcrumb items={breadcrumbItems} />
+      </div>
+      <div className="container flex flex-col pb-10 sm:flex-row">
+        {clothDetail ? <DetailCard src={src} data={clothDetail} /> : <LoadingSpinner />}
       </div>
       <div className="relative">
         <Image src={detail_bg} alt="detail_bg" />

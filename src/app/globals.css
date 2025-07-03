@@ -44,6 +44,10 @@
   .mid-fill {
     @apply min-h-[calc(100vh_-_370px)];
   }
+
+  .breadcrumb {
+    @apply text-xs text-white underline underline-offset-4 hover:text-primary-yellow md:text-sm !important;
+  }
 }
 
 body {

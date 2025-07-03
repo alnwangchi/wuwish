@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  important: true,
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,7 +12,14 @@ module.exports = {
         DEFAULT: '.5rem',
         lg: '1rem'
       },
-      center: true
+      center: true,
+      screens: {
+        sm: '100%',
+        md: '640px',
+        lg: '768px',
+        xl: '960px',
+        '2xl': '1080px' // 原本是 1280px
+      }
     },
     extend: {
       colors: {

@@ -1,6 +1,6 @@
 'use client';
 import CategoryItem from '@/components/CategoryItem';
-import { saleCategoryList } from '@/constance';
+import { categoryList, saleCategoryList } from '@/constance';
 import React from 'react';
 import slugify from 'slugify';
 import CategoryContainer from '@/components/template/CategoryContainer';
@@ -16,7 +16,7 @@ const breadcrumbItems = [
     )
   },
   {
-    title: <span className="text-white">服裝販售</span>
+    title: <span className="text-white">服裝租借</span>
   }
 ];
 
@@ -27,11 +27,11 @@ const page = () => {
         <Breadcrumb items={breadcrumbItems} />
       </div>
       <CategoryContainer>
-        {saleCategoryList.map((c) => (
+        {categoryList.map((c) => (
           <CategoryItem
             text={c.name}
             key={c.name}
-            href={`/product-sell/${slugify(c.en, { lower: true })}`}
+            href={`/product-rent/${slugify(c.en, { lower: true })}`}
             alt={c.name + '按鈕'}
           />
         ))}

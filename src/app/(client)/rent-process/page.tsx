@@ -9,6 +9,7 @@ import { FaInstagram } from 'react-icons/fa6';
 import Arrows from '@/components/Arrows';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: '神龍變裝租借流程說明',
@@ -20,11 +21,26 @@ export const metadata: Metadata = {
 };
 
 const page = () => {
+  const breadcrumbItems = [
+    {
+      title: (
+        <a className="breadcrumb" href="/">
+          首頁
+        </a>
+      )
+    },
+    {
+      title: <span className="text-white">租借流程</span>
+    }
+  ];
   return (
     <div>
+      <div className="container">
+        <Breadcrumb items={breadcrumbItems} />
+      </div>
       <div className="f-center container flex-col">
         {/* AB版 */}
-        <div className="hidden py-10 sm:block">
+        <div className="hidden pb-10 pt-6 sm:block">
           <div className="flex items-center gap-3 lg:gap-5">
             <a target="_blank" href="https://www.instagram.com/wu_wish88/">
               <Hexagon>

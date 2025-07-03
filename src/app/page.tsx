@@ -10,7 +10,7 @@ import slugify from 'slugify';
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <div className="relative">
+      <div className="relative mb-10">
         <Image src={carousel_bg} sizes="100vw" alt="神龍變裝輪播圖" />
         <div className="ab-center">
           <div className="w-[70vw]">

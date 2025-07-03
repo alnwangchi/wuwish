@@ -14,7 +14,7 @@ const DetailCard: FC<DetailCardProps> = (props) => {
 
   return (
     <>
-      <div className="f-center w-full sm:w-2/4">
+      <div className="f-center w-full sm:w-2/4 sm:justify-start">
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_URL}/${src}`}
           alt={generateImgAlt('服裝租借 ', category, title, name)}
