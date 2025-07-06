@@ -22,9 +22,9 @@ const NavItem: FC<NavItemProps> = ({ href, text, alt, setIsMenuOpen }) => {
         alt="TBC"
         className="ab-center opacity-0 transition group-hover:opacity-100"
       />
-      <Image src={navItem_bg} width={150} height={60} alt="TBC" />
+      <Image src={navItem_bg} width={150} height={60} alt="連結按鈕" />
       <div className="ab-center flex w-full justify-center text-lg font-bold">
-        <Image src={ball_icon} width={30} height={30} alt="TBC" />
+        <Image src={ball_icon} width={30} height={30} alt="連結按鈕" />
         <span className="pr-2">{text}</span>
       </div>
     </Link>

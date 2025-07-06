@@ -9,6 +9,7 @@ import type { PaginationProps } from 'antd';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import slugify from 'slugify';
+import { generateImgAlt } from '@/util';
 
 const SearchPage = () => {
   const router = useRouter();
@@ -45,7 +46,7 @@ const SearchPage = () => {
           })}/${p.image_id}`}
           src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
           key={p.image_id}
-          alt="imageUrl"
+          alt={generateImgAlt('服裝', p.info.category, p.info.title, p.info.name)}
         />
       ))}
       <div className="col-span-full">

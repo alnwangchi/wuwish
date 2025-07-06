@@ -50,7 +50,7 @@ export default function Carousel() {
     // prevArrow: <div className='w-5 h20 bg-orange-600'></div>,
     dots: true,
     customPaging: function (i: number) {
-      return <Image src={paginationImg[i]} alt="TBC" />;
+      return <Image src={paginationImg[i]} alt={`神龍變裝輪播 ${i}星球`} />;
     }
   };
   return (
@@ -63,31 +63,31 @@ export default function Carousel() {
       >
         <Image
           src={carousel_left}
-          alt="TBC"
+          alt="向左滑動"
           className="cursor-pointer contrast-50 hover:contrast-100"
         />
       </div>
       <Slider {...settings} ref={carouselRef}>
         <div>
-          <Image src={c1} alt="" />
+          <Image src={c1} alt="活動檔期公告輪播" />
         </div>
         <div>
-          <Image src={c2} alt="" />
+          <Image src={c2} alt="活動檔期公告輪播" />
         </div>
         <div>
-          <Image src={c3} alt="" />
+          <Image src={c3} alt="活動檔期公告輪播" />
         </div>
         <div>
-          <Image src={c4} alt="" />
+          <Image src={c4} alt="活動檔期公告輪播" />
         </div>
         <div>
-          <Image src={c5} alt="" />
+          <Image src={c5} alt="活動檔期公告輪播" />
         </div>
         <div>
-          <Image src={c6} alt="" />
+          <Image src={c6} alt="活動檔期公告輪播" />
         </div>
         <div>
-          <Image src={c7} alt="" />
+          <Image src={c7} alt="活動檔期公告輪播" />
         </div>
       </Slider>
       <div
@@ -98,7 +98,7 @@ export default function Carousel() {
       >
         <Image
           src={carousel_right}
-          alt="TBC"
+          alt="向右滑動"
           className="cursor-pointer contrast-50 hover:contrast-100"
         />
       </div>

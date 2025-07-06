@@ -13,6 +13,7 @@ import { enToNameMap } from '@/constance';
 import Breadcrumb from '@/components/Breadcrumb';
 import ClothEmpty from '@/components/ClothEmpty'; // 引入 ClothEmpty 元件
 import LoadingSpinner from '@/components/LoadingSpinner';
+import { generateImgAlt } from '@/util';
 
 const SaleCategoryPage = () => {
   const router = useRouter();
@@ -70,7 +71,7 @@ const SaleCategoryPage = () => {
             href={`/product-sell/${slugify(category!, { lower: true })}/${p.image_id}`}
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
             key={p.image_id}
-            alt="imageUrl"
+            alt={generateImgAlt('服裝販售 ', p.info.category, p.info.title, p.info.name)}
           />
         ))}
         <div className="col-span-full">
