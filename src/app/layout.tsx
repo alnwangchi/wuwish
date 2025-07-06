@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ],
               aggregateRating: {
                 '@type': 'AggregateRating',
-                ratingValue: '5.9',
+                ratingValue: '5.0',
                 reviewCount: '566'
               },
               sameAs: ['https://www.facebook.com/wuwish.tw', 'https://www.instagram.com/wuwish.tw']
