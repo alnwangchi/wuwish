@@ -50,7 +50,13 @@ export default function Carousel() {
     // prevArrow: <div className='w-5 h20 bg-orange-600'></div>,
     dots: true,
     customPaging: function (i: number) {
-      return <Image src={paginationImg[i]} alt={`神龍變裝輪播 ${i}星球`} />;
+      return (
+        <Image
+          src={paginationImg[i]}
+          alt={`神龍變裝輪播 ${i}星球`}
+          aria-label={`跳轉到第${i}張圖`}
+        />
+      );
     }
   };
   return (
@@ -65,11 +71,12 @@ export default function Carousel() {
           src={carousel_left}
           alt="向左滑動"
           className="cursor-pointer contrast-50 hover:contrast-100"
+          priority
         />
       </div>
       <Slider {...settings} ref={carouselRef}>
         <div>
-          <Image src={c1} alt="活動檔期公告輪播" />
+          <Image src={c1} alt="活動檔期公告輪播" priority />
         </div>
         <div>
           <Image src={c2} alt="活動檔期公告輪播" />
@@ -100,6 +107,7 @@ export default function Carousel() {
           src={carousel_right}
           alt="向右滑動"
           className="cursor-pointer contrast-50 hover:contrast-100"
+          priority
         />
       </div>
     </div>

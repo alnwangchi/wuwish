@@ -79,6 +79,7 @@ const Header = () => {
             layout="responsive"
             sizes="(max-width: 400px) 200px,
               300px"
+            priority
           />
         </Link>
         <section className="hidden sm:flex-col sm:justify-center md:flex lg:px-2">
@@ -86,6 +87,7 @@ const Header = () => {
             <a
               target="_blank"
               href="https://www.facebook.com/Wu.wish88"
+              aria-label="Facebook"
               onClick={() => {
                 eventTracker('social_media', {
                   event_category: 'header_social',
@@ -99,6 +101,7 @@ const Header = () => {
             <a
               target="_blank"
               href="https://www.instagram.com/wu_wish88/"
+              aria-label="Instagram"
               onClick={() => {
                 eventTracker('social_media', {
                   event_category: 'header_social',
@@ -113,6 +116,7 @@ const Header = () => {
               target="_blank"
               className="f-center"
               href="https://lin.ee/w3FAybm"
+              aria-label="LINE"
               onClick={() => {
                 eventTracker('social_media', {
                   event_category: 'header_social',
@@ -121,7 +125,7 @@ const Header = () => {
                 });
               }}
             >
-              <Image src={icon_line} width={32} height={32} alt="line" />
+              <Image src={icon_line} width={32} height={32} alt="line" priority />
             </a>
           </div>
           <div className="flex items-center gap-4">
@@ -141,6 +145,8 @@ const Header = () => {
                     width={25}
                     height={25}
                     alt="line"
+                    priority
+                    aria-label="搜尋服裝"
                   />
                 </span>
               </div>
@@ -179,6 +185,7 @@ const Header = () => {
                   width={25}
                   height={25}
                   alt="line"
+                  priority
                 />
               </span>
             </div>

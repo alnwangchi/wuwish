@@ -2,10 +2,14 @@
   font-family: 'cubic';
   src: url('../assets/font/Cubic_11_1.013_R.woff'), url('../assets/font/Cubic_11_1.013_R.woff2'),
     url('../assets/font/Cubic_11_1.013_R.ttf');
+  /* 當頁面自定義字體還沒下載完成時，先用系統預設字體，等下載好後再換成目標字體 for SEO */
+  font-display: swap;
 }
 @font-face {
   font-family: 'timer';
   src: url('../assets/font/CursedTimerUlil-Aznm.ttf');
+  /* 當頁面自定義字體還沒下載完成時，先用系統預設字體，等下載好後再換成目標字體 for SEO */
+  font-display: swap;
 }
 
 @tailwind base;
