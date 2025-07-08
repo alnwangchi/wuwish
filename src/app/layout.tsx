@@ -41,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 latitude: 25.041682169438786,
                 longitude: 121.50667589815379
               },
+              priceRange: '$$',
               openingHoursSpecification: [
                 {
                   '@type': 'OpeningHoursSpecification',
@@ -62,7 +63,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 ratingValue: '5.0',
                 reviewCount: '566'
               },
-              sameAs: ['https://www.facebook.com/wuwish.tw', 'https://www.instagram.com/wuwish.tw']
+              sameAs: [
+                'https://www.facebook.com/Wu.wish88/?locale=zh_TW',
+                'https://www.instagram.com/wu_wish88'
+              ]
             })
           }}
         ></Script>
