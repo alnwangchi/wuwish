@@ -1,5 +1,5 @@
-# test-bot
-User-agent: test-bot
+# *
+User-agent: *
 Allow: /
 
 # black-listed-bot
