@@ -18,14 +18,26 @@ const NavItem: FC<NavItemProps> = ({ href, text, alt, setIsMenuOpen }) => {
       <Image
         priority
         src={yellow}
-        width={129}
-        height={60}
+        width={84} // 原本 129 * 0.65
+        height={39} // 原本 60 * 0.65
         alt="連結按鈕"
         className="ab-center opacity-0 transition group-hover:opacity-100"
       />
-      <Image priority src={navItem_bg} width={150} height={60} alt="連結按鈕" />
-      <div className="ab-center flex w-full justify-center text-lg font-bold">
-        <Image priority src={ball_icon} width={30} height={30} alt="連結按鈕" />
+      <Image
+        priority
+        src={navItem_bg}
+        width={98} // 原本 150 * 0.65
+        height={39} // 原本 60 * 0.65
+        alt="連結按鈕"
+      />
+      <div className="ab-center flex w-full justify-center text-sm font-bold">
+        <Image
+          priority
+          src={ball_icon}
+          width={20} // 原本 30 * 0.65
+          height={20} // 原本 30 * 0.65
+          alt="連結按鈕"
+        />
         <span className="pr-2">{text}</span>
       </div>
     </Link>

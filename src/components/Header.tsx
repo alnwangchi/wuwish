@@ -71,7 +71,7 @@ const Header = () => {
 
   return (
     <div className="relative z-10 bg-primary-yellow py-3">
-      <div className="container relative flex justify-center lg:gap-[10%]">
+      <div className="container relative flex justify-between lg:gap-[10%]">
         <Link href="/" className="z-20">
           <Image
             src={main_logo}
@@ -83,7 +83,7 @@ const Header = () => {
           />
         </Link>
         <section className="hidden sm:flex-col sm:justify-center md:flex lg:px-2">
-          <div className="flex cursor-pointer gap-2 pl-2 text-4xl text-black">
+          <div className="mb-2 flex cursor-pointer gap-2 pl-2 text-4xl text-black">
             <a
               target="_blank"
               href="https://www.facebook.com/Wu.wish88"
@@ -154,6 +154,7 @@ const Header = () => {
             <nav className="flex gap-2">
               <NavItem text="商品販售" href="/product-sell" />
               <NavItem text="租借流程" href="/rent-process" />
+              <NavItem text="常見問題" href="/faq" />
             </nav>
           </div>
         </section>
@@ -191,6 +192,7 @@ const Header = () => {
             </div>
             <NavItem text="商品販售" href="/product-sell" setIsMenuOpen={setIsMenuOpen} />
             <NavItem text="租借流程" href="/rent-process" setIsMenuOpen={setIsMenuOpen} />
+            <NavItem text="常見問題" href="/faq" setIsMenuOpen={setIsMenuOpen} />
           </nav>
         </section>
       </div>
