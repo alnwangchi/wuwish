@@ -71,7 +71,7 @@ const Header = () => {
 
   return (
     <div className="relative z-10 bg-primary-yellow py-3">
-      <div className="container relative flex justify-between lg:gap-[10%]">
+      <div className="container relative flex justify-center sm:justify-between lg:gap-[10%]">
         <Link href="/" className="z-20">
           <Image
             src={main_logo}
