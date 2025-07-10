@@ -1,5 +1,5 @@
-# *
-User-agent: *
+# test-bot
+User-agent: test-bot
 Allow: /
 
 # black-listed-bot
@@ -7,8 +7,28 @@ User-agent: black-listed-bot
 Disallow: /dashboard
 Disallow: /login
 
-# Host
-Host: https://www.wuwish.com.tw/
+# Allow AI-related crawlers
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Optional: Common bots from other AI platforms
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: IndexNow
+Allow: /
 
 # Sitemaps
 Sitemap: https://www.wuwish.com.tw/sitemap.xml
