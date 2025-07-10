@@ -1,12 +1,12 @@
 import { enToNameMap } from '@/constance';
+import { categoryMeta } from '@/seo/metaData';
 import { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: { category: string } }) {
+  const { title, desc } = categoryMeta[params.category as keyof typeof categoryMeta] || {};
   return {
-    title: `神龍變裝 ${enToNameMap[params.category]} 租借專區`,
-    description: `歡迎來到神龍變裝，這邊都是我們有在租借的服裝，${
-      enToNameMap[params.category]
-    } 服裝專區`
+    title,
+    description: desc
   };
 }
 
