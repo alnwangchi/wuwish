@@ -29,11 +29,11 @@ const categoryList = [
   { name: '芭比全系列', en: 'Barbie Series' }
 ];
 
-const saleCategoryList = [
-  { name: '萬聖節', en: 'Halloween' },
-  { name: '卡通/動漫', en: 'Cartoons/Animations' },
-  { name: '電影/影集', en: 'Movies/TV Series' }
-];
+// const saleCategoryList = [
+//   { name: '萬聖節', en: 'Halloween' },
+//   { name: '卡通/動漫', en: 'Cartoons/Animations' },
+//   { name: '電影/影集', en: 'Movies/TV Series' }
+// ];
 
 module.exports = {
   siteUrl: 'https://www.wuwish.com.tw/',
@@ -67,10 +67,10 @@ module.exports = {
     }
 
     // 3️⃣ 加入出售分類
-    for (const category of saleCategoryList) {
-      const slug = slugify(category.en, { lower: true });
-      paths.push(await config.transform(config, `/product-sell/${slug}`));
-    }
+    // for (const category of saleCategoryList) {
+    //   const slug = slugify(category.en, { lower: true });
+    //   paths.push(await config.transform(config, `/product-sell/${slug}`));
+    // }
 
     return paths;
   },
