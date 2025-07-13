@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <div className="container space-y-8 py-10 font-cubic  text-white">{children}</div>;
+  return <div className="container space-y-8 py-10 font-cubic text-white">{children}</div>;
 }

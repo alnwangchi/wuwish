@@ -34,5 +34,11 @@
     "prefix": "cx",
     "body": ["import clsx from 'clsx';"],
     "description": "clsx"
+  },
+
+  "Wrap with span.text-red": {
+    "prefix": "wwr", // 你要輸入的觸發詞
+    "body": ["<span className='text-red-700'>${TM_SELECTED_TEXT}</span>"],
+    "description": "Wrap selected text with span"
   }
 }

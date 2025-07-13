@@ -8,7 +8,7 @@ const FAQPage = () => {
   return (
     <>
       <FAQJsonLd />
-      <h1 className="mb-4 text-center ">FAQ 常見問題</h1>
+      <h1 className="mb-4 text-center">FAQ 常見問題</h1>
       {FAQ.map((faq) => (
         <section className="space-y-4 leading-loose" key={faq.category}>
           <h2 className="title-effect mx-auto inline-block text-center shadow">{faq.category}</h2>
@@ -18,7 +18,7 @@ const FAQPage = () => {
                 <Image src={ball_icon} width={30} height={30} alt="FAQ-icon" />
                 <h3>{item.question}</h3>
               </div>
-              <p className="text-md">{item.answer}</p>
+              <div className="text-md">{item.answer}</div>
               {idx !== ary.length - 1 && <Divider style={{ background: 'white' }} />}
             </div>
           ))}
