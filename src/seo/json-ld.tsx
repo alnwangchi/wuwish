@@ -222,7 +222,39 @@ export const FAQJsonLd = () => {
 
   return (
     <Script
-      id="json-ld"
+      id="faq-json-ld"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+};
+
+export const AboutJsonLd = () => {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: '神龍變裝',
+    url: 'https://www.wuwish.com.tw/about',
+    logo: 'https://www.wuwish.com.tw/logo.png',
+    foundingDate: '2022',
+    description:
+      '神龍變裝成立於 2022 年，位於台北西門町，致力於提供高品質的服裝與道具租借服務，包含動漫角色、節慶造型與創意搞笑變裝，實現每位顧客的變裝願望。',
+    brand: {
+      '@type': 'Brand',
+      name: '神龍變裝',
+      slogan: '召喚神龍，實現變裝願望！',
+      description:
+        '提供超過百款動漫、節慶與搞笑主題服裝，支援派對、拍攝、快閃等各式活動的造型需求，是台北最具創意的變裝基地。'
+    },
+    sameAs: [
+      'https://www.facebook.com/Wu.wish88/?locale=zh_TW',
+      'https://www.instagram.com/wu_wish88'
+    ]
+  };
+
+  return (
+    <Script
+      id="about-json-ld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />

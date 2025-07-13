@@ -9,7 +9,13 @@ import slugify from 'slugify';
 import { LocalBusinessJsonLd } from '@/seo/json-ld';
 
 export default function Home() {
-  const cnList = ['text-red-700'];
+  const cnList = [
+    'text-red-700',
+    'decoration-1',
+    'underline',
+    'decoration-2',
+    'underline-offset-4'
+  ];
   return (
     <>
       {/*  https://developers.google.com/search/docs/appearance/structured-data/local-business?hl=zh-tw for SEO */}

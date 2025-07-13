@@ -155,6 +155,7 @@ const Header = () => {
               {/* <NavItem text="商品販售" href="/product-sell" /> */}
               <NavItem text="租借流程" href="/rent-process" />
               <NavItem text="常見問題" href="/faq" />
+              <NavItem text="關於我們" href="/about" />
             </nav>
           </div>
         </section>
@@ -193,6 +194,7 @@ const Header = () => {
             {/* <NavItem text="商品販售" href="/product-sell" setIsMenuOpen={setIsMenuOpen} /> */}
             <NavItem text="租借流程" href="/rent-process" setIsMenuOpen={setIsMenuOpen} />
             <NavItem text="常見問題" href="/faq" setIsMenuOpen={setIsMenuOpen} />
+            <NavItem text="關於我們" href="/about" />
           </nav>
         </section>
       </div>
