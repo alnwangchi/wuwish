@@ -9,11 +9,11 @@ import './globals.css';
 export const metadata: Metadata = {
   title: '神龍變裝 - 台北西門租衣服推薦｜角色扮演・主題派對服裝出租｜神龍變裝',
   description:
-    '神龍變裝位於台北西門町，專業提供各類租衣服服務，包含動漫電影、角色扮演、異國主題與派對造型，超過千款以上服裝任你挑選，高品質大配租借流程快速，歡迎來店詢問！',
+    '神龍變裝位於台北西門町，專業提供各類 cosplay 租衣服服務，包含動漫電影、角色扮演、異國主題與派對造型，超過千款以上服裝任你挑選，高品質大配租借流程快速，歡迎來店詢問！',
   alternates: {
-    canonical: 'https://wuwish.com.tw',
+    canonical: 'https://www.wuwish.com.tw',
     languages: {
-      'zh-TW': 'https://wuwish.com.tw'
+      'zh-TW': 'https://www.wuwish.com.tw'
     }
   },
   openGraph: {

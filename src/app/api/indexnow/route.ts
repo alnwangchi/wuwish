@@ -15,17 +15,32 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing or invalid urls' }, { status: 400 });
     }
 
-    const res = await axios.post('https://www.bing.com/indexnow', {
+    const payload = {
       host: HOST,
       key: INDEXNOW_KEY,
       keyLocation: KEY_LOCATION,
       urlList: urls
-    });
+    };
 
-    console.log(`IndexNow response:`, res);
-    return NextResponse.json({ success: true, submitted: urls.length, res });
+    const res = await axios.post('https://www.bing.com/indexnow', payload);
+
+    console.log('✅ IndexNow submitted successfully:', res.status);
+
+    return NextResponse.json({
+      success: true,
+      submitted: urls.length,
+      status: res.status,
+      data: res.data // ✅ 這裡只回傳純資料，安全
+    });
   } catch (error: any) {
-    console.log(`IndexNow response error:`, error);
-    return NextResponse.json({ success: false, error }, { status: 500 });
+    console.error('❌ IndexNow error:', error?.response?.data || error.message);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: error?.response?.data || error.message
+      },
+      { status: 500 }
+    );
   }
 }
