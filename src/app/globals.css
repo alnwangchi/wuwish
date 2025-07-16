@@ -74,7 +74,7 @@ body {
 }
 
 .title-effect {
-  background: linear-gradient(180deg, transparent 40%, #f4e101 0);
+  background: linear-gradient(180deg, transparent 40%, #ffa500 0);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 

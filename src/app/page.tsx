@@ -22,9 +22,14 @@ export default function Home() {
       <LocalBusinessJsonLd />
       <main className="min-h-screen">
         <div className="relative mb-10">
-          <Image src={carousel_bg} sizes="100vw" alt="神龍變裝輪播圖" />
+          <Image
+            src={carousel_bg}
+            sizes="100vw"
+            alt="神龍變裝輪播圖背景"
+            className="invisible sm:visible"
+          />
           <div className="ab-center">
-            <div className="w-[70vw]">
+            <div className="mt-[-2%] w-screen sm:w-[70vw]">
               <Carousel />
             </div>
           </div>

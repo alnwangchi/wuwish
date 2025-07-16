@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     container: {
       padding: {
-        DEFAULT: '.5rem',
-        lg: '1rem'
+        DEFAULT: '1rem',
+        lg: '1.5rem'
       },
       center: true,
       screens: {

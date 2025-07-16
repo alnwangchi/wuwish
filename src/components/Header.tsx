@@ -11,6 +11,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { FaSearch } from 'react-icons/fa';
 import NavItem from './NavItem';
 import { eventTracker } from '@/ga/utils/eventTracker';
 
@@ -159,7 +160,7 @@ const Header = () => {
             </nav>
           </div>
         </section>
-        <GiHamburgerMenu
+        <FaSearch
           className="absolute right-5 top-2/4 z-20 -translate-y-1/2 cursor-pointer text-xl md:hidden"
           onClick={() => setIsMenuOpen((prev) => !prev)}
         />

@@ -1,9 +1,10 @@
 // components/JsonLd.tsx
 import Script from 'next/script';
+import type { FAQPage, LocalBusiness, WithContext } from 'schema-dts';
 
 // 首頁最重要的
 export const LocalBusinessJsonLd = () => {
-  const jsonLd = {
+  const jsonLd: WithContext<LocalBusiness> = {
     '@context': 'https://schema.org',
     '@type': 'ClothingStore',
     name: '神龍變裝西門町最齊全的服裝出租店',
@@ -61,7 +62,7 @@ export const LocalBusinessJsonLd = () => {
 
 export const FAQJsonLd = () => {
   // 因為 FAQ constants 是 JSX 所以這邊不參考統一來源 也不常更動
-  const jsonLd = {
+  const jsonLd: WithContext<FAQPage> = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [

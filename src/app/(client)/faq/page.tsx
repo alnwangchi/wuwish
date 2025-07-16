@@ -9,9 +9,12 @@ const FAQPage = () => {
     <>
       <FAQJsonLd />
       <h1 className="mb-4 text-center">FAQ 常見問題</h1>
-      {FAQ.map((faq) => (
-        <section className="space-y-4 leading-loose" key={faq.category}>
-          <h2 className="title-effect mx-auto inline-block text-center shadow">{faq.category}</h2>
+      {FAQ.map((faq, idx) => (
+        <section className="space-y-4 leading-loose" key={idx}>
+          <div className="flex items-center gap-2">
+            {faq.icon}
+            <h2 className="title-effect inline-block text-center shadow">{faq.category}</h2>
+          </div>
           {faq.items.map((item, idx, ary) => (
             <div className="space-y-2" key={idx}>
               <div className="flex items-center">

@@ -1,5 +1,13 @@
+import Image from 'next/image';
+
+import icon1 from '@/assets/img/faq_icon-1.png';
+import icon2 from '@/assets/img/faq_icon-2.png';
+import icon3 from '@/assets/img/faq_icon-3.png';
+import icon4 from '@/assets/img/faq_icon-4.png';
+
 export const FAQ = [
   {
+    icon: <Image src={icon1} alt="關於租借 icon" />,
     category: '關於租借',
     items: [
       {
@@ -7,13 +15,21 @@ export const FAQ = [
         answer: (
           <>
             <p>
-              瀏覽與選擇：您可在網站瀏覽或使用搜尋功能，亦可參考 IG 社群上的穿搭範例與獨家服裝。
+              <span className="font-bold underline underline-offset-4">瀏覽與選擇</span>
+              ：您可在網站瀏覽或使用搜尋功能，亦可參考 IG 社群上的穿搭範例與獨家服裝。
             </p>
             <p>
-              預約與確認：記錄您喜歡的款式名稱／代號，並與我們聯繫確認租借日期、時間與訂金金額。
+              <span className="font-bold underline underline-offset-4">預約與確認</span>
+              ：記錄您喜歡的款式名稱／代號，並與我們聯繫確認租借日期、時間與訂金金額。
             </p>
-            <p>付款與取件：支付租金尾款與押金（或提供有效證件）後，即可取走預訂的服裝／道具。</p>
-            <p>歸還與點交：依約定時間歸還商品，點交確認無誤後退還押金（或歸還證件）。</p>
+            <p>
+              <span className="font-bold underline underline-offset-4">付款與取件</span>
+              ：支付租金尾款與押金（或提供有效證件）後，即可取走預訂的服裝／道具。
+            </p>
+            <p>
+              <span className="font-bold underline underline-offset-4">歸還與點交</span>
+              ：依約定時間歸還商品，點交確認無誤後退還押金（或歸還證件）。
+            </p>
           </>
         )
       },
@@ -22,7 +38,8 @@ export const FAQ = [
         answer: (
           <p>
             您可透過網站底部連結進行檔期詢問、費用查詢與預約。訂單確認後，每套服裝需預繳{' '}
-            <span className="text-red-700">50%</span> 訂金；如取消訂單，訂金將不予退還。
+            <span className="font-bold text-red-700 underline underline-offset-4">50%</span>{' '}
+            訂金；如取消訂單，訂金將不予退還。
           </p>
         )
       },
@@ -40,20 +57,31 @@ export const FAQ = [
         answer: (
           <>
             <p>
-              我們提供<span className="text-red-700">限量試穿服務</span>
+              我們提供
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                限量試穿服務
+              </span>
               ，歡迎有租借意願的客人洽詢現場工作人員協助。
             </p>
             <p>
-              為維持服務品質與流程順暢，<span className="text-red-700">恕不提供純試穿服務</span>
+              為維持服務品質與流程順暢，
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                恕不提供純試穿服務
+              </span>
               ，敬請見諒。
             </p>
             <p>
-              <span className="text-red-700">繁忙期間</span>
-              （如萬聖節、春酒旺季）<span className="text-red-700">將暫停</span>現場試穿服務。
+              <span className="font-bold text-red-700 underline underline-offset-4">繁忙期間</span>
+              （如萬聖節、春酒旺季）
+              <span className="font-bold text-red-700 underline underline-offset-4">將暫停</span>
+              現場試穿服務。
             </p>
             <p>
-              部分<span className="text-red-700">高價或特殊款式</span>試穿需收取 NT$100
-              意向金，成功租借可全額折抵。
+              部分
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                高價或特殊款式
+              </span>
+              試穿需收取 NT$100 意向金，成功租借可全額折抵。
             </p>
           </>
         )
@@ -62,7 +90,8 @@ export const FAQ = [
         question: '5：服裝可以修改尺寸嗎？',
         answer: (
           <p>
-            我們可提供<span className="text-red-700">簡易調整</span>
+            我們可提供
+            <span className="font-bold text-red-700 underline underline-offset-4">簡易調整</span>
             （如肩帶長度、腰帶綁法），無法進行大幅修改。若有特殊需求，請提前告知。
           </p>
         )
@@ -71,8 +100,10 @@ export const FAQ = [
         question: '6：租借時間多久？',
         answer: (
           <p>
-            一般租期為 <span className="text-red-700">3 天</span>
-            ，如需延長請提前聯繫。延租每一天加收原租金的 <span className="text-red-700">30%</span>。
+            一般租期為{' '}
+            <span className="font-bold text-red-700 underline underline-offset-4">3 天</span>
+            ，如需延長請提前聯繫。延租每一天加收原租金的{' '}
+            <span className="font-bold text-red-700 underline underline-offset-4">30%</span>。
           </p>
         )
       },
@@ -81,7 +112,10 @@ export const FAQ = [
         answer: (
           <p>
             建議提早預約，特別是熱門時段（如萬聖節、聖誕節、尾牙、春酒等），
-            <span className="text-red-700">活動前 1 個月預約</span>為佳。
+            <span className="font-bold text-red-700 underline underline-offset-4">
+              活動前 1 個月預約
+            </span>
+            為佳。
           </p>
         )
       },
@@ -94,15 +128,24 @@ export const FAQ = [
             </p>
             <p>
               <strong>部分取消：</strong> 因人為因素取消部分商品，將扣
-              <span className="text-red-700">除該商品訂金（租金 50%）</span>。
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                除該商品訂金（租金 50%）
+              </span>
+              。
             </p>
             <p>
               <strong>整筆取消：</strong> 因人為因素取消整筆訂單，
-              <span className="text-red-700">所有訂金不予退還</span>。
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                所有訂金不予退還
+              </span>
+              。
             </p>
             <p>
               <strong>未取件視同取消：</strong> 若已逾取件時間未到場，系統將視為取消，
-              <span className="text-red-700">不另行通知，訂金不退還</span>。
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                不另行通知，訂金不退還
+              </span>
+              。
             </p>
             <p>訂金不得轉讓或挪用至他人或其他訂單。</p>
             <p>
@@ -118,6 +161,7 @@ export const FAQ = [
     ]
   },
   {
+    icon: <Image src={icon2} alt="付款與押金 icon" />,
     category: '付款與押金',
     items: [
       {
@@ -128,10 +172,14 @@ export const FAQ = [
         question: '10：租借需要支付押金嗎？',
         answer: (
           <p>
-            是的。每件服裝道具皆需收取押金，押金為租金的 <span className="text-red-700">2 倍</span>
+            是的。每件服裝道具皆需收取押金，押金為租金的{' '}
+            <span className="font-bold text-red-700 underline underline-offset-4">2 倍</span>
             ，或提供{' '}
             <strong>
-              <span className="text-red-700">有效證件（身分證／駕照／健保卡</span>）
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                有效證件（身分證／駕照／健保卡
+              </span>
+              ）
             </strong>{' '}
             作為擔保。歸還時確認無損壞與遺失後將全額退還。
           </p>
@@ -141,7 +189,10 @@ export const FAQ = [
         question: '11：是否能開立發票或收據？',
         answer: (
           <p>
-            可以。如有需求，請於付款時提供 <span className="text-red-700">公司抬頭與統編</span>
+            可以。如有需求，請於付款時提供{' '}
+            <span className="font-bold text-red-700 underline underline-offset-4">
+              公司抬頭與統編
+            </span>
             ，我們將開立收據或發票。
           </p>
         )
@@ -149,13 +200,17 @@ export const FAQ = [
     ]
   },
   {
+    icon: <Image src={icon3} alt="清潔與賠償 icon" />,
     category: '清潔與賠償',
     items: [
       {
         question: '12：租借的服裝道具需要清洗嗎？',
         answer: (
           <p>
-            您<span className="text-red-700">無需自行清洗</span>
+            您
+            <span className="font-bold text-red-700 underline underline-offset-4">
+              無需自行清洗
+            </span>
             ，我們將進行專業清潔。但請保持道具基本清潔與乾燥，避免嚴重污損或潮濕。
           </p>
         )
@@ -168,11 +223,17 @@ export const FAQ = [
               <strong>方式一：自行處理（建議）</strong>
             </p>
             <p>
-              可將商品送至<span className="text-red-700">專業洗衣／修補店</span>
+              可將商品送至
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                專業洗衣／修補店
+              </span>
               處理後再歸還，避免爭議與額外費用。
             </p>
             <p>
-              ※ 若因污損或破損影響後續使用，將<span className="text-red-700">比照逾期費用</span>
+              ※ 若因污損或破損影響後續使用，將
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                比照逾期費用
+              </span>
               計算至修復完成為止。
             </p>
             <p>
@@ -180,7 +241,10 @@ export const FAQ = [
             </p>
             <p>
               若無法自行處理，我們可協助送洗／修補，
-              <span className="text-red-700">所有費用由租借人負擔，恕不接受異議</span>。
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                所有費用由租借人負擔，恕不接受異議
+              </span>
+              。
             </p>
           </>
         )
@@ -194,7 +258,10 @@ export const FAQ = [
         answer: (
           <p>
             將依《刑法第335條》普通侵占罪處理，
-            <span className="text-red-700">並協請警方介入。同時求償營業損失</span>。
+            <span className="font-bold text-red-700 underline underline-offset-4">
+              並協請警方介入。同時求償營業損失
+            </span>
+            。
           </p>
         )
       },
@@ -203,16 +270,31 @@ export const FAQ = [
         answer: (
           <>
             <p>
-              所有商品<span className="text-red-700">未經同意不得改造或破壞</span>，
-              <span className="text-red-700">亦禁止使用膠類（如雙面膠、泡棉膠）與釘書針</span>。
+              所有商品
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                未經同意不得改造或破壞
+              </span>
+              ，
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                亦禁止使用膠類（如雙面膠、泡棉膠）與釘書針
+              </span>
+              。
             </p>
             <p>
               表演／道具服多為特殊材質，
-              <span className="text-red-700">遇水、淋雨或流汗易產生退色或染色</span>
-              。請務必於使用完後<span className="text-red-700">立即晾乾通風</span>。
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                遇水、淋雨或流汗易產生退色或染色
+              </span>
+              。請務必於使用完後
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                立即晾乾通風
+              </span>
+              。
             </p>
             <p>
-              <span className="text-red-700">潮濕狀態下請勿將深淺色服裝混放</span>
+              <span className="font-bold text-red-700 underline underline-offset-4">
+                潮濕狀態下請勿將深淺色服裝混放
+              </span>
               ，避免染色。若因未妥善處理導致服裝損壞或他人物品染色，須依情況賠償，本店概不負責。
             </p>
           </>
@@ -221,6 +303,7 @@ export const FAQ = [
     ]
   },
   {
+    icon: <Image src={icon4} alt="其他服務 icon" />,
     category: '其他服務',
     items: [
       {
