@@ -39,6 +39,7 @@ const SearchPage = () => {
 
   return (
     <ClothesContainer>
+      <div className="h-4"></div>
       {cloth?.map((p: any) => (
         <ClothesCard
           href={`/product-${p.info.business_type}/${slugify(p.info.category!, {

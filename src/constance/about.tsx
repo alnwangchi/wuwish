@@ -1,6 +1,6 @@
 export const ABOUT = [
   {
-    title: '關於神龍變裝｜西門町服裝道具租借專家',
+    title: '',
     content: (
       <>
         <p>

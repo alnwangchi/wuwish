@@ -2,6 +2,7 @@ import { toLower } from 'lodash';
 import slugify from 'slugify';
 
 export const categoryList = [
+  { name: '熱門推薦', en: 'Popular Recommendations' },
   { name: '訂製服裝', en: 'Custom Clothing' },
   { name: '萬聖節', en: 'Halloween' },
   { name: '聖誕節', en: 'Christmas' },
@@ -25,8 +26,8 @@ export const categoryList = [
   { name: '維京海盜', en: 'Viking Pirates' },
   { name: '玩偶裝', en: 'Doll Costume' },
   { name: '配件', en: 'Accessories' },
-  { name: '大型道具', en: 'Large Props' },
-  { name: '芭比全系列', en: 'Barbie Series' }
+  { name: '大型道具', en: 'Large Props' }
+  // { name: '芭比全系列', en: 'Barbie Series' }
 ];
 
 export const categoryOptions = categoryList.map((item) => ({

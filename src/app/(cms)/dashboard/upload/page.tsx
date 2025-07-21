@@ -103,10 +103,10 @@ const UploadPage = () => {
                 <input type="radio" value={BusinessType.Rent} {...register('business_type')} />
                 <span className="pl-2">租借</span>
               </label>
-              <label>
+              {/* <label>
                 <input type="radio" value={BusinessType.Sell} {...register('business_type')} />
                 <span className="pl-2">販售</span>
-              </label>
+              </label> */}
             </div>
           </div>
           {/* 1131006 需要一圖多類 */}
