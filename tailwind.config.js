@@ -25,7 +25,8 @@ module.exports = {
       colors: {
         'primary-dk': '#010A0F',
         'primary-yellow': ' #F4E101',
-        'deco-blue': '#53D2FF'
+        'deco-blue': '#53D2FF',
+        'primary-orange': '#ffa500'
       },
       fontFamily: {
         cubic: ['cubic'],

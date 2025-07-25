@@ -37,9 +37,9 @@ export const FAQ = [
         question: '2：如何租借服裝／道具？',
         answer: (
           <p>
-            您可透過網站底部連結進行檔期詢問、費用查詢與預約。訂單確認後，每套服裝需預繳{' '}
-            <span className="text-red-700 underline underline-offset-4">50%</span>{' '}
-            訂金；如取消訂單，訂金將不予退還。
+            您可透過網站底部連結進行檔期詢問、費用查詢與預約。訂單確認後，每套服裝需預繳
+            <span className="text-primary-orange">50% 訂金</span>
+            ；如<span className="text-primary-orange">取消訂單，訂金將不予退還</span>。
           </p>
         )
       },
@@ -47,7 +47,7 @@ export const FAQ = [
         question: '3：租借費用如何計算？',
         answer: (
           <p>
-            租金依款式與天數而定，一般款式約 NT$300–900，精緻款式 NT$1,000
+            租金依款式與天數而定，㇐般款式約 NT$300–900，精緻款 式 NT$1,000
             起。詳細費用請洽詢客服人員。
           </p>
         )
@@ -57,24 +57,21 @@ export const FAQ = [
         answer: (
           <>
             <p>
-              我們提供
-              <span className="text-red-700 underline underline-offset-4">限量試穿服務</span>
-              ，歡迎有租借意願的客人洽詢現場工作人員協助。
+              <span className="font-bold underline underline-offset-4">限量試穿服務</span>
+              ：歡迎有租借意願的客人洽詢現場工作人員，我們將依現場狀況提供協助。
             </p>
             <p>
-              為維持服務品質與流程順暢，
-              <span className="text-red-700 underline underline-offset-4">恕不提供純試穿服務</span>
-              ，敬請見諒。
+              <span className="font-bold underline underline-offset-4">純試穿服務</span>
+              ：為維持服務品質與流程順暢，恕不提供「僅試穿不租借」的服務，敬請見諒。
             </p>
             <p>
-              <span className="text-red-700 underline underline-offset-4">繁忙期間</span>
-              （如萬聖節、春酒旺季）
-              <span className="text-red-700 underline underline-offset-4">將暫停</span>
-              現場試穿服務。
+              <span className="font-bold underline underline-offset-4">繁忙期間調整</span>
+              ：在萬聖節、尾牙表演等旺季期間，將視情況暫停現場試穿服務，敬請理解。
             </p>
             <p>
-              部分<span className="text-red-700 underline underline-offset-4">高價或特殊款式</span>
-              試穿需收取 NT$100 意向金，成功租借可全額折抵。
+              <span className="font-bold underline underline-offset-4">特殊款式規範</span>
+              ：部分<span className="text-primary-orange">高價或特殊款式</span>試穿需收取 NT$100
+              意向金，成功租借可全額折抵租金。
             </p>
           </>
         )
@@ -83,8 +80,9 @@ export const FAQ = [
         question: '5：服裝可以修改尺寸嗎？',
         answer: (
           <p>
-            我們可提供<span className="text-red-700 underline underline-offset-4">簡易調整</span>
-            （如肩帶長度、腰帶綁法），無法進行大幅修改。若有特殊需求，請提前告知。
+            神龍變裝可提供
+            <span className="text-primary-orange">簡易調整</span>
+            (如肩帶長度、腰帶綁法)，無法進 行大幅修改。若有特殊需求，請提前告知。
           </p>
         )
       },
@@ -92,9 +90,9 @@ export const FAQ = [
         question: '6：租借時間多久？',
         answer: (
           <p>
-            一般租期為 <span className="text-red-700 underline underline-offset-4">3 天</span>
+            一般租期為 <span className="text-primary-orange">3 天</span>
             ，如需延長請提前聯繫。延租每一天加收原租金的{' '}
-            <span className="text-red-700 underline underline-offset-4">30%</span>。
+            <span className="text-primary-orange">30%</span>。
           </p>
         )
       },
@@ -102,8 +100,8 @@ export const FAQ = [
         question: '7：可以提前預約嗎？最晚什麼時候預約？',
         answer: (
           <p>
-            建議提早預約，特別是熱門時段（如萬聖節、聖誕節、尾牙、春酒等），
-            <span className="text-red-700 underline underline-offset-4">活動前 1 個月預約</span>
+            建議提早預約，特別是熱門時段(如萬聖節裝扮、聖誕節裝扮、 尾牙裝扮、尾牙春酒等)，
+            <span className="text-primary-orange">活動前 1 個月預約</span>
             為佳。
           </p>
         )
@@ -116,30 +114,33 @@ export const FAQ = [
               <strong>以下為訂單取消與異動的規定：</strong>
             </p>
             <p>
-              <strong>部分取消：</strong> 因人為因素取消部分商品，將扣
-              <span className="text-red-700 underline underline-offset-4">
-                除該商品訂金（租金 50%）
-              </span>
-              。
+              <span className="font-bold underline underline-offset-4">部分取消</span>
+              ：因人為因素取消部分商品，將<span className="text-primary-orange">扣除</span>
+              該商品<span className="text-primary-orange">訂金（租金 50%）</span>。
             </p>
             <p>
-              <strong>整筆取消：</strong> 因人為因素取消整筆訂單，
-              <span className="text-red-700 underline underline-offset-4">所有訂金不予退還</span>。
+              <span className="font-bold underline underline-offset-4">整筆取消</span>
+              ：因人為因素取消整筆訂單，
+              <span className="text-primary-orange">所有訂金不予退還</span>。
             </p>
             <p>
-              <strong>未取件視同取消：</strong> 若已逾取件時間未到場，系統將視為取消，
-              <span className="text-red-700 underline underline-offset-4">
-                不另行通知，訂金不退還
-              </span>
-              。
+              <span className="font-bold underline underline-offset-4">未取件視同取消</span>
+              ：若已<span className="text-primary-orange">逾取件時間</span>
+              未到場，系統將視為取消，
+              <span className="text-primary-orange">不另行通知，訂金不退還</span>。
             </p>
-            <p>訂金不得轉讓或挪用至他人或其他訂單。</p>
             <p>
-              若遇 <strong>天災或不可抗力因素（依政府公告為準）</strong> 取消活動，可選擇：
+              <span className="font-bold underline underline-offset-4">訂金不得轉讓或挪用</span>
+              ：訂金不得轉讓給他人或挪用至其他訂單。
             </p>
+            <p>
+              <span className="font-bold underline underline-offset-4">不可抗力因素</span>
+              ：若因天災或不可抗力因素（依政府公告為準）導致活動取消，您可選擇以下任一方案。
+            </p>
+
             <ul className="list-disc pl-6">
-              <li>全額退還訂金</li>
-              <li>更改一次租借日期（更改後不得再退費）</li>
+              <li>1. 全額退還訂金</li>
+              <li>2. 更改一次租借日期（更改後不得再退費）</li>
             </ul>
           </>
         )
@@ -152,32 +153,39 @@ export const FAQ = [
     items: [
       {
         question: '9：有哪些付款方式？',
-        answer: <p>提供 現金、銀行轉帳兩種方式。</p>
+        answer: (
+          <p>
+            提供<span className="text-primary-orange"> 現金、銀行轉帳</span>兩種方式。
+          </p>
+        )
       },
       {
         question: '10：租借需要支付押金嗎？',
         answer: (
-          <p>
-            是的。每件服裝道具皆需收取押金，押金為租金的{' '}
-            <span className="text-red-700 underline underline-offset-4">2 倍</span>
-            ，或提供{' '}
-            <strong>
-              <span className="text-red-700 underline underline-offset-4">
-                有效證件（身分證／駕照／健保卡
-              </span>
-              ）
-            </strong>{' '}
-            作為擔保。歸還時確認無損壞與遺失後將全額退還。
-          </p>
+          <>
+            <p>
+              <span className="font-bold underline underline-offset-4">押金金額</span>
+              ：每件商品需支付「租金的 2
+              倍」作為押金；或提供有效證件（身分證／駕照／健保卡）作為擔保，二擇一即可。
+            </p>
+            <p>
+              <span className="font-bold underline underline-offset-4">押品替代</span>
+              ：可提供一份有效證件（身分證／駕照／健保卡）作為擔保，免收押金。
+            </p>
+            <p>
+              <span className="font-bold underline underline-offset-4">退還規則</span>
+              ：歸還時經現場確認商品無損壞或遺失，押金將全額退還。
+            </p>
+          </>
         )
       },
       {
         question: '11：是否能開立發票或收據？',
         answer: (
           <p>
-            可以。如有需求，請於付款時提供{' '}
-            <span className="text-red-700 underline underline-offset-4">公司抬頭與統編</span>
-            ，我們將開立收據或發票。
+            可以。如果需要發票或收據，請在付款時提供
+            <span className="text-primary-orange">公司抬頭與統編</span>
+            我們會幫您開立。
           </p>
         )
       }
@@ -191,8 +199,10 @@ export const FAQ = [
         question: '12：租借的服裝道具需要清洗嗎？',
         answer: (
           <p>
-            您<span className="text-red-700 underline underline-offset-4">無需自行清洗</span>
-            ，我們將進行專業清潔。但請保持道具基本清潔與乾燥，避免嚴重污損或潮濕。
+            不需自行清洗。神龍變裝會於每次租借後進行專業
+            <span className="text-primary-orange">服裝清潔與 道具消毒</span>，讓您安心使用 Cosplay
+            與派對服裝。請協助保持 <span className="text-primary-orange">基本整潔與乾燥</span>
+            ，避免嚴重污損或異味，以確保下㇐位租借人 同樣有良好體驗。
           </p>
         )
       },
@@ -203,43 +213,47 @@ export const FAQ = [
             <p>
               <strong>方式一：自行處理（建議）</strong>
             </p>
-            <p>
-              可將商品送至
-              <span className="text-red-700 underline underline-offset-4">專業洗衣／修補店</span>
-              處理後再歸還，避免爭議與額外費用。
-            </p>
-            <p>
-              ※ 若因污損或破損影響後續使用，將
-              <span className="text-red-700 underline underline-offset-4">比照逾期費用</span>
-              計算至修復完成為止。
-            </p>
+            <p>您可將商品送至專業洗衣或修補店處理後再歸還，以避免爭議 與額外費用。</p>
+            <p>※ 若污損/破損影響商品後續使用，將比照逾期計費方式， 計算至修復完成為止。</p>
             <p>
               <strong>方式二：由我們代處理</strong>
             </p>
             <p>
-              若無法自行處理，我們可協助送洗／修補，
-              <span className="text-red-700 underline underline-offset-4">
-                所有費用由租借人負擔，恕不接受異議
-              </span>
-              。
+              若無法自行清洗或修補，我們可代為送洗或修復，
+              <span className="text-primary-orange">相關費用將 由租借人全額負擔</span>
+              ，恕不接受異議。
             </p>
           </>
         )
       },
       {
         question: '14：如果不小心損壞或遺失道具怎麼辦？',
-        answer: <p>請立即聯繫我們，依損壞程度或道具原價酌收維修費／賠償金。</p>
+        answer: (
+          <>
+            <p>
+              若租借期間不慎發生<span className="text-primary-orange">損壞或遺失</span>，請
+              <span className="text-primary-orange">立即聯繫我們</span>。
+            </p>
+            <p>
+              我們將依道具的<span className="text-primary-orange">損壞情況或原價</span>酌情收取
+              <span className="text-primary-orange">維修費或賠償金</span>，以維護雙方權益。
+            </p>
+          </>
+        )
       },
       {
         question: '15：若逾期不歸還如何處理？',
         answer: (
-          <p>
-            將依《刑法第335條》普通侵占罪處理，
-            <span className="text-red-700 underline underline-offset-4">
-              並協請警方介入。同時求償營業損失
-            </span>
-            。
-          </p>
+          <>
+            <p>若未於約定時間內歸還商品且無事先通知，我們將視情況啟動 以下處理程序:</p>
+            <ul className="emoji-list">
+              <li>依實際逾期天數計算租金與營業損失費用</li>
+              <li>
+                多次聯繫無回應或故意不還者，將依《刑法第 335 條》普 通侵占罪報警處理，並協請警方介入
+              </li>
+              <li>同時保留求償相關損失(包含道具成本與營業損失)之法 律權利</li>
+            </ul>
+          </>
         )
       },
       {
@@ -247,29 +261,22 @@ export const FAQ = [
         answer: (
           <>
             <p>
-              所有商品
-              <span className="text-red-700 underline underline-offset-4">
-                未經同意不得改造或破壞
-              </span>
-              ，
-              <span className="text-red-700 underline underline-offset-4">
-                亦禁止使用膠類（如雙面膠、泡棉膠）與釘書針
-              </span>
-              。
+              <span className="font-bold underline underline-offset-4">🚫 禁止改造或破壞</span>
+              ：所有商品未經同意不得自行修改、剪裁或破壞。
+              <span className="text-primary-orange">嚴禁使用膠類</span>
+              （如雙面膠、泡棉膠）及釘書針等會造成損傷的物品。
             </p>
             <p>
-              表演／道具服多為特殊材質，
-              <span className="text-red-700 underline underline-offset-4">
-                遇水、淋雨或流汗易產生退色或染色
-              </span>
-              。請務必於使用完後
-              <span className="text-red-700 underline underline-offset-4">立即晾乾通風</span>。
+              <span className="font-bold underline underline-offset-4">🚫 避免染色損壞</span>
+              ：潮濕狀態下請<span className="text-primary-orange">勿將深色與淺色服裝混放</span>
+              ，以免發生染色問題。若因未妥善處理導致服裝損壞或染色至他人物品，須依情況賠償，本店不負責相關損失。
             </p>
             <p>
-              <span className="text-red-700 underline underline-offset-4">
-                潮濕狀態下請勿將深淺色服裝混放
-              </span>
-              ，避免染色。若因未妥善處理導致服裝損壞或他人物品染色，須依情況賠償，本店概不負責。
+              <span className="font-bold underline underline-offset-4">⚠️ 特殊材質須小心保養</span>
+              ：部分表演服與道具服為特殊材質，易因
+              <span className="text-primary-orange">流汗、淋雨或接觸水分</span>
+              造成退色或染色。請於使用後
+              <span className="text-primary-orange">盡速晾乾並保持通風</span>，以延長使用壽命。
             </p>
           </>
         )
@@ -294,7 +301,12 @@ export const FAQ = [
       },
       {
         question: '19：你們有提供兒童變裝嗎？',
-        answer: <p>目前尚未提供 150cm 以下身高之兒童變裝服務，敬請見諒。</p>
+        answer: (
+          <p>
+            目前尚<span className="text-primary-orange">未提供 150cm 以下身高</span>
+            之兒童變裝服務，敬請見諒。
+          </p>
+        )
       }
     ]
   }

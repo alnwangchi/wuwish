@@ -11,6 +11,7 @@ import { LocalBusinessJsonLd } from '@/seo/json-ld';
 export default function Home() {
   const cnList = [
     'text-red-700',
+    'text-primary-orange',
     'decoration-1',
     'underline',
     'decoration-2',

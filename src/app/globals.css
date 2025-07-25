@@ -130,3 +130,14 @@ body {
 .ant-input-number {
   width: 100% !important;
 }
+
+/* emoji list */
+.emoji-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.emoji-list li::before {
+  content: '⚠️';
+  margin-right: 0.5em;
+}
