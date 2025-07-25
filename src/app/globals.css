@@ -141,3 +141,23 @@ body {
   content: '⚠️';
   margin-right: 0.5em;
 }
+
+.emoji-list-2 {
+  list-style: none;
+  padding-left: 0;
+}
+
+.emoji-list-2 li::before {
+  content: '✅';
+  margin-right: 0.5em;
+}
+
+.emoji-list-3 {
+  list-style: none;
+  padding-left: 0;
+}
+
+.emoji-list-3 li::before {
+  content: '●';
+  margin-right: 0.5em;
+}

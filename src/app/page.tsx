@@ -15,7 +15,9 @@ export default function Home() {
     'decoration-1',
     'underline',
     'decoration-2',
-    'underline-offset-4'
+    'underline-offset-4',
+    'list-disc',
+    'pl-5'
   ];
   return (
     <>

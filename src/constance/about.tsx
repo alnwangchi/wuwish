@@ -4,87 +4,202 @@ export const ABOUT = [
     content: (
       <>
         <p>
-          歡迎來到「神龍變裝」，一間位於台北西門町，專業提供服裝與道具租借的創意基地！ 我們自 2022
-          年創立以來，致力於滿足每位顧客的變裝體驗，協助參與派對、拍攝、活動的你，
-          以最小的成本和時間，快速完成最高質感的變身！
+          歡迎來到【神龍變裝】，台北西門町最具創意的
+          <span className="text-primary-orange"> Cosplay 服裝出租</span>與
+          <span className="text-primary-orange">派對主題道具租借</span>專門店。 自 2022
+          年創立以來，我們專注提供高 CP 值、多元化的角
+          <span className="text-primary-orange"> 色扮演服裝租借服務</span>
+          。無論是
+          <span className="text-primary-orange">萬聖節服裝、尾牙春酒活 動、商業拍攝或主題派對</span>
+          ，這裡就是你實現變裝願望的首 選基地!
         </p>
       </>
     )
   },
   {
-    title: '🐲 品牌故事：召喚神龍，實現變裝願望！',
+    title: '品牌故事：召喚神龍，實現變裝願望！',
+    content: (
+      <>
+        <p>相傳，只要集滿七顆龍珠，就能召喚神龍實現願望。 而我們，就是你的「變裝神龍」!</p>
+        <p>
+          【神龍變裝】誕生的初衷，是希望每一位顧客都能輕鬆實 現變身夢。無論你想
+          Cosplay、整人搞笑、拍影片、參加派 對或參加節慶活動，只要你想變，我們就幫你變!
+        </p>
+      </>
+    )
+  },
+  {
+    title: '三大品牌特色|租借服裝不踩雷',
+    content: (
+      <ul className="emoji-list-2">
+        <li>
+          <span className="font-bold underline underline-offset-4">誠信為本</span>
+          ：從顧客角度出發，提供實用解決方案。
+        </li>
+        <li>
+          <span className="font-bold underline underline-offset-4">品質保證</span>
+          ：嚴選布料、注重細節，打造高質感服裝。
+        </li>
+        <li>
+          <span className="font-bold underline underline-offset-4">創意無限</span>
+          ：打造市面罕見的獨家造型，話題十足。
+        </li>
+      </ul>
+    )
+  },
+  {
+    title: '服務項目',
+    content: (
+      <>
+        <p>我們提供全方位的變裝與租借服務，讓你每次出場都成為 焦點:</p>
+        <ul className="list-disc pl-5">
+          <li>
+            <span className="font-bold underline underline-offset-4">上千款主題</span>
+            服裝租借：動漫、古裝、職業裝、搞笑角色扮演等。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">主題造型</span>
+            諮詢與搭配建議：沒有想法？我們幫你想！
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">現場快速</span>
+            修改與服裝調整：尺寸微調不求人。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">客製化服裝</span>
+            設計與製作：提供特殊訂製與團體造型。
+          </li>
+        </ul>
+      </>
+    )
+  },
+
+  {
+    title: '適合誰來神龍變裝？',
+    content: (
+      <>
+        <p>不論你是專業表演者還是初次體驗變裝的新手，這裡都是你的最佳選擇：</p>
+        <ul className="list-disc pl-5">
+          <li>
+            <span className="font-bold underline underline-offset-4">KOL / Coser / 創作者</span>
+            ：打造專業拍攝與演出造型。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">萬聖節、變裝趴、尾牙活動</span>
+            參與者：全場最吸睛。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">避免淘寶翻車風險</span>
+            ：避免卡關、尺寸不合、實品不符等網購困擾。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">學生社團 / 公司團隊活動</span>
+            ：創意搞笑裝扮、團體表演一次搞定。
+          </li>
+        </ul>
+      </>
+    )
+  },
+  {
+    title: '為什麼選擇神龍變裝？',
+    content: (
+      <>
+        <ul className="list-disc pl-5">
+          <li>
+            <span className="font-bold underline underline-offset-4">現貨齊全</span>
+            +出貨快速：臨時需求也不怕措手不及。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">主題建議</span>
+            +造型搭配：專人協助，提供創意搭配建議。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">高品質手工製作</span>
+            ：嚴選材質、不怕撞衫尷尬。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">專業服務有保障</span>
+            ：現場試穿、安心租借，拒絕踩雷。
+          </li>
+        </ul>
+      </>
+    )
+  },
+  {
+    title: '熱門與特色款式介紹',
     content: (
       <>
         <p>
-          你知道嗎？每部中日動畫裡只要集到七顆龍珠，就能召喚神龍實現願望。
-          神龍變裝的誕生，就是希望幫助每位想變裝參加派對、拍片、表演，還是只是想搞笑一下的你，
-          實現變身的願望。
+          【神龍變裝】不僅有經典動漫造型，也自製全台找不到的特色服裝！適合打造創意、話題十足的造型：
         </p>
-        <p>我們的核心價值是：</p>
-        <ul className="list-disc pl-4">
-          <li>質感：提供細節到位的服裝品質</li>
-          <li>高效：協助節省角度與時間成本</li>
-          <li>創新：設計你在別處找不到的特色服裝</li>
+        <ul className="list-disc pl-5">
+          <li>
+            <span className="font-bold underline underline-offset-4">動漫系列</span>
+            ：鬼滅之刃、航海王、膽大黨、七龍珠、咒術迴戰等。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">獨家研發款</span>
+            ：魷魚遊戲服裝、垃圾袋裝、乖乖裝、疫苗小黃卡裝。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">節慶與搞笑系列</span>
+            ：聖誕節裝扮、整人服裝、惡搞系列。
+          </li>
         </ul>
       </>
     )
   },
   {
-    title: '🎁 我們提供的服務',
-    content: (
-      <ul className="list-disc pl-4">
-        <li>各類變裝服出租（動漫、古裝、節慶、搞笑等）</li>
-        <li>客製化服裝設計與製作</li>
-        <li>現場快速服裝修改服務</li>
-        <li>提供跨年拍攝或活動用造型建議</li>
-      </ul>
-    )
-  },
-  {
-    title: '👥 適合誰來神龍變裝？',
-    content: (
-      <ul className="list-disc pl-4">
-        <li>專業 KOL、攝影創作者、Coser</li>
-        <li>一般民眾：增加聖誕節、尾牙、春酒、生日派對、節日拍攝等趣味</li>
-        <li>不想搞瘋淘寶或臨時快閃成本的你：避免卡關、尺寸不合、圖片不符</li>
-        <li>尋找創意搞笑裝扮的學生團體或工作團隊</li>
-      </ul>
-    )
-  },
-  {
-    title: '💡 為什麼選擇神龍變裝？',
-    content: (
-      <ul className="list-disc pl-4">
-        <li>📦 現貨充足，臨時需求也能快速處理</li>
-        <li>🧠 主題建議 + 造型搭配服務，不會穿錯服、沒想法壓力大</li>
-        <li>✨ 高品質材料 + 值得手工製作，撞衫也不怕，就是高人一等</li>
-        <li>🎯 專業且用心的服務，幫你避開網購風險與雷品</li>
-      </ul>
-    )
-  },
-  {
-    title: '🔥 熱門與特色款式介紹',
+    title: '媒體與名人合作經驗',
     content: (
       <>
-        <p>我們不只租借常見服裝，還有許多獨家製作與話題造型：</p>
-        <ul className="list-disc pl-4">
-          <li>🧛‍♂️ 動漫系列：鬼滅之刃、航海王、名偵探柯南、哆啦A夢等</li>
-          <li>👩‍⚕️ 實驗研發款：細胞造型服裝、垃圾袋裝、乞丐裝、疫苗小黃卡裝，全為手工製作</li>
-          <li>🤪 節慶/搞笑系列：創意搞怪造型，拍照話題感十足！</li>
+        <p>【神龍變裝】有幸獲得多家媒體與創作者合作，口碑與實力兼具：</p>
+        <ul className="list-disc pl-5">
+          <li>
+            <span className="font-bold underline underline-offset-4">節目合作指定</span>
+            ：《綜藝玩很大》《食尚玩家》《女孩好野》等。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">合作網紅 / KOL</span>
+            ：Dcard Video、HowHow、阿翰、白癡公主、一隻阿圓等。
+          </li>
+          <li>
+            <span className="font-bold underline underline-offset-4">拍攝支援</span>
+            ：主題服裝提供、現場搭配、特殊訂製造型。
+          </li>
         </ul>
       </>
     )
   },
   {
-    title: '📺 合作經驗與媒體曝光',
+    title: '店面資訊',
     content: (
-      <ul className="list-disc pl-4">
-        <li>《綜藝玩很大》《綜藝大熱門》（三立電視）</li>
-        <li>《食尚玩家》《11點熱吵店》（TVBS）</li>
-        <li>《超級冰冰Show》（民視）</li>
-        <li>《綜藝遊樂》《中視》</li>
-        <li>KOL 合作：Dcard、HowHow、阿翰、白癡公主、一隻阿圓等</li>
-      </ul>
+      <>
+        <>
+          <ul className="list-disc pl-5">
+            <li>
+              <span className="font-bold underline underline-offset-4">地址</span>
+              ：台北市萬華區漢中街150號2樓（捷運西門站1號出口步行約3分鐘）
+            </li>
+            <li>
+              <span className="font-bold underline underline-offset-4">營業時間</span>
+              ：每日12:00-21:00
+            </li>
+            <li>
+              <span className="font-bold underline underline-offset-4">聯絡電話</span>
+              ：0968-270-178
+            </li>
+            <li>
+              <span className="font-bold underline underline-offset-4">Instagram</span>
+              ：@wu_wish88
+            </li>
+            <li>
+              <span className="font-bold underline underline-offset-4">電子信箱</span>
+              ：wu.wish88@gmail.com
+            </li>
+          </ul>
+        </>
+      </>
     )
   },
   {
@@ -113,6 +228,17 @@ export const ABOUT = [
             className="underline decoration-1 underline-offset-4"
           >
             點我看看更多人氣服裝款式
+          </a>
+          →
+        </p>
+        <p>
+          👉
+          <a
+            target="_blank"
+            href="https://www.instagram.com/8_equal_d/?igsh=cnM2ODR6ZTJzZms3#"
+            className="underline decoration-1 underline-offset-4"
+          >
+            訂製服裝聯絡方式
           </a>
           →
         </p>
