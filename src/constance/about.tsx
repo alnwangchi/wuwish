@@ -5,13 +5,13 @@ export const ABOUT = [
       <>
         <p>
           歡迎來到【神龍變裝】，台北西門町最具創意的
-          <span className="text-primary-orange"> Cosplay 服裝出租</span>與
+          <span className="text-primary-orange">Cosplay 服裝出租</span>與
           <span className="text-primary-orange">派對主題道具租借</span>專門店。 自 2022
-          年創立以來，我們專注提供高 CP 值、多元化的角
-          <span className="text-primary-orange"> 色扮演服裝租借服務</span>
+          年創立以來，我們專注提供高 CP 值、多元化的
+          <span className="text-primary-orange">角色扮演服裝租借服務</span>
           。無論是
-          <span className="text-primary-orange">萬聖節服裝、尾牙春酒活 動、商業拍攝或主題派對</span>
-          ，這裡就是你實現變裝願望的首 選基地!
+          <span className="text-primary-orange">萬聖節服裝、尾牙春酒活動、商業拍攝或主題派對</span>
+          ，這裡就是你實現變裝願望的首選基地!
         </p>
       </>
     )
@@ -22,8 +22,8 @@ export const ABOUT = [
       <>
         <p>相傳，只要集滿七顆龍珠，就能召喚神龍實現願望。 而我們，就是你的「變裝神龍」!</p>
         <p>
-          【神龍變裝】誕生的初衷，是希望每一位顧客都能輕鬆實 現變身夢。無論你想
-          Cosplay、整人搞笑、拍影片、參加派 對或參加節慶活動，只要你想變，我們就幫你變!
+          【神龍變裝】誕生的初衷，是希望每一位顧客都能輕鬆實現變身夢。無論你想
+          Cosplay、整人搞笑、拍影片、參加派對或參加節慶活動，只要你想變，我們就幫你變!
         </p>
       </>
     )
@@ -54,20 +54,20 @@ export const ABOUT = [
         <p>我們提供全方位的變裝與租借服務，讓你每次出場都成為 焦點:</p>
         <ul className="list-disc pl-5">
           <li>
-            <span className="font-bold underline underline-offset-4">上千款主題</span>
-            服裝租借：動漫、古裝、職業裝、搞笑角色扮演等。
+            <span className="font-bold underline underline-offset-4">上千款主題服裝租借</span>
+            :動漫、古裝、職業裝、搞笑角色扮演等。
           </li>
           <li>
-            <span className="font-bold underline underline-offset-4">主題造型</span>
-            諮詢與搭配建議：沒有想法？我們幫你想！
+            <span className="font-bold underline underline-offset-4">主題造型諮詢與搭配建議</span>
+            ：沒有想法？我們幫你想！
           </li>
           <li>
-            <span className="font-bold underline underline-offset-4">現場快速</span>
-            修改與服裝調整：尺寸微調不求人。
+            <span className="font-bold underline underline-offset-4">現場快速修改與服裝調整</span>
+            ：尺寸微調不求人。
           </li>
           <li>
-            <span className="font-bold underline underline-offset-4">客製化服裝</span>
-            設計與製作：提供特殊訂製與團體造型。
+            <span className="font-bold underline underline-offset-4">客製化服裝設計與製作</span>
+            ：提供特殊訂製與團體造型。
           </li>
         </ul>
       </>
@@ -85,8 +85,10 @@ export const ABOUT = [
             ：打造專業拍攝與演出造型。
           </li>
           <li>
-            <span className="font-bold underline underline-offset-4">萬聖節、變裝趴、尾牙活動</span>
-            參與者：全場最吸睛。
+            <span className="font-bold underline underline-offset-4">
+              萬聖節、變裝趴、尾牙活動 參與者
+            </span>
+            ：全場最吸睛。
           </li>
           <li>
             <span className="font-bold underline underline-offset-4">避免淘寶翻車風險</span>
@@ -106,12 +108,12 @@ export const ABOUT = [
       <>
         <ul className="list-disc pl-5">
           <li>
-            <span className="font-bold underline underline-offset-4">現貨齊全</span>
-            +出貨快速：臨時需求也不怕措手不及。
+            <span className="font-bold underline underline-offset-4">現貨齊全 +出貨快速</span>
+            ：臨時需求也不怕措手不及。
           </li>
           <li>
-            <span className="font-bold underline underline-offset-4">主題建議</span>
-            +造型搭配：專人協助，提供創意搭配建議。
+            <span className="font-bold underline underline-offset-4">主題建議 +造型搭配</span>
+            ：專人協助，提供創意搭配建議。
           </li>
           <li>
             <span className="font-bold underline underline-offset-4">高品質手工製作</span>
@@ -153,7 +155,7 @@ export const ABOUT = [
     title: '媒體與名人合作經驗',
     content: (
       <>
-        <p>【神龍變裝】有幸獲得多家媒體與創作者合作，口碑與實力兼具：</p>
+        <p>【神龍變裝】有幸獲得多家媒體與創作者合作，口碑與實力兼具</p>
         <ul className="list-disc pl-5">
           <li>
             <span className="font-bold underline underline-offset-4">節目合作指定</span>
@@ -190,12 +192,25 @@ export const ABOUT = [
               ：0968-270-178
             </li>
             <li>
-              <span className="font-bold underline underline-offset-4">Instagram</span>
-              ：@wu_wish88
+              <span className="font-bold underline underline-offset-4">Instagram</span>：
+              <a
+                className="font-bold underline underline-offset-4"
+                target="_blank"
+                href="https://www.instagram.com/wu_wish88/"
+              >
+                @wu_wish88
+              </a>
             </li>
             <li>
-              <span className="font-bold underline underline-offset-4">電子信箱</span>
-              ：wu.wish88@gmail.com
+              <span className="">電子信箱</span>：
+              <a
+                className="font-bold underline underline-offset-4"
+                target="_blank"
+                type="email"
+                href="mailto:wu.wish88@gmail.com"
+              >
+                wu.wish88@gmail.com
+              </a>
             </li>
           </ul>
         </>
@@ -218,7 +233,7 @@ export const ABOUT = [
           >
             立即預約試穿變裝
           </a>
-          !
+          →
         </p>
         <p>
           👉

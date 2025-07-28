@@ -41,7 +41,7 @@ export interface ListType {
 
 interface DefaultParamType {
   rentCurrent: number;
-  sellCurrent: number;
+  // sellCurrent: number;
   pagesize: number;
   business_type: BusinessType;
   loading: boolean;
@@ -72,7 +72,7 @@ const options = [
 ];
 const defaultParam = {
   rentCurrent: 1,
-  sellCurrent: 1,
+  // sellCurrent: 1,
   pagesize: 10,
   business_type: BusinessType.Rent,
   loading: true,
@@ -191,13 +191,13 @@ const List = () => {
 
   const rentColumns = commonColumns.concat(actionColumn);
 
-  const sellColumns = commonColumns
-    .concat([
-      { title: '內容', dataIndex: 'content' },
-      { title: '價格', dataIndex: 'price' },
-      { title: '狀態', dataIndex: 'status' }
-    ])
-    .concat(actionColumn);
+  // const sellColumns = commonColumns
+  //   .concat([
+  //     { title: '內容', dataIndex: 'content' },
+  //     { title: '價格', dataIndex: 'price' },
+  //     { title: '狀態', dataIndex: 'status' }
+  //   ])
+  //   .concat(actionColumn);
 
   const dataSource = filterData.results.map((list) => {
     const {
@@ -235,6 +235,7 @@ const List = () => {
 
   const onSearch = (value: string | undefined) => {
     const searchValue = value ? value.trim() : undefined;
+
     setFilterParams({
       ...filterParams,
       searchValue,
@@ -243,10 +244,7 @@ const List = () => {
     // fetch api
     queryApi({
       page_size: filterParams.pagesize,
-      page_number:
-        filterParams.business_type === BusinessType.Rent
-          ? filterParams.rentCurrent
-          : filterParams.sellCurrent,
+      page_number: filterParams.rentCurrent,
       business_type: filterParams.business_type,
       [filterParams.selectOption]: searchValue
     }).then((result) => {
@@ -312,34 +310,14 @@ const List = () => {
           onChange={(pagination, _filters, _sorter, extra) => {
             if (extra.action === 'paginate') {
               const { current } = pagination;
+              const page = current || 1;
+              const params = new URLSearchParams(window.location.search);
+              params.set('page', page.toString());
+              const newUrl = `${window.location.pathname}?${params.toString()}`;
+              window.history.pushState({}, '', newUrl);
               setFilterParams({
                 ...filterParams,
-                rentCurrent: current || 1,
-                loading: true
-              });
-              setSelectedImageIds([]);
-            }
-          }}
-          totalAmount={filterData.total_count}
-          defaultPageSize={filterParams.pagesize}
-          rowSelection={{ onChange: onSelect, selectedRowKeys: selectedImageIds }}
-        />
-      )
-    },
-    {
-      key: BusinessType.Sell,
-      label: '販售',
-      children: (
-        <DataTable
-          dataSource={dataSource || []}
-          columns={sellColumns}
-          loading={filterParams.loading}
-          onChange={(pagination, _filters, _sorter, extra) => {
-            if (extra.action === 'paginate') {
-              const { current } = pagination;
-              setFilterParams({
-                ...filterParams,
-                sellCurrent: current || 1,
+                rentCurrent: page,
                 loading: true
               });
               setSelectedImageIds([]);
@@ -351,6 +329,31 @@ const List = () => {
         />
       )
     }
+    // {
+    //   key: BusinessType.Sell,
+    //   label: '販售',
+    //   children: (
+    //     <DataTable
+    //       dataSource={dataSource || []}
+    //       columns={sellColumns}
+    //       loading={filterParams.loading}
+    //       onChange={(pagination, _filters, _sorter, extra) => {
+    //         if (extra.action === 'paginate') {
+    //           const { current } = pagination;
+    //           setFilterParams({
+    //             ...filterParams,
+    //             sellCurrent: current || 1,
+    //             loading: true
+    //           });
+    //           setSelectedImageIds([]);
+    //         }
+    //       }}
+    //       totalAmount={filterData.total_count}
+    //       defaultPageSize={filterParams.pagesize}
+    //       rowSelection={{ onChange: onSelect, selectedRowKeys: selectedImageIds }}
+    //     />
+    //   )
+    // }
   ];
 
   return (

@@ -17,6 +17,8 @@ const DataTable = ({
   rowSelection,
   size = 'small'
 }: DataTableProps) => {
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get('page');
   return (
     <TableAntd
       size={size}
@@ -26,9 +28,10 @@ const DataTable = ({
       onChange={onChange}
       pagination={{
         defaultPageSize,
-        showQuickJumper: false,
+        showQuickJumper: true,
         total: totalAmount,
-        showSizeChanger: false
+        showSizeChanger: false,
+        defaultCurrent: page ? parseInt(page) : 1
       }}
       rowSelection={rowSelection}
     />

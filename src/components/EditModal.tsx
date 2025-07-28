@@ -113,7 +113,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
                 />
                 <span className="pl-2">租借</span>
               </label>
-              <label>
+              {/* <label>
                 <input
                   disabled
                   type="radio"
@@ -121,7 +121,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
                   {...register('business_type')}
                 />
                 <span className="pl-2">販售</span>
-              </label>
+              </label> */}
             </div>
           </div>
           <div className="mb-4">
