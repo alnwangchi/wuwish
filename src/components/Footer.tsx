@@ -9,7 +9,7 @@ import footer_comment from '@/assets/img/footer_comment.png';
 import Link from 'next/link';
 import { eventTracker } from '@/ga/utils/eventTracker';
 import NavItem from './NavItem';
-import { TawkLauncher } from '@/twak';
+// import { TawkLauncher } from '@/twak';
 
 const Footer = () => {
   return (
@@ -26,7 +26,7 @@ const Footer = () => {
               className="block"
             />
           </Link>
-          <TawkLauncher />
+          {/* <TawkLauncher /> */}
           <p>台北市漢中街150號2樓 </p>
           <p>0968-270178</p>
           <p>wu.wish88@gmail.com</p>

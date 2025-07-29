@@ -5,6 +5,7 @@ import Analytics from '@/ga/Analytics';
 import type { Metadata } from 'next';
 import './form.css';
 import './globals.css';
+import { Twak } from '@/twak/script';
 
 export const metadata: Metadata = {
   title: '神龍變裝 - 台北西門租衣服推薦｜角色扮演・主題派對服裝出租｜神龍變裝',
@@ -46,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <Analytics />
-        {/* <Twak /> */}
+        <Twak />
       </head>
       <body>
         <RootStyleRegistry>
