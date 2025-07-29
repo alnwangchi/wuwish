@@ -19,8 +19,9 @@ import {
   TabsProps
 } from 'antd';
 import { ColumnsType } from 'antd/es/table/interface';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useId, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const { Search } = Input;
 const { confirm } = Modal;
@@ -98,6 +99,12 @@ const List = () => {
   const [editTargetData, setEditTargetData] = useState<ListType | undefined>();
   // to force rerender
   const [key, setKey] = useState('');
+
+  const pathname = usePathname();
+  console.log('🚀 ~ pathname:', pathname);
+
+  const searchParams = useSearchParams();
+  const search = searchParams.get('page');
 
   const showDeleteConfirm = ({
     image_id,
@@ -311,10 +318,12 @@ const List = () => {
             if (extra.action === 'paginate') {
               const { current } = pagination;
               const page = current || 1;
-              const params = new URLSearchParams(window.location.search);
-              params.set('page', page.toString());
-              const newUrl = `${window.location.pathname}?${params.toString()}`;
-              window.history.pushState({}, '', newUrl);
+              if (typeof window !== 'undefined') {
+                const params = new URLSearchParams(window.location.search);
+                const newUrl = `${pathname}?${params.toString()}`;
+                window.history.pushState({}, '', newUrl);
+              }
+
               setFilterParams({
                 ...filterParams,
                 rentCurrent: page,
@@ -326,6 +335,7 @@ const List = () => {
           totalAmount={filterData.total_count}
           defaultPageSize={filterParams.pagesize}
           rowSelection={{ onChange: onSelect, selectedRowKeys: selectedImageIds }}
+          queryPage={search || '1'}
         />
       )
     }

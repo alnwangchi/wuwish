@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Table as TableAntd, TableProps as TablePropsAntd } from 'antd';
 
@@ -5,6 +6,7 @@ interface DataTableProps extends TablePropsAntd<any> {
   loading: boolean;
   totalAmount: number;
   defaultPageSize: number;
+  queryPage?: string;
 }
 
 const DataTable = ({
@@ -15,10 +17,9 @@ const DataTable = ({
   defaultPageSize,
   totalAmount,
   rowSelection,
-  size = 'small'
+  size = 'small',
+  queryPage = '1'
 }: DataTableProps) => {
-  const params = new URLSearchParams(window.location.search);
-  const page = params.get('page');
   return (
     <TableAntd
       size={size}
@@ -31,7 +32,7 @@ const DataTable = ({
         showQuickJumper: true,
         total: totalAmount,
         showSizeChanger: false,
-        defaultCurrent: page ? parseInt(page) : 1
+        defaultCurrent: queryPage ? parseInt(queryPage) : 1
       }}
       rowSelection={rowSelection}
     />

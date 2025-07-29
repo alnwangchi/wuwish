@@ -83,7 +83,28 @@ module.exports = {
       {
         userAgent: 'black-listed-bot',
         disallow: ['/dashboard', '/login']
-      }
+      },
+      {
+        userAgent: 'AhrefsBot',
+        disallow: ['/']
+      },
+      {
+        userAgent: 'SemrushBot',
+        disallow: ['/']
+      },
+      {
+        userAgent: 'MJ12bot',
+        disallow: ['/']
+      },
+
+      // 🤖 ✅ 允許 AI 相關爬蟲
+      { userAgent: 'Google-Extended', allow: '/' },
+      { userAgent: 'GPTBot', allow: '/' },
+      { userAgent: 'ChatGPT-User', allow: '/' },
+      { userAgent: 'Anthropic-ai', allow: '/' },
+      { userAgent: 'ClaudeBot', allow: '/' },
+      { userAgent: 'CCBot', allow: '/' },
+      { userAgent: 'IndexNow', allow: '/' }
     ]
   }
 };
