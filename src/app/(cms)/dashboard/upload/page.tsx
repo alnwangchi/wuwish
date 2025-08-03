@@ -52,35 +52,23 @@ const UploadPage = () => {
   };
 
   const onSubmit: SubmitHandler<CreateFormValues> = async (data) => {
-    // console.log('🚀 ~ data:', data);
     const { category, image } = data;
 
-    const uploadPromises = category.map((c) => {
+    const uploadPromises = () => {
       const postData = {
         ...data,
-        category: c,
+        category: category.join(),
         image: (image as any)['0']
       };
       const formData = new FormData();
       Object.entries(postData).forEach((item) => formData.append(item[0], item[1]));
       return postProductApi(formData);
-    });
+    };
 
     setIsLoading(true);
 
     try {
-      const results = await Promise.allSettled(uploadPromises);
-
-      const successCount = results.filter((result) => result.status === 'fulfilled').length;
-      const failCount = results.length - successCount;
-
-      if (successCount > 0) {
-        message.success(`成功上傳 ${successCount} 個類別`);
-      }
-
-      if (failCount > 0) {
-        message.error(`${failCount} 個類別上傳失敗`);
-      }
+      const results = await uploadPromises();
 
       setPreviewImg('');
       resetField('image');

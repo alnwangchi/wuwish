@@ -183,6 +183,7 @@ const List = () => {
             </Button>
             <Button
               type="primary"
+              className="bg-blue-900 text-white"
               onClick={() => {
                 setEditTargetData({ ...record, image_id });
                 setIsEditModalOpen(true);
