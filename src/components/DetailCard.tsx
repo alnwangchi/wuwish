@@ -12,12 +12,19 @@ const DetailCard: FC<DetailCardProps> = (props) => {
   const { src, data } = props;
   const { category, content, name, number, price, status, title } = data;
 
+  const displayCategory =
+    enToNameMap[category] ||
+    category
+      .split(',')
+      .map((c: string) => enToNameMap[c] || c)
+      .join(' • ');
+
   return (
     <>
       <div className="f-center w-full sm:w-2/4 sm:justify-start">
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_URL}/${src}`}
-          alt={generateImgAlt('服裝租借 ', category, title, name)}
+          alt={generateImgAlt('服裝租借 ', displayCategory, title, name)}
           width={460}
           height={500}
         />
@@ -29,7 +36,7 @@ const DetailCard: FC<DetailCardProps> = (props) => {
         </p>
         <p>
           <span>類別 : </span>
-          <span>{enToNameMap[category]}</span>
+          <span>{displayCategory}</span>
         </p>
         <p>
           <span>劇名 : </span>

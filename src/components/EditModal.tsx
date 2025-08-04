@@ -97,7 +97,12 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
   }, [data, reset]);
 
   return (
-    <Modal onOk={handleSubmit(onSubmit)} onCancel={() => setOpen(false)} open={open}>
+    <Modal
+      onOk={handleSubmit(onSubmit)}
+      onCancel={() => setOpen(false)}
+      open={open}
+      okButtonProps={{ className: 'bg-blue-900' }}
+    >
       <div className="flex gap-3">
         <form className="flex w-3/6 flex-col">
           <div className="mb-4 flex flex-col">
@@ -150,7 +155,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
             render={(props) => <InputField label="名稱" {...props} placeholder="孫悟空" />}
           />
 
-          {business_value === BusinessType.Sell && (
+          {/* {business_value === BusinessType.Sell && (
             <>
               <Controller
                 control={control}
@@ -174,7 +179,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
                 )}
               />
             </>
-          )}
+          )} */}
 
           <Controller
             control={control}

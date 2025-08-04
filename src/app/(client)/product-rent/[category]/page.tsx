@@ -65,16 +65,14 @@ const RentalCategoryPage = () => {
         <Breadcrumb items={breadcrumbItems} />
       </div>
       <ClothesContainer>
-        {cloth
-          ?.filter((p) => p.info.category === category)
-          ?.map((p: any) => (
-            <ClothesCard
-              href={`/product-rent/${slugify(category!, { lower: true })}/${p.image_id}`}
-              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
-              key={p.image_id}
-              alt={generateImgAlt('服裝租借 ', p.info.category, p.info.title, p.info.name)}
-            />
-          ))}
+        {cloth?.map((p: any) => (
+          <ClothesCard
+            href={`/product-rent/${slugify(category!, { lower: true })}/${p.image_id}`}
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
+            key={p.image_id}
+            alt={generateImgAlt('服裝租借 ', p.info.category, p.info.title, p.info.name)}
+          />
+        ))}
         <div className="col-span-full">
           <Pagination current={Number(currentPage)} onChange={onChange} total={totalCount} />
         </div>
