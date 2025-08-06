@@ -76,13 +76,13 @@ export default function Carousel() {
       </div>
       <Slider {...settings} ref={carouselRef}>
         <div>
-          <Image src={c1} alt="活動檔期公告輪播" priority />
+          <Image src={c3} alt="活動檔期公告輪播" priority />
         </div>
         <div>
-          <Image src={c2} alt="活動檔期公告輪播" />
+          <Image src={c6} alt="活動檔期公告輪播" />
         </div>
         <div>
-          <Image src={c3} alt="活動檔期公告輪播" />
+          <Image src={c1} alt="活動檔期公告輪播" />
         </div>
         <div>
           <Image src={c4} alt="活動檔期公告輪播" />
@@ -91,7 +91,7 @@ export default function Carousel() {
           <Image src={c5} alt="活動檔期公告輪播" />
         </div>
         <div>
-          <Image src={c6} alt="活動檔期公告輪播" />
+          <Image src={c2} alt="活動檔期公告輪播" />
         </div>
         <div>
           <Image src={c7} alt="活動檔期公告輪播" />
