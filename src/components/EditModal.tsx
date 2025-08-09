@@ -9,6 +9,7 @@ import { BusinessType } from '@/interface';
 import { putProductApi } from '@/server';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { message, Modal } from 'antd';
+import clsx from 'clsx';
 import Image from 'next/image';
 import React, { FC, useEffect, useId, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -26,7 +27,9 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
   const randomKey = useId();
   const [localPreviewImg, setLocalPreviewImg] = useState(data?.image);
   const [file, setFile] = useState('');
-  const { register, handleSubmit, reset, control } = useForm({
+  const [hasImageChanged, setHasImageChanged] = useState(false);
+
+  const { register, handleSubmit, reset, control, formState } = useForm({
     resolver: yupResolver(EditSchema),
     defaultValues: {
       business_type: BusinessType.Rent,
@@ -37,11 +40,14 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
     }
   });
 
+  const isFormDirty = formState.isDirty || hasImageChanged;
+
   const handleUploadImage = (e: any) => {
     if (e.target?.files?.[0]) {
       setLocalPreviewImg(URL.createObjectURL(e.target.files[0]));
       // 檔案另存 為了解決在用拖曳的時候會使 image 變 undefined 可能跟 RHF 有關
       setFile(e.target.files[0]);
+      setHasImageChanged(true); // 標記圖片已變更
     } else {
       message.error('預覽圖片失敗!');
     }
@@ -69,6 +75,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
       if (result === 'success') {
         setLocalPreviewImg('');
         setFile('');
+        setHasImageChanged(false); // 重置圖片變更狀態
         setOpen(false);
         onSearch(filterParams.searchValue);
         setKey(randomKey);
@@ -91,8 +98,12 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
       number: data?.number,
       title: data?.title
     });
+    setHasImageChanged(false); // 重置圖片變更狀態
     // 清除未 submit 的預覽圖
-    return () => setLocalPreviewImg('');
+    return () => {
+      setLocalPreviewImg('');
+      setHasImageChanged(false);
+    };
   }, [data, reset]);
 
   return (
@@ -100,7 +111,8 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
       onOk={handleSubmit(onSubmit)}
       onCancel={() => setOpen(false)}
       open={open}
-      okButtonProps={{ className: 'bg-blue-900' }}
+      okButtonProps={{ className: clsx({ 'bg-blue-900': isFormDirty }), disabled: !isFormDirty }}
+      okText={isFormDirty ? '更新' : '沒有變更'}
     >
       <div className="flex gap-3">
         <form className="flex w-3/6 flex-col">
@@ -175,6 +187,12 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
             />
           )}
         </div>
+      </div>
+
+      <div className="mt-2 text-sm text-gray-500">
+        表單狀態：{isFormDirty ? '已變更' : '未變更'}
+        {formState.isDirty && <span> | 表單欄位已變更</span>}
+        {hasImageChanged && <span> | 圖片已變更</span>}
       </div>
     </Modal>
   );
