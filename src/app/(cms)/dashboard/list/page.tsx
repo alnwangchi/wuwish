@@ -20,7 +20,7 @@ import {
 } from 'antd';
 import { ColumnsType } from 'antd/es/table/interface';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useEffect, useId, useRef, useState } from 'react';
+import React, { useEffect, useId, useRef, useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 const { Search } = Input;
@@ -42,7 +42,6 @@ export interface ListType {
 
 interface DefaultParamType {
   rentCurrent: number;
-  // sellCurrent: number;
   pagesize: number;
   business_type: BusinessType;
   loading: boolean;
@@ -73,7 +72,6 @@ const options = [
 ];
 const defaultParam = {
   rentCurrent: 1,
-  // sellCurrent: 1,
   pagesize: 10,
   business_type: BusinessType.Rent,
   loading: true,
@@ -92,19 +90,32 @@ const List = () => {
     results: [],
     total_count: 0
   });
-  const [showBatchDeleteBtn, setShowBatchDeleteBtn] = useState(false);
   const [selectedImageIds, setSelectedImageIds] = useState<string[]>([]);
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editTargetData, setEditTargetData] = useState<ListType | undefined>();
-  // to force rerender
   const [key, setKey] = useState('');
 
   const pathname = usePathname();
-  console.log('🚀 ~ pathname:', pathname);
-
   const searchParams = useSearchParams();
   const search = searchParams.get('page');
+
+  const selectedItemsManager = {
+    getSelected: () => selectedImageIds,
+    hasSelected: () => selectedImageIds.length > 0,
+    updateSelected: (newSelectedIds: string[]) => {
+      setSelectedImageIds(newSelectedIds);
+    },
+    clearSelected: () => {
+      setSelectedImageIds([]);
+    },
+    removeItem: (imageId: string) => {
+      setSelectedImageIds((prev) => prev.filter((id) => id !== imageId));
+    },
+    removeItems: (imageIds: string[]) => {
+      setSelectedImageIds((prev) => prev.filter((id) => !imageIds.includes(id)));
+    }
+  };
 
   const showDeleteConfirm = ({
     image_id,
@@ -115,10 +126,11 @@ const List = () => {
     image_ids?: string[];
     type: DeleteType;
   }) => {
+    const total = type === DeleteType.Single ? 1 : image_ids?.length || 0;
+    const title = `請確認是否要刪除這 ${total} 筆`;
     confirm({
-      title: '確認是否要刪除',
+      title,
       icon: <ExclamationCircleFilled />,
-      content: '',
       okText: '確認',
       okType: 'danger',
       cancelText: '取消',
@@ -127,28 +139,23 @@ const List = () => {
           deleteProductApi(image_id).then((result) => {
             if (result === 'success') {
               onSearch(filterParams.searchValue);
+              selectedItemsManager.removeItem(image_id);
             }
           });
-          removeSelectImageIds({ type: DeleteType.Single, image_id });
         }
-        // batch delete
         if (type === DeleteType.Multiple && image_ids?.length) {
           deleteMultipleProductApi(image_ids).then((result) => {
             if (result === 'success') {
               onSearch(filterParams.searchValue);
+              selectedItemsManager.clearSelected();
             }
           });
-          removeSelectImageIds({ type: DeleteType.Multiple });
         }
-      },
-      onCancel() {
-        return;
       }
     });
   };
 
-  // sell 有的欄位 rent 都會有
-  const commonColumns: ColumnsType<ListType> = [
+  const rentColumns: ColumnsType<ListType> = [
     {
       title: '圖片',
       dataIndex: 'image',
@@ -162,10 +169,7 @@ const List = () => {
     },
     { title: '劇名', dataIndex: 'title' },
     { title: '名稱', dataIndex: 'name' },
-    { title: '編碼', dataIndex: 'number', width: '120px' }
-  ];
-
-  const actionColumn: ColumnsType<ListType> = [
+    { title: '編碼', dataIndex: 'number', width: '120px' },
     {
       title: '操作',
       dataIndex: 'action',
@@ -197,48 +201,22 @@ const List = () => {
     }
   ];
 
-  const rentColumns = commonColumns.concat(actionColumn);
-
-  // const sellColumns = commonColumns
-  //   .concat([
-  //     { title: '內容', dataIndex: 'content' },
-  //     { title: '價格', dataIndex: 'price' },
-  //     { title: '狀態', dataIndex: 'status' }
-  //   ])
-  //   .concat(actionColumn);
-
   const dataSource = filterData.results.map((list) => {
     const {
       image_path,
       image_id,
       info: { business_type, category, name, title, content, price, status, number }
     } = list;
-    if (business_type === BusinessType.Sell) {
-      return {
-        business_type,
-        key: image_id,
-        image: image_path,
-        category,
-        name,
-        title,
-        content,
-        price,
-        status,
-        number,
-        action: image_id
-      };
-    } else {
-      return {
-        business_type,
-        key: image_id,
-        image: image_path,
-        category,
-        name,
-        title,
-        number,
-        action: image_id
-      };
-    }
+    return {
+      business_type,
+      key: image_id,
+      image: image_path,
+      category,
+      name,
+      title,
+      number,
+      action: image_id
+    };
   });
 
   const onSearch = (value: string | undefined) => {
@@ -262,29 +240,32 @@ const List = () => {
     });
   };
 
-  const changeTab = (activeKey: string) => {
-    setFilterParams({
-      ...filterParams,
-      business_type: activeKey as BusinessType,
-      loading: true
-    });
-  };
+  const handleRowSelection = useCallback((selectedRowKeys: React.Key[]) => {
+    const newSelectedIds = selectedRowKeys.map((item) => String(item));
+    selectedItemsManager.updateSelected(newSelectedIds);
+  }, []);
 
-  const onSelect = (selectedRowKeys: React.Key[]) => {
-    if (selectedRowKeys.length) {
-      setSelectedImageIds(selectedRowKeys.map((item) => String(item)));
-    } else {
-      setSelectedImageIds([]);
-    }
-  };
+  const handleTableChange = useCallback(
+    (pagination: any, _filters: any, _sorter: any, extra: any) => {
+      if (extra.action === 'paginate') {
+        const { current } = pagination;
+        const page = current || 1;
+        if (typeof window !== 'undefined') {
+          const params = new URLSearchParams(window.location.search);
+          const newUrl = `${pathname}?${params.toString()}`;
+          window.history.pushState({}, '', newUrl);
+        }
 
-  const removeSelectImageIds = ({ type, image_id }: { type: DeleteType; image_id?: string }) => {
-    if (type === DeleteType.Single) {
-      setSelectedImageIds(selectedImageIds.filter((item) => item !== image_id));
-    } else {
-      setSelectedImageIds([]);
-    }
-  };
+        setFilterParams({
+          ...filterParams,
+          rentCurrent: page,
+          loading: true
+        });
+        selectedItemsManager.clearSelected();
+      }
+    },
+    [filterParams, pathname, selectedItemsManager]
+  );
 
   useEffect(() => {
     if (filterParams.loading) {
@@ -298,74 +279,6 @@ const List = () => {
       router.push('/login');
     }
   }, [isCanViewAdmin, router]);
-
-  // handle batch delete button status
-  useEffect(() => {
-    if (selectedImageIds.length) {
-      setShowBatchDeleteBtn(true);
-    } else setShowBatchDeleteBtn(false);
-  }, [selectedImageIds]);
-
-  const items: TabsProps['items'] = [
-    {
-      key: BusinessType.Rent,
-      label: '租借',
-      children: (
-        <DataTable
-          dataSource={dataSource || []}
-          columns={rentColumns}
-          loading={filterParams.loading}
-          onChange={(pagination, _filters, _sorter, extra) => {
-            if (extra.action === 'paginate') {
-              const { current } = pagination;
-              const page = current || 1;
-              if (typeof window !== 'undefined') {
-                const params = new URLSearchParams(window.location.search);
-                const newUrl = `${pathname}?${params.toString()}`;
-                window.history.pushState({}, '', newUrl);
-              }
-
-              setFilterParams({
-                ...filterParams,
-                rentCurrent: page,
-                loading: true
-              });
-              setSelectedImageIds([]);
-            }
-          }}
-          totalAmount={filterData.total_count}
-          defaultPageSize={filterParams.pagesize}
-          rowSelection={{ onChange: onSelect, selectedRowKeys: selectedImageIds }}
-          queryPage={search || '1'}
-        />
-      )
-    }
-    // {
-    //   key: BusinessType.Sell,
-    //   label: '販售',
-    //   children: (
-    //     <DataTable
-    //       dataSource={dataSource || []}
-    //       columns={sellColumns}
-    //       loading={filterParams.loading}
-    //       onChange={(pagination, _filters, _sorter, extra) => {
-    //         if (extra.action === 'paginate') {
-    //           const { current } = pagination;
-    //           setFilterParams({
-    //             ...filterParams,
-    //             sellCurrent: current || 1,
-    //             loading: true
-    //           });
-    //           setSelectedImageIds([]);
-    //         }
-    //       }}
-    //       totalAmount={filterData.total_count}
-    //       defaultPageSize={filterParams.pagesize}
-    //       rowSelection={{ onChange: onSelect, selectedRowKeys: selectedImageIds }}
-    //     />
-    //   )
-    // }
-  ];
 
   return (
     <div className="container py-10">
@@ -385,25 +298,33 @@ const List = () => {
           <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
         </Space.Compact>
         <div className="mb-4 ml-auto w-fit">
-          {showBatchDeleteBtn ? (
+          {selectedItemsManager.hasSelected() ? (
             <Button
               type="primary"
               danger
               onClick={() =>
-                showDeleteConfirm({ image_ids: selectedImageIds, type: DeleteType.Multiple })
+                showDeleteConfirm({
+                  image_ids: selectedItemsManager.getSelected(),
+                  type: DeleteType.Multiple
+                })
               }
             >
               全部刪除
             </Button>
           ) : null}
         </div>
-        <Tabs
-          type="card"
-          defaultActiveKey={BusinessType.Rent}
-          onChange={changeTab}
-          items={items}
-          className="bg-white"
-          key={key}
+        <DataTable
+          dataSource={dataSource || []}
+          columns={rentColumns}
+          loading={filterParams.loading}
+          onChange={handleTableChange}
+          totalAmount={filterData.total_count}
+          defaultPageSize={filterParams.pagesize}
+          rowSelection={{
+            onChange: handleRowSelection,
+            selectedRowKeys: selectedItemsManager.getSelected()
+          }}
+          queryPage={search || '1'}
         />
       </Card>
       <EditModal
