@@ -219,7 +219,7 @@ const List = () => {
     };
   });
 
-  const onSearch = (value: string | undefined) => {
+  const onSearch = (value?: string) => {
     const searchValue = value ? value.trim() : undefined;
 
     setFilterParams({
@@ -230,7 +230,7 @@ const List = () => {
     // fetch api
     queryApi({
       page_size: filterParams.pagesize,
-      page_number: filterParams.rentCurrent,
+      page_number: searchValue ? 1 : filterParams.rentCurrent,
       business_type: filterParams.business_type,
       [filterParams.selectOption]: searchValue
     }).then((result) => {

@@ -177,7 +177,12 @@ const UploadPage = () => {
             />
             {errors.image && <p className="errorInput">{errors.image.message}</p>}
           </div>
-          <Button htmlType="submit" className="self-end" type="primary" loading={isLoading}>
+          <Button
+            htmlType="submit"
+            className="self-end bg-blue-900"
+            type="primary"
+            loading={isLoading}
+          >
             {isLoading ? '上傳中' : '提交'}
           </Button>
         </form>

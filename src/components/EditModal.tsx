@@ -23,10 +23,10 @@ interface EditModalProps {
 }
 
 const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSearch, setKey }) => {
-  const randonKey = useId();
+  const randomKey = useId();
   const [localPreviewImg, setLocalPreviewImg] = useState(data?.image);
   const [file, setFile] = useState('');
-  const { register, handleSubmit, watch, reset, control, setValue } = useForm({
+  const { register, handleSubmit, reset, control } = useForm({
     resolver: yupResolver(EditSchema),
     defaultValues: {
       business_type: BusinessType.Rent,
@@ -36,7 +36,6 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
       title: data?.title
     }
   });
-  const business_value = watch('business_type', BusinessType.Rent);
 
   const handleUploadImage = (e: any) => {
     if (e.target?.files?.[0]) {
@@ -72,7 +71,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
         setFile('');
         setOpen(false);
         onSearch(filterParams.searchValue);
-        setKey(randonKey);
+        setKey(randomKey);
         message.success('產品更新成功');
       } else {
         throw new Error('Update failed');
@@ -107,7 +106,6 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
         <form className="flex w-3/6 flex-col">
           <div className="mb-4 flex flex-col">
             <p className="labelText-required labelText">商業類型（business type）</p>
-
             <div className="flex gap-4 py-2">
               <label>
                 <input
@@ -118,15 +116,6 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
                 />
                 <span className="pl-2">租借</span>
               </label>
-              {/* <label>
-                <input
-                  disabled
-                  type="radio"
-                  value={BusinessType.Sell}
-                  {...register('business_type')}
-                />
-                <span className="pl-2">販售</span>
-              </label> */}
             </div>
           </div>
           <div className="mb-4">
@@ -155,32 +144,6 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
             render={(props) => <InputField label="名稱" {...props} placeholder="孫悟空" />}
           />
 
-          {/* {business_value === BusinessType.Sell && (
-            <>
-              <Controller
-                control={control}
-                name="content"
-                render={(props) => (
-                  <InputField required={false} label="內容" {...props} placeholder="上衣、下身" />
-                )}
-              />
-              <Controller
-                control={control}
-                name="price"
-                render={(props) => (
-                  <InputNumberField required={false} label="價格" {...props} placeholder="2000" />
-                )}
-              />
-              <Controller
-                control={control}
-                name="status"
-                render={(props) => (
-                  <InputField required={false} label="狀態" {...props} placeholder="八成新" />
-                )}
-              />
-            </>
-          )} */}
-
           <Controller
             control={control}
             name="number"
@@ -207,7 +170,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
             <Image
               width={500}
               height={500}
-              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${data?.image}?key=${randonKey}`}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${data?.image}?key=${randomKey}`}
               alt="imageUrl"
             />
           )}
