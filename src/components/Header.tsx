@@ -62,6 +62,7 @@ const Header = () => {
               <nav className="flex gap-2">
                 <NavItem text="商品上傳" href="/dashboard/upload" />
                 <NavItem text="商品列表" href="/dashboard/list" />
+                <NavItem text="輪播管理" href="/dashboard/banner" />
               </nav>
             </div>
           </section>
@@ -192,7 +193,6 @@ const Header = () => {
                 />
               </span>
             </div>
-            {/* <NavItem text="商品販售" href="/product-sell" setIsMenuOpen={setIsMenuOpen} /> */}
             <NavItem text="租借流程" href="/rent-process" setIsMenuOpen={setIsMenuOpen} />
             <NavItem text="常見問題" href="/faq" setIsMenuOpen={setIsMenuOpen} />
             <NavItem text="關於我們" href="/about" />

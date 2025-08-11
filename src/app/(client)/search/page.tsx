@@ -24,8 +24,7 @@ const SearchPage = () => {
     if (!keyword) return;
     (async () => {
       const res = await keywordSearch({ keyword, currentPage: Number(currentPage) });
-      const uniqueResults = _.uniqBy(res?.results, (item) => item.info.number);
-      setCloth(uniqueResults);
+      setCloth(res?.results);
       setTotalCount(res?.total_count);
     })();
   }, [keyword, currentPage]);
