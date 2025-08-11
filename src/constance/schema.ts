@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export type CreateFormValues = {
-  image: any;
+  image: any; // 必填
   business_type: string;
   category: string[];
   name: string;
@@ -11,10 +11,11 @@ export type CreateFormValues = {
   price?: number;
   status?: string;
 };
+
 export type EditFormValues = {
-  image: any;
+  image?: any; // 可選
   business_type: string;
-  category: string;
+  category: string[];
   name: string;
   title: string;
   number?: string;
@@ -50,5 +51,10 @@ export const createSchema = baseSchema.shape({
 
 export const EditSchema = baseSchema.shape({
   image: yup.mixed(),
-  category: yup.string().required()
+  category: yup
+    .array()
+    .of(yup.string().required())
+    .min(1, '類別是必填欄位')
+    .max(3, '最多選擇三個類別') // restrict in UI
+    .required('類別是必填欄位')
 });

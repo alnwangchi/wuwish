@@ -8,7 +8,7 @@ import { EditFormValues, EditSchema } from '@/constance/schema';
 import { BusinessType } from '@/interface';
 import { putProductApi } from '@/server';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { message, Modal } from 'antd';
+import { message, Modal, Select } from 'antd';
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { FC, useEffect, useId, useState } from 'react';
@@ -33,7 +33,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
     resolver: yupResolver(EditSchema),
     defaultValues: {
       business_type: BusinessType.Rent,
-      category: data?.category,
+      category: data?.category.split('•') || [],
       name: data?.name,
       number: data?.number,
       title: data?.title
@@ -93,7 +93,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
   useEffect(() => {
     reset({
       business_type: data?.business_type,
-      category: data?.category,
+      category: data?.category.split('•'),
       name: data?.name,
       number: data?.number,
       title: data?.title
@@ -132,16 +132,27 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
           </div>
           <div className="mb-4">
             <label className="labelText-required labelText">類別</label>
-            <select
-              {...register('category')}
-              className="w-full rounded-md border border-[#d9d9d9] py-2 pl-[11px]"
-            >
-              {categoryOptions.map((c) => (
-                <option key={c.value} value={c.value}>
-                  {c.label}
-                </option>
-              ))}
-            </select>
+            <Controller
+              name="category"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <Select
+                  className="w-full"
+                  mode="multiple"
+                  allowClear
+                  placeholder="Please select"
+                  maxCount={3}
+                  options={categoryOptions}
+                  value={value as string[]}
+                  onChange={(newValue: string[]) => {
+                    onChange(newValue);
+                  }}
+                />
+              )}
+            />
+            {formState.errors.category && (
+              <p className="errorInput">{formState.errors.category.message}</p>
+            )}
           </div>
 
           <Controller

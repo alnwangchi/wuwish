@@ -2,26 +2,15 @@
 'use client';
 import EditModal from '@/components/EditModal';
 import DataTable from '@/components/Tables';
+import { categoryTransformer } from '@/constance';
 import useAuthenticate from '@/hooks/useAuthenticate';
 import { BusinessType, ProductSearchResponse } from '@/interface';
 import { deleteMultipleProductApi, deleteProductApi, queryApi } from '@/server';
 import { ExclamationCircleFilled } from '@ant-design/icons';
-import {
-  Button,
-  Card,
-  Image,
-  Input,
-  Modal,
-  PaginationProps,
-  Select,
-  Space,
-  Tabs,
-  TabsProps
-} from 'antd';
+import { Button, Card, Image, Input, Modal, PaginationProps, Select, Space } from 'antd';
 import { ColumnsType } from 'antd/es/table/interface';
-import { usePathname, useRouter } from 'next/navigation';
-import React, { useEffect, useId, useRef, useState, useCallback } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const { Search } = Input;
 const { confirm } = Modal;
@@ -211,7 +200,7 @@ const List = () => {
       business_type,
       key: image_id,
       image: image_path,
-      category,
+      category: categoryTransformer(category),
       name,
       title,
       number,

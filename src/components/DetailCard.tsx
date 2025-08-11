@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
-import { enToNameMap } from '@/constance';
+import { categoryTransformer, enToNameMap } from '@/constance';
 import { generateImgAlt } from '@/util';
 
 interface DetailCardProps {
@@ -12,12 +12,7 @@ const DetailCard: FC<DetailCardProps> = (props) => {
   const { src, data } = props;
   const { category, content, name, number, price, status, title } = data;
 
-  const displayCategory =
-    enToNameMap[category] ||
-    category
-      .split(',')
-      .map((c: string) => enToNameMap[c] || c)
-      .join(' • ');
+  const displayCategory = categoryTransformer(category);
 
   return (
     <>

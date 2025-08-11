@@ -43,6 +43,16 @@ export const enToNameMap = categoryList.reduce(
   {} as Record<string, string>
 );
 
+export const categoryTransformer = (category: string) => {
+  return (
+    enToNameMap[category] ||
+    category
+      .split(',')
+      .map((c: string) => enToNameMap[c] || c)
+      .join(' • ')
+  );
+};
+
 export const saleCategoryList = [
   { name: '萬聖節', en: 'Halloween' },
   { name: '卡通/動漫', en: 'Cartoons/Animations' },
