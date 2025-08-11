@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: 'www.wuwish.com.tw',
         port: '9527',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        pathname: '/**'
       }
     ]
   }
