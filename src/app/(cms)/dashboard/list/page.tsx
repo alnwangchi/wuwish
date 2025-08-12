@@ -212,18 +212,22 @@ const List = () => {
     };
   });
 
-  const onSearch = (value?: string) => {
+  const onSearch = (value?: string, resetPage = false) => {
     const searchValue = value ? value.trim() : undefined;
+
+    const pageNumber = resetPage ? 1 : filterParams.rentCurrent;
 
     setFilterParams({
       ...filterParams,
       searchValue,
+      rentCurrent: pageNumber,
       loading: false
     });
+
     // fetch api
     queryApi({
       page_size: filterParams.pagesize,
-      page_number: searchValue ? 1 : filterParams.rentCurrent,
+      page_number: pageNumber,
       business_type: filterParams.business_type,
       [filterParams.selectOption]: searchValue
     }).then((result) => {
@@ -231,6 +235,10 @@ const List = () => {
         setFilterData(result);
       }
     });
+  };
+
+  const onKeywordSearch = (value?: string) => {
+    onSearch(value, true); // 搜索時重置頁面為第一頁
   };
 
   const handleRowSelection = useCallback(
@@ -291,7 +299,7 @@ const List = () => {
               })
             }
           />
-          <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onSearch} />
+          <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onKeywordSearch} />
         </Space.Compact>
         <div className="mb-4 ml-auto w-fit">
           {selectedItemsManager.hasSelected() ? (

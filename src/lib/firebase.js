@@ -3,14 +3,14 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCdZ_8PkT0Anqp9Tw8vHAnDZRIG6cx9Vdc',
-  authDomain: 'wuwish-81bc1.firebaseapp.com',
-  databaseURL: 'https://wuwish-81bc1-default-rtdb.firebaseio.com',
-  projectId: 'wuwish-81bc1',
-  storageBucket: 'wuwish-81bc1.firebasestorage.app',
-  messagingSenderId: '467318589351',
-  appId: '1:467318589351:web:bea3751c58212356935882',
-  measurementId: 'G-ML9V7V00HL'
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
