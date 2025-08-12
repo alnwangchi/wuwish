@@ -10,22 +10,19 @@ export interface UploadImageResult {
 }
 
 export interface BannerUploadData {
-  key: string; // 已有圖片的 id
+  key: string;
   order: number;
-  originalOrder: number;
-  imageUrl: string;
-  imageAlt: string;
+  image: string;
   uploadedFile: File | null;
-  fileName: string;
 }
 
 export const uploadImageToFirebase = async (data: BannerUploadData) => {
-  const { fileName, key, order, uploadedFile } = data;
+  const { key, order, uploadedFile } = data;
 
   try {
     let downloadURL = '';
     if (uploadedFile) {
-      const storagePath = `banners/${fileName}`;
+      const storagePath = `banners/${key}`;
       const storageRef = ref(storage, storagePath);
       const snapshot = await uploadBytes(storageRef, uploadedFile);
       downloadURL = await getDownloadURL(snapshot.ref);
@@ -64,7 +61,7 @@ export const uploadImageToFirebase = async (data: BannerUploadData) => {
     const result: UploadImageResult = {
       id: docId,
       downloadURL,
-      fileName,
+      fileName: key,
       uploadTime: imageData.uploadTime
     };
     return result;
@@ -82,21 +79,7 @@ export const uploadImageToFirebase = async (data: BannerUploadData) => {
  */
 export const uploadMultipleImages = async (data: BannerUploadData[]) => {
   try {
-    const itemsToUpdate = data.filter((d) => {
-      // 如果有新檔案，需要更新
-      if (d.uploadedFile) {
-        return true;
-      }
-      // 如果順序有變更，需要更新
-      if (d.originalOrder && d.order !== d.originalOrder) {
-        return true;
-      }
-      // 其他情況不需要更新
-      return false;
-    });
-    console.warn('🚀 ~ itemsToUpdate:', itemsToUpdate);
-
-    const uploadPromises = itemsToUpdate.map((d) => {
+    const uploadPromises = data.map((d) => {
       return uploadImageToFirebase(d);
     });
     return await Promise.all(uploadPromises);

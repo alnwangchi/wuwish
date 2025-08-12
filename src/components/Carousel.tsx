@@ -64,7 +64,6 @@ export default function Carousel() {
         });
 
         banners.sort((a, b) => a.order - b.order);
-        console.log('🚀 ~ banners:', banners);
 
         setImages(banners);
       } catch (error) {

@@ -30,6 +30,7 @@ import {
 
 import { uploadMultipleImages } from '@/lib/utils/uploadImage';
 import { collection, getDocs } from 'firebase/firestore';
+import { cloneDeep, uniqBy } from 'lodash';
 
 interface DataType {
   key: string;
@@ -41,6 +42,15 @@ interface DataType {
 interface RowContextProps {
   setActivatorNodeRef?: (element: HTMLElement | null) => void;
   listeners?: SyntheticListenerMap;
+}
+
+function findChangedOrder(arr1: any, arr2: any) {
+  const map1 = new Map(arr1.map((item: any) => [item.key, item.order]));
+
+  return arr2.filter((item: any) => {
+    const originalOrder = map1.get(item.key);
+    return originalOrder !== undefined && originalOrder !== item.order;
+  });
 }
 
 const RowContext = createContext<RowContextProps>({});
@@ -61,46 +71,39 @@ const DragHandle: FC = () => {
 
 const initialData: DataType[] = [
   {
-    key: '1',
+    key: 'banner-1',
     order: 1,
-    image: '',
-    imageAlt: '西門衣服租借神龍變裝輪播圖'
+    image: '111111'
   },
   {
-    key: '2',
+    key: 'banner-2',
     order: 2,
-    image: '',
-    imageAlt: '西門衣服租借神龍變裝輪播圖'
+    image: '222222'
   },
   {
-    key: '3',
+    key: 'banner-3',
     order: 3,
-    image: '',
-    imageAlt: '西門衣服租借神龍變裝輪播圖'
+    image: '333333'
   },
   {
-    key: '4',
+    key: 'banner-4',
     order: 4,
-    image: '',
-    imageAlt: '西門衣服租借神龍變裝輪播圖'
+    image: ''
   },
   {
-    key: '5',
+    key: 'banner-5',
     order: 5,
-    image: '',
-    imageAlt: '西門衣服租借神龍變裝輪播圖'
+    image: ''
   },
   {
-    key: '6',
+    key: 'banner-6',
     order: 6,
-    image: '',
-    imageAlt: '西門衣服租借神龍變裝輪播圖'
+    image: ''
   },
   {
-    key: '7',
+    key: 'banner-7',
     order: 7,
-    image: '',
-    imageAlt: '西門衣服租借神龍變裝輪播圖'
+    image: ''
   }
 ];
 
@@ -152,8 +155,7 @@ const UploadBannerPage: FC = () => {
           return {
             key: doc.id,
             order: doc.data().order || 0,
-            image: doc.data().downloadURL || '',
-            imageAlt: doc.data().imageAlt || ''
+            image: doc.data().downloadURL || ''
           };
         });
 
@@ -167,7 +169,7 @@ const UploadBannerPage: FC = () => {
         });
 
         setDataSource(mergedData);
-        originalDataSource.current = mergedData;
+        originalDataSource.current = cloneDeep(mergedData);
       } catch (error) {
         console.error('Error fetching banners:', error);
       }
@@ -196,25 +198,21 @@ const UploadBannerPage: FC = () => {
     setIsUpdating(true);
 
     try {
-      const allRecords = dataSource;
-
-      const bannerData = allRecords.map((record, idx) => {
-        const uploadedFile = uploadedFiles.get(record.key);
-
-        const data = {
-          key: record.key,
-          order: record.order,
-          originalOrder: +originalDataSource.current[idx].key,
-          imageUrl: record.image,
-          imageAlt: record.imageAlt || '',
-          uploadedFile: uploadedFile || null,
-          fileName: `banner_${record.order}`
+      const bannerData = dataSource.map((data, idx) => {
+        const uploadedFile = uploadedFiles.get(data.key);
+        const result = {
+          ...data,
+          uploadedFile: uploadedFile || null
         };
-
-        return data;
+        return result;
       });
 
-      const res = await uploadMultipleImages(bannerData);
+      const fileData = bannerData.filter((data) => !!data.uploadedFile);
+      const changeOrderData = findChangedOrder(originalDataSource.current, bannerData);
+
+      const uploadData = uniqBy(fileData.concat(changeOrderData), 'key');
+
+      const res = await uploadMultipleImages(uploadData);
 
       message.success('更新成功');
 
@@ -234,11 +232,19 @@ const UploadBannerPage: FC = () => {
       key: 'order',
       align: 'center',
       width: 120,
-      render: () => (
+      render: (_, record) => (
         <div className="flex items-center justify-center gap-2">
           <DragHandle />
+          {record.order}
         </div>
       )
+    },
+    {
+      title: 'OriginOrder',
+      key: 'originOrder',
+      align: 'center',
+      width: 120,
+      render: (_, record) => <div className="flex items-center justify-center">{record.key}</div>
     },
     {
       title: 'Image',
@@ -250,7 +256,7 @@ const UploadBannerPage: FC = () => {
           {!!record.image ? (
             <img
               src={record.image}
-              alt={record.imageAlt || ''}
+              alt={''}
               style={{
                 width: 340,
                 height: 150,

@@ -89,22 +89,25 @@ const List = () => {
   const searchParams = useSearchParams();
   const search = searchParams.get('page');
 
-  const selectedItemsManager = {
-    getSelected: () => selectedImageIds,
-    hasSelected: () => selectedImageIds.length > 0,
-    updateSelected: (newSelectedIds: string[]) => {
-      setSelectedImageIds(newSelectedIds);
-    },
-    clearSelected: () => {
-      setSelectedImageIds([]);
-    },
-    removeItem: (imageId: string) => {
-      setSelectedImageIds((prev) => prev.filter((id) => id !== imageId));
-    },
-    removeItems: (imageIds: string[]) => {
-      setSelectedImageIds((prev) => prev.filter((id) => !imageIds.includes(id)));
-    }
-  };
+  const selectedItemsManager = React.useMemo(
+    () => ({
+      getSelected: () => selectedImageIds,
+      hasSelected: () => selectedImageIds.length > 0,
+      updateSelected: (newSelectedIds: string[]) => {
+        setSelectedImageIds(newSelectedIds);
+      },
+      clearSelected: () => {
+        setSelectedImageIds([]);
+      },
+      removeItem: (imageId: string) => {
+        setSelectedImageIds((prev) => prev.filter((id) => id !== imageId));
+      },
+      removeItems: (imageIds: string[]) => {
+        setSelectedImageIds((prev) => prev.filter((id) => !imageIds.includes(id)));
+      }
+    }),
+    [selectedImageIds]
+  );
 
   const showDeleteConfirm = ({
     image_id,
@@ -154,7 +157,8 @@ const List = () => {
     },
     {
       title: '類別',
-      dataIndex: 'category'
+      dataIndex: 'category',
+      render: (category) => <span>{categoryTransformer(category)}</span>
     },
     { title: '劇名', dataIndex: 'title' },
     { title: '名稱', dataIndex: 'name' },
@@ -200,7 +204,7 @@ const List = () => {
       business_type,
       key: image_id,
       image: image_path,
-      category: categoryTransformer(category),
+      category,
       name,
       title,
       number,
@@ -229,10 +233,13 @@ const List = () => {
     });
   };
 
-  const handleRowSelection = useCallback((selectedRowKeys: React.Key[]) => {
-    const newSelectedIds = selectedRowKeys.map((item) => String(item));
-    selectedItemsManager.updateSelected(newSelectedIds);
-  }, []);
+  const handleRowSelection = useCallback(
+    (selectedRowKeys: React.Key[]) => {
+      const newSelectedIds = selectedRowKeys.map((item) => String(item));
+      selectedItemsManager.updateSelected(newSelectedIds);
+    },
+    [selectedItemsManager]
+  );
 
   const handleTableChange = useCallback(
     (pagination: any, _filters: any, _sorter: any, extra: any) => {
