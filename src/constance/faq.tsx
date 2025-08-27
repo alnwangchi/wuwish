@@ -11,7 +11,15 @@ export const FAQ = [
     category: '關於租借',
     items: [
       {
-        question: '1：租借流程為何？',
+        question: '1：哪裡可以租借服裝道具推薦？',
+        answer: (
+          <p>
+            想租服裝道具？服裝道具租借推薦台北西門町「神龍變裝」提供Cosplay服裝出租、派對主題造型與節慶搞笑服，款式多樣、高CP值，適合拍攝、活動與變裝派對。
+          </p>
+        )
+      },
+      {
+        question: '2：租借流程為何？',
         answer: (
           <>
             <p>
@@ -34,7 +42,7 @@ export const FAQ = [
         )
       },
       {
-        question: '2：如何租借服裝／道具？',
+        question: '3：如何租借服裝／道具？',
         answer: (
           <p>
             您可透過網站底部連結進行檔期詢問、費用查詢與預約。訂單確認後，每套服裝需預繳
@@ -44,7 +52,7 @@ export const FAQ = [
         )
       },
       {
-        question: '3：租借費用如何計算？',
+        question: '4：租借費用如何計算？',
         answer: (
           <p>
             租金依款式與天數而定，一般款式約 NT$300–900，精緻款式 NT$1,000
@@ -53,7 +61,7 @@ export const FAQ = [
         )
       },
       {
-        question: '4：現場是否可以試穿？',
+        question: '5：現場是否可以試穿？',
         answer: (
           <>
             <p>
@@ -77,7 +85,7 @@ export const FAQ = [
         )
       },
       {
-        question: '5：服裝可以修改尺寸嗎？',
+        question: '6：服裝可以修改尺寸嗎？',
         answer: (
           <p>
             神龍變裝可提供
@@ -87,7 +95,7 @@ export const FAQ = [
         )
       },
       {
-        question: '6：租借時間多久？',
+        question: '7：租借時間多久？',
         answer: (
           <p>
             一般租期為 <span className="text-primary-orange">3 天</span>
@@ -97,7 +105,7 @@ export const FAQ = [
         )
       },
       {
-        question: '7：可以提前預約嗎？',
+        question: '8：可以提前預約嗎？',
         answer: (
           <p>
             建議提早預約，特別是熱門時段(如萬聖節裝扮、聖誕節裝扮、 尾牙裝扮、尾牙春酒等)，
@@ -107,7 +115,7 @@ export const FAQ = [
         )
       },
       {
-        question: '8：可以取消或更改訂單嗎？',
+        question: '9：可以取消或更改訂單嗎？',
         answer: (
           <>
             <p>
@@ -152,7 +160,7 @@ export const FAQ = [
     category: '付款與押金',
     items: [
       {
-        question: '9：有哪些付款方式？',
+        question: '10：有哪些付款方式？',
         answer: (
           <p>
             提供<span className="text-primary-orange"> 現金、銀行轉帳</span>兩種方式。
@@ -160,7 +168,7 @@ export const FAQ = [
         )
       },
       {
-        question: '10：租借需要支付押金嗎？',
+        question: '11：租借需要支付押金嗎？',
         answer: (
           <>
             <p>
@@ -180,7 +188,7 @@ export const FAQ = [
         )
       },
       {
-        question: '11：是否能開立發票或收據？',
+        question: '12：是否能開立發票或收據？',
         answer: (
           <p>
             可以。如果需要發票或收據，請在付款時提供
@@ -196,7 +204,7 @@ export const FAQ = [
     category: '清潔與賠償',
     items: [
       {
-        question: '12：租借的服裝道具需要清洗嗎？',
+        question: '13：租借的服裝道具需要清洗嗎？',
         answer: (
           <p>
             不需自行清洗。神龍變裝會於每次租借後進行專業
@@ -207,7 +215,7 @@ export const FAQ = [
         )
       },
       {
-        question: '13：商品歸還後若有嚴重破損或污漬，會如何處理？',
+        question: '14：商品歸還後若有嚴重破損或污漬，會如何處理？',
         answer: (
           <>
             <p>
@@ -227,7 +235,7 @@ export const FAQ = [
         )
       },
       {
-        question: '14：如果不小心損壞或遺失道具怎麼辦？',
+        question: '15：如果不小心損壞或遺失道具怎麼辦？',
         answer: (
           <>
             <p>
@@ -242,7 +250,7 @@ export const FAQ = [
         )
       },
       {
-        question: '15：若逾期不歸還如何處理？',
+        question: '16：若逾期不歸還如何處理？',
         answer: (
           <>
             <p>若未於約定時間內歸還商品且無事先通知，我們將視情況啟動以下處理程序:</p>
@@ -257,7 +265,7 @@ export const FAQ = [
         )
       },
       {
-        question: '16：道具服有什麼需要特別注意？',
+        question: '17：道具服有什麼需要特別注意？',
         answer: (
           <>
             <p>
@@ -288,7 +296,7 @@ export const FAQ = [
     category: '其他服務',
     items: [
       {
-        question: '17：可以訂製服裝道具嗎？',
+        question: '18：可以訂製服裝道具嗎？',
         answer: (
           <p>
             我們主要提供現有商品租借服務。如有訂製需求，歡迎聯繫，我們將協助評估或轉介合作單位。
@@ -296,11 +304,11 @@ export const FAQ = [
         )
       },
       {
-        question: '18：你們有提供配送服務嗎？',
+        question: '19：你們有提供配送服務嗎？',
         answer: <p>目前以店面取還為主。如需配送，請提前與我們聯繫，將視情況討論配送方式與費用。</p>
       },
       {
-        question: '19：你們有提供兒童變裝嗎？',
+        question: '20：你們有提供兒童變裝嗎？',
         answer: (
           <p>
             目前尚<span className="text-primary-orange">未提供 150cm 以下身高</span>
