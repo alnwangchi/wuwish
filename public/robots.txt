@@ -1,199 +1,54 @@
-# 神龍變裝服裝出租網站 - Robots.txt
-# 台北西門町 cosplay 服裝租借服務
-# 最後更新: 2025年
-
-# ========================================
-# 主要搜尋引擎爬蟲
-# ========================================
-
-# Google 爬蟲
-User-agent: Googlebot
+# *
+User-agent: *
 Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
-Disallow: /_next/
-Disallow: /admin/
-Disallow: /private/
 
-# Google 圖片爬蟲
-User-agent: Googlebot-Image
-Allow: /
-Allow: /src/assets/img/
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
+# black-listed-bot
+User-agent: black-listed-bot
+Disallow: /dashboard
+Disallow: /login
 
-# Google 行動版爬蟲
-User-agent: Googlebot-Mobile
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
+# AhrefsBot
+User-agent: AhrefsBot
+Disallow: /
 
-# Bing 爬蟲
-User-agent: Bingbot
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
+# SemrushBot
+User-agent: SemrushBot
+Disallow: /
 
-# Yahoo 爬蟲
-User-agent: Slurp
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
+# MJ12bot
+User-agent: MJ12bot
+Disallow: /
 
-# ========================================
-# 台灣本地搜尋引擎
-# ========================================
-
-# Yahoo 奇摩
-User-agent: Yahoo! Slurp
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
-
-# 百度爬蟲
-User-agent: Baiduspider
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
-
-# 搜狗爬蟲
-User-agent: Sogou web spider
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
-
-# ========================================
-# AI 和聊天機器人爬蟲
-# ========================================
-
-# Google AI 爬蟲
+# Google-Extended
 User-agent: Google-Extended
 Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
 
-# OpenAI GPT 爬蟲
+# GPTBot
 User-agent: GPTBot
 Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
 
-# ChatGPT 用戶
+# ChatGPT-User
 User-agent: ChatGPT-User
 Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
 
-# Anthropic Claude 爬蟲
+# Anthropic-ai
 User-agent: Anthropic-ai
 Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
 
+# ClaudeBot
 User-agent: ClaudeBot
 Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
 
-# 其他 AI 平台
+# CCBot
 User-agent: CCBot
 Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
 
-# ========================================
-# 社交媒體爬蟲
-# ========================================
-
-# Facebook 爬蟲
-User-agent: facebookexternalhit
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
-
-# Twitter 爬蟲
-User-agent: Twitterbot
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
-
-# LinkedIn 爬蟲
-User-agent: LinkedInBot
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
-
-# Pinterest 爬蟲
-User-agent: Pinterest
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
-
-# ========================================
-# 其他重要爬蟲
-# ========================================
-
-# IndexNow 爬蟲
+# IndexNow
 User-agent: IndexNow
 Allow: /
 
-# 通用爬蟲規則
-User-agent: *
-Allow: /
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /api/
-Disallow: /_next/
-Disallow: /admin/
-Disallow: /private/
-Disallow: /temp/
-Disallow: /test/
+# Host
+Host: https://www.wuwish.com.tw/
 
-# ========================================
-# 爬蟲速率限制 (可選)
-# ========================================
-
-# 建議爬蟲延遲 (秒)
-Crawl-delay: 1
-
-# ========================================
-# 網站地圖
-# ========================================
-
-# 主要網站地圖
+# Sitemaps
 Sitemap: https://www.wuwish.com.tw/sitemap.xml
-
-# 圖片網站地圖 (如果有)
-# Sitemap: https://www.wuwish.com.tw/sitemap-images.xml
-
-# 新聞網站地圖 (如果有)
-# Sitemap: https://www.wuwish.com.tw/sitemap-news.xml
-
-# ========================================
-# 網站資訊
-# ========================================
-
-# 網站名稱: 神龍變裝服裝出租
-# 主要服務: 台北西門町 cosplay 服裝租借
-# 服務內容: 角色扮演、主題派對、動漫電影服裝出租
-# 目標地區: 台北市、新北市、桃園市
-# 語言: 繁體中文
-# 主要關鍵字: 服裝出租、cosplay、角色扮演、西門町、台北租衣服

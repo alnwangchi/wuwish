@@ -13,6 +13,7 @@ import { type PaginationProps } from 'antd';
 import _ from 'lodash';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import slugify from 'slugify';
+import { BreadcrumbJsonLd } from '@/seo/json-ld';
 
 const RentalCategoryPage = () => {
   const router = useRouter();
@@ -47,6 +48,16 @@ const RentalCategoryPage = () => {
     }
   ];
 
+  // 為 SEO 準備麵包屑資料
+  const breadcrumbSeoItems = [
+    { name: '首頁', url: 'https://www.wuwish.com.tw/' },
+    { name: '服裝租借', url: 'https://www.wuwish.com.tw/product-rent' },
+    {
+      name: enToNameMap[category as string] || '',
+      url: `https://www.wuwish.com.tw/product-rent/${category}`
+    }
+  ];
+
   const onChange: PaginationProps['onChange'] = (page) => {
     router.push(`${pathname}?page=${page}`);
   };
@@ -61,6 +72,7 @@ const RentalCategoryPage = () => {
 
   return (
     <>
+      <BreadcrumbJsonLd items={breadcrumbSeoItems} />
       <div className="container">
         <Breadcrumb items={breadcrumbItems} />
       </div>

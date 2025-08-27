@@ -5,6 +5,7 @@ import React from 'react';
 import slugify from 'slugify';
 import CategoryContainer from '@/components/template/CategoryContainer';
 import Breadcrumb from '@/components/Breadcrumb';
+import { BreadcrumbJsonLd } from '@/seo/json-ld';
 // import { Metadata } from 'next';
 
 const breadcrumbItems = [
@@ -20,9 +21,16 @@ const breadcrumbItems = [
   }
 ];
 
+// 為 SEO 準備麵包屑資料
+const breadcrumbSeoItems = [
+  { name: '首頁', url: 'https://www.wuwish.com.tw/' },
+  { name: '服裝租借', url: 'https://www.wuwish.com.tw/product-rent' }
+];
+
 const page = () => {
   return (
     <>
+      <BreadcrumbJsonLd items={breadcrumbSeoItems} />
       <div className="container">
         <Breadcrumb items={breadcrumbItems} />
       </div>

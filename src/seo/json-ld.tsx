@@ -1,6 +1,6 @@
 // components/JsonLd.tsx
 import Script from 'next/script';
-import type { FAQPage, LocalBusiness, WithContext } from 'schema-dts';
+import type { FAQPage, LocalBusiness, WithContext, Organization, BreadcrumbList } from 'schema-dts';
 
 // 首頁最重要的
 export const LocalBusinessJsonLd = () => {
@@ -8,13 +8,18 @@ export const LocalBusinessJsonLd = () => {
     '@context': 'https://schema.org',
     '@type': 'ClothingStore',
     name: '神龍變裝西門町最齊全的服裝出租店',
-    image: 'https://www.wuwish.com.tw/logo.png',
+    alternateName: '神龍變裝',
+    description:
+      '台北西門町專業服裝出租店，提供動漫角色、節慶造型、創意變裝等服裝租借服務，超過百款服裝道具，支援派對、拍攝、快閃等各式活動。',
+    image: ['https://www.wuwish.com.tw/logo.png', 'https://www.wuwish.com.tw/og.jpg'],
     url: 'https://www.wuwish.com.tw/',
     telephone: '+886-968-270-178',
+    email: 'wuwish88@gmail.com',
     address: {
       '@type': 'PostalAddress',
       streetAddress: '萬華區漢中街150號2樓',
       addressLocality: '台北市',
+      addressRegion: '台北市',
       postalCode: '108',
       addressCountry: 'TW'
     },
@@ -24,6 +29,16 @@ export const LocalBusinessJsonLd = () => {
       longitude: 121.50667589815379
     },
     priceRange: '$$',
+    paymentAccepted: ['Cash', 'LINE Pay'],
+    currenciesAccepted: 'TWD',
+    areaServed: {
+      '@type': 'City',
+      name: '台北市'
+    },
+    serviceArea: {
+      '@type': 'City',
+      name: '台北市'
+    },
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
@@ -43,12 +58,46 @@ export const LocalBusinessJsonLd = () => {
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '5.0',
-      reviewCount: '566'
+      reviewCount: '566',
+      bestRating: '5',
+      worstRating: '1'
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: '服裝租借目錄',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: '動漫角色服裝租借',
+            description: '提供各種動漫角色服裝租借服務'
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: '節慶造型服裝租借',
+            description: '萬聖節、聖誕節等節慶主題服裝租借'
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: '創意變裝服裝租借',
+            description: '搞笑、創意主題服裝租借服務'
+          }
+        }
+      ]
     },
     sameAs: [
       'https://www.facebook.com/Wu.wish88/?locale=zh_TW',
       'https://www.instagram.com/wu_wish88'
-    ]
+    ],
+    foundingDate: '2022',
+    slogan: '召喚神龍，實現變裝願望！'
   };
 
   return (
@@ -231,12 +280,18 @@ export const FAQJsonLd = () => {
 };
 
 export const AboutJsonLd = () => {
-  const jsonLd = {
+  const jsonLd: WithContext<Organization> = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: '神龍變裝',
+    alternateName: '神龍變裝西門町最齊全的服裝出租店',
     url: 'https://www.wuwish.com.tw/about',
-    logo: 'https://www.wuwish.com.tw/logo.png',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://www.wuwish.com.tw/logo.png',
+      width: '200',
+      height: '200'
+    },
     foundingDate: '2022',
     description:
       '神龍變裝成立於 2022 年，位於台北西門町，致力於提供高品質的服裝與道具租借服務，包含動漫角色、節慶造型與創意搞笑變裝，實現每位顧客的變裝願望。',
@@ -247,6 +302,20 @@ export const AboutJsonLd = () => {
       description:
         '提供超過百款動漫、節慶與搞笑主題服裝，支援派對、拍攝、快閃等各式活動的造型需求，是台北最具創意的變裝基地。'
     },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+886-968-270-178',
+      contactType: 'customer service',
+      availableLanguage: 'Chinese'
+    },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '萬華區漢中街150號2樓',
+      addressLocality: '台北市',
+      addressRegion: '台北市',
+      postalCode: '108',
+      addressCountry: 'TW'
+    },
     sameAs: [
       'https://www.facebook.com/Wu.wish88/?locale=zh_TW',
       'https://www.instagram.com/wu_wish88'
@@ -256,6 +325,74 @@ export const AboutJsonLd = () => {
   return (
     <Script
       id="about-json-ld"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+};
+
+// 新增：麵包屑導航結構化資料
+export const BreadcrumbJsonLd = ({ items }: { items: Array<{ name: string; url: string }> }) => {
+  const jsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url
+    }))
+  };
+
+  return (
+    <Script
+      id="breadcrumb-json-ld"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+};
+
+// 新增：產品頁面結構化資料
+export const ProductJsonLd = ({
+  name,
+  description,
+  image,
+  category,
+  number
+}: {
+  name: string;
+  description?: string;
+  image: string;
+  category: string;
+  number?: string;
+}) => {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: name,
+    description: description || `${name} - 專業服裝租借服務`,
+    image: `https://www.wuwish.com.tw${image}`,
+    category: category,
+    brand: {
+      '@type': 'Brand',
+      name: '神龍變裝'
+    },
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      priceCurrency: 'TWD',
+      seller: {
+        '@type': 'Organization',
+        name: '神龍變裝'
+      }
+    },
+    ...(number && { sku: number })
+  };
+
+  return (
+    <Script
+      id="product-json-ld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
