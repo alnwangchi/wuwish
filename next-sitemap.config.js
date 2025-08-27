@@ -55,7 +55,7 @@ module.exports = {
     const paths = [];
 
     // 1️⃣ 加回首頁 & 固定頁面
-    const staticPaths = ['/', '/search', '/faq', '/product-rent', '/product-sell', '/rent-process'];
+    const staticPaths = ['/', '/search', '/faq', '/product-rent', '/rent-process'];
     for (const path of staticPaths) {
       paths.push(await config.transform(config, path));
     }
@@ -65,12 +65,6 @@ module.exports = {
       const slug = slugify(category.en, { lower: true });
       paths.push(await config.transform(config, `/product-rent/${slug}`));
     }
-
-    // 3️⃣ 加入出售分類
-    // for (const category of saleCategoryList) {
-    //   const slug = slugify(category.en, { lower: true });
-    //   paths.push(await config.transform(config, `/product-sell/${slug}`));
-    // }
 
     return paths;
   },

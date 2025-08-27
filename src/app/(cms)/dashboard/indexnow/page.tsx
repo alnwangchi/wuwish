@@ -9,7 +9,6 @@ const sitemapUrls: string[] = [
   'https://www.wuwish.com.tw/search',
   'https://www.wuwish.com.tw/faq',
   'https://www.wuwish.com.tw/product-rent',
-  'https://www.wuwish.com.tw/product-sell',
   'https://www.wuwish.com.tw/rent-process',
 
   // product-rent/[category] 分類頁
@@ -37,12 +36,7 @@ const sitemapUrls: string[] = [
   'https://www.wuwish.com.tw/product-rent/doll-costume',
   'https://www.wuwish.com.tw/product-rent/accessories',
   'https://www.wuwish.com.tw/product-rent/large-props',
-  'https://www.wuwish.com.tw/product-rent/barbie-series',
-
-  // product-sell/[category] 分類頁
-  'https://www.wuwish.com.tw/product-sell/halloween',
-  'https://www.wuwish.com.tw/product-sell/cartoons-animations',
-  'https://www.wuwish.com.tw/product-sell/movies-tv-series'
+  'https://www.wuwish.com.tw/product-rent/barbie-series'
 ];
 
 const IndexNowPage = () => {

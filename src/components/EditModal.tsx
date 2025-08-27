@@ -36,6 +36,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
       category: data?.category.split('•') || [],
       name: data?.name,
       number: data?.number,
+      depot: data?.depot,
       title: data?.title
     }
   });
@@ -96,6 +97,7 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
       category: data?.category.split('•'),
       name: data?.name,
       number: data?.number,
+      depot: data?.depot,
       title: data?.title
     });
     setHasImageChanged(false); // 重置圖片變更狀態
@@ -172,6 +174,14 @@ const EditModal: FC<EditModalProps> = ({ open, setOpen, data, filterParams, onSe
             name="number"
             render={(props) => (
               <InputField required={false} label="編號" {...props} placeholder="B2201" />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="depot"
+            render={(props) => (
+              <InputField required={false} label="庫位" {...props} placeholder="主倉庫" />
             )}
           />
 

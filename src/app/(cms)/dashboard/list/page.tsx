@@ -22,6 +22,7 @@ export interface ListType {
   name: string;
   title: string;
   number?: string;
+  depot?: string;
   content?: string;
   price?: number;
   status?: string;
@@ -163,6 +164,7 @@ const List = () => {
     { title: '劇名', dataIndex: 'title' },
     { title: '名稱', dataIndex: 'name' },
     { title: '編碼', dataIndex: 'number', width: '120px' },
+    { title: '庫位', dataIndex: 'depot', width: '120px' },
     {
       title: '操作',
       dataIndex: 'action',
@@ -198,7 +200,7 @@ const List = () => {
     const {
       image_path,
       image_id,
-      info: { business_type, category, name, title, content, price, status, number }
+      info: { business_type, category, name, title, content, price, status, number, depot }
     } = list;
     return {
       business_type,
@@ -208,6 +210,7 @@ const List = () => {
       name,
       title,
       number,
+      depot,
       action: image_id
     };
   });

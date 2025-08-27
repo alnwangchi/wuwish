@@ -10,7 +10,7 @@ interface DetailCardProps {
 
 const DetailCard: FC<DetailCardProps> = (props) => {
   const { src, data } = props;
-  const { category, content, name, number, price, status, title } = data;
+  const { category, content, name, number, price, status, title, depot } = data;
 
   const displayCategory = categoryTransformer(category);
 
@@ -57,6 +57,12 @@ const DetailCard: FC<DetailCardProps> = (props) => {
           <p>
             <span>狀態 : </span>
             <span>{status}</span>
+          </p>
+        )}
+        {depot && (
+          <p>
+            <span>庫位 : </span>
+            <span>{depot}</span>
           </p>
         )}
       </div>

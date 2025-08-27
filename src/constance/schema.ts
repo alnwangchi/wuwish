@@ -7,6 +7,7 @@ export type CreateFormValues = {
   name: string;
   title: string;
   number?: string;
+  depot?: string;
   content?: string;
   price?: number;
   status?: string;
@@ -19,6 +20,7 @@ export type EditFormValues = {
   name: string;
   title: string;
   number?: string;
+  depot?: string;
   content?: string;
   price?: number;
   status?: string;
@@ -29,6 +31,7 @@ const baseSchema = yup.object({
   name: yup.string().required('名稱是必填欄位'),
   title: yup.string().required('劇名是必填欄位'),
   number: yup.string(),
+  depot: yup.string(),
   content: yup.string(),
   price: yup.number(),
   status: yup.string()

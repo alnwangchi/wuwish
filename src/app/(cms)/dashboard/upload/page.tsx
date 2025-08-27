@@ -33,7 +33,6 @@ const UploadPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const isCanViewAdmin = useAuthenticate();
   const router = useRouter();
-  const business_value = watch('business_type', BusinessType.Rent);
 
   useEffect(() => {
     if (!isCanViewAdmin) {
@@ -57,6 +56,7 @@ const UploadPage = () => {
     const uploadPromises = () => {
       const postData = {
         ...data,
+        business_type: BusinessType.Rent,
         category: category.join(),
         image: (image as any)['0']
       };
@@ -84,19 +84,6 @@ const UploadPage = () => {
     <div className="container grid grid-cols-2 gap-4 p-4">
       <Card bordered={false} className="w-full">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-          <div className="mb-4 flex flex-col">
-            <p className="labelText-required labelText">商業類型（business type）</p>
-            <div className="flex gap-4 py-2">
-              <label>
-                <input type="radio" value={BusinessType.Rent} {...register('business_type')} />
-                <span className="pl-2">租借</span>
-              </label>
-              {/* <label>
-                <input type="radio" value={BusinessType.Sell} {...register('business_type')} />
-                <span className="pl-2">販售</span>
-              </label> */}
-            </div>
-          </div>
           {/* 1131006 需要一圖多類 */}
           <div className="mb-4">
             <label className="labelText-required labelText">類別</label>
@@ -133,37 +120,19 @@ const UploadPage = () => {
             render={(props) => <InputField label="名稱" {...props} placeholder="孫悟空" />}
           />
 
-          {business_value === BusinessType.Sell && (
-            <>
-              <Controller
-                control={control}
-                name="content"
-                render={(props) => (
-                  <InputField required={false} label="內容" {...props} placeholder="上衣、下身" />
-                )}
-              />
-              <Controller
-                control={control}
-                name="price"
-                render={(props) => (
-                  <InputNumberField required={false} label="價格" {...props} placeholder="2000" />
-                )}
-              />
-              <Controller
-                control={control}
-                name="status"
-                render={(props) => (
-                  <InputField required={false} label="狀態" {...props} placeholder="八成新" />
-                )}
-              />
-            </>
-          )}
-
           <Controller
             control={control}
             name="number"
             render={(props) => (
               <InputField required={false} label="編號" {...props} placeholder="B2201" />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="depot"
+            render={(props) => (
+              <InputField required={false} label="倉庫" {...props} placeholder="主倉庫" />
             )}
           />
 

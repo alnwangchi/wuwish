@@ -1,7 +1,6 @@
 import { ControllerFieldState, ControllerRenderProps, UseFormStateReturn } from 'react-hook-form';
 export enum BusinessType {
-  Rent = 'rent',
-  Sell = 'sell'
+  Rent = 'rent'
 }
 interface ReactFormProps {
   field: ControllerRenderProps<any, any>;
@@ -25,6 +24,7 @@ interface ProductDetail {
   content: string;
   name: string;
   number: Number;
+  depot?: string;
   price: string;
   status: string;
   title: string;
