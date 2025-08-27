@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: '神龍變裝 服裝出租',
     images: [
       {
-        url: 'https://www.wuwish.com.tw/og.png', // 請換成實際圖片 URL
+        url: 'https://www.wuwish.com.tw/og.jpg',
         width: 1200,
         height: 630,
         alt: '神龍變裝 服裝出租 - OG 封面圖'
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     site: '', // 換成你的 Twitter 帳號
     title: '神龍變裝 服裝出租｜台北西門町服裝租借服務',
     description: '在台北西門町找到最適合你的服裝租借服務，多樣風格、線上預約超方便！',
-    images: ['https://www.wuwish.com.tw/og.png'] // 同樣換成正確圖片
+    images: ['https://www.wuwish.com.tw/og.jpg']
   }
 };
 
