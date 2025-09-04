@@ -111,67 +111,90 @@ const page = () => {
             <div className="flex items-center gap-3 lg:gap-5">
               <Hexagon>
                 <div>
-                  <p>取件</p>
-                  <Image src={step4} alt="取件" />
+                  <p>歸還檢查</p>
+                  <p>領回</p>
+                  <p>押金or證件</p>
+                </div>
+              </Hexagon>
+              <Arrows direction="left" />
+              <Hexagon>
+                <div>
+                  <p>活動執行</p>
+                </div>
+              </Hexagon>
+              <Arrows direction="left" />
+              <Hexagon>
+                <div>
+                  <p>領服裝</p>
+                  <p>付尾款</p>
+                  <p className="mb-2">押金or證件</p>
+                  <Image src={step4} className="pl-2" width={100} alt="試裝" />
                 </div>
               </Hexagon>
             </div>
           </div>
-
-          {/* 手機版 */}
-          <div className="block pb-10 pt-6 sm:hidden">
-            <div className="flex flex-col items-center gap-3">
-              <a target="_blank" href="https://www.instagram.com/wu_wish88/">
-                <Hexagon>
-                  <div>
-                    <p>詢問估價</p>
-                    <FaInstagram className="mx-auto text-4xl" />
-                  </div>
-                </Hexagon>
-              </a>
-              <Arrows direction="down" />
-              <Link href="/">
-                <Hexagon>
-                  <div>
-                    <p>試裝</p>
-                    <Image src={step2} alt="試裝" />
-                  </div>
-                </Hexagon>
-              </Link>
-              <Arrows direction="down" />
+          <div className="flex flex-col gap-2 sm:hidden">
+            <a target="_blank" href="https://www.instagram.com/wu_wish88/">
               <Hexagon>
                 <div>
-                  <p>付訂金</p>
-                  <p className="mb-2">保留服裝</p>
-                  <Image src={step3} className="pl-2" width={80} alt="試裝" />
+                  <p>詢問估價</p>
+                  <FaInstagram className="mx-auto text-4xl" />
                 </div>
               </Hexagon>
-              <Arrows direction="down" />
+            </a>
+            <Link href="/">
               <Hexagon>
                 <div>
-                  <p>取件</p>
-                  <Image src={step4} alt="取件" />
+                  <p>試裝</p>
+                  <Image src={step2} alt="試裝" />
                 </div>
               </Hexagon>
-            </div>
+            </Link>
+            <Hexagon>
+              <div>
+                <p>付訂金</p>
+                <p className="mb-2">保留服裝</p>
+                <Image src={step3} width={45} alt="試裝" />
+              </div>
+            </Hexagon>
+            <Hexagon>
+              <div>
+                <p>領服裝</p>
+                <p>付尾款</p>
+                <p className="mb-2">押金or證件</p>
+                <Image src={step4} className="pl-2" width={100} alt="試裝" />
+              </div>
+            </Hexagon>
+            <Hexagon>
+              <div>
+                <p>活動執行</p>
+              </div>
+            </Hexagon>
+            <Hexagon>
+              <div>
+                <p>歸還檢查</p>
+                <p>領回</p>
+                <p>押金or證件</p>
+              </div>
+            </Hexagon>
           </div>
-        </div>
-        <div className="relative w-full sm:py-0">
-          <Image src={rental_bg} className="hidden w-full sm:block" alt="deco" />
-          <div className="sm:ab-center mx-auto w-3/4 font-cubic text-clamp2 leading-loose text-white">
-            <h2 className="clamp1 my-2 text-center">租借細則</h2>
-            <p>
-              1.訂單確認後，每套服裝需先預繳1/2之訂金，
-              <span className="text-red-600">如訂單取消，訂金不退還。</span>
-            </p>
-            <p>2.務必在租借期限內歸還，每逾期一天加收原租金之30%。</p>
-            <p>3.服裝經由客戶確認領取後，恕不退費或更換，本公司亦不負責其他相關責任。</p>
-            <p>
-              4.本公司所有商品未經同意切勿變更破壞更
-              <span className="text-red-600">不可使用各種膠類</span> (例：雙面膠、
-              泡棉膠)以及釘書針。 違者若無法將其還原，須賠償租金的2倍，若有破損遺失，
-              按租金4倍賠償。
-            </p>
+          <div className="relative w-full sm:py-0">
+            <Image src={rental_bg} className="hidden w-full sm:block" alt="deco" />
+            <div className="sm:ab-center mx-auto w-3/4 font-cubic text-clamp2 leading-loose text-white">
+              <h2 className="clamp1 my-2 text-center">租借細則</h2>
+              <p>
+                1.訂單確認後，每套服裝需先預繳1/2之訂金，
+                <span className="text-red-600">如訂單取消，訂金不退還。</span>
+              </p>
+              <p>2.務必在租借期限內歸還，每逾期一天加收原租金之30%。</p>
+              <p>3.服裝經由客戶確認領取後，恕不退費或更換，本公司亦不負責其他相關責任。</p>
+              <p>
+                4.本公司所有商品未經同意切勿變更破壞更
+                <span className="text-red-600">不可使用各種膠類</span> (例：雙面膠、
+                泡棉膠)以及釘書針。 違者若無法將其還原，須賠償租金的2倍，若有破損遺失，
+                按租金4倍賠償。
+              </p>
+            </div>
           </div>
         </div>
       </div>
