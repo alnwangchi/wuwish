@@ -96,7 +96,7 @@ const UploadPage = () => {
                   mode="multiple"
                   allowClear
                   placeholder="Please select"
-                  maxCount={3}
+                  maxCount={4}
                   options={categoryOptions}
                   value={value as string[]}
                   onChange={(newValue: string[]) => {
