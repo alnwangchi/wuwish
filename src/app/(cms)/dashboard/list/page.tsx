@@ -58,6 +58,10 @@ const options = [
   {
     value: 'number',
     label: '編號'
+  },
+  {
+    value: 'depot',
+    label: '庫位'
   }
 ];
 const defaultParam = {
