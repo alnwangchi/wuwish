@@ -48,7 +48,7 @@ export const createSchema = baseSchema.shape({
     .array()
     .of(yup.string().required())
     .min(1, '類別是必填欄位')
-    .max(3, '最多選擇三個類別') // restrict in UI
+    .max(4, '最多選擇四個類別') // restrict in UI
     .required('類別是必填欄位')
 });
 
@@ -58,6 +58,6 @@ export const EditSchema = baseSchema.shape({
     .array()
     .of(yup.string().required())
     .min(1, '類別是必填欄位')
-    .max(3, '最多選擇三個類別') // restrict in UI
+    .max(4, '最多選擇四個類別') // restrict in UI
     .required('類別是必填欄位')
 });
