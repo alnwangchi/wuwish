@@ -76,7 +76,7 @@ const RentalDetailPage = () => {
         <div className="container">
           <Breadcrumb items={breadcrumbItems} />
         </div>
-        <div className="container flex flex-col pb-10 sm:flex-row">
+        <div className="container flex flex-col gap-4 pb-10 sm:flex-row">
           {clothDetail ? <DetailCard src={src} data={clothDetail} /> : <LoadingSpinner />}
         </div>
         <div className="relative">

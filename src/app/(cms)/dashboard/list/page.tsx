@@ -2,7 +2,7 @@
 'use client';
 import EditModal from '@/components/EditModal';
 import DataTable from '@/components/Tables';
-import { categoryTransformer } from '@/constance';
+import { categoryOptions, categoryTransformer } from '@/constance';
 import useAuthenticate from '@/hooks/useAuthenticate';
 import { BusinessType, ProductSearchResponse } from '@/interface';
 import { deleteMultipleProductApi, deleteProductApi, queryApi } from '@/server';
@@ -62,6 +62,10 @@ const options = [
   {
     value: 'depot',
     label: '庫位'
+  },
+  {
+    value: 'category',
+    label: '類別'
   }
 ];
 const defaultParam = {
@@ -93,6 +97,8 @@ const List = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const search = searchParams.get('page');
+
+  const [category, setCategory] = useState('');
 
   const selectedItemsManager = React.useMemo(
     () => ({
@@ -204,7 +210,7 @@ const List = () => {
     const {
       image_path,
       image_id,
-      info: { business_type, category, name, title, content, price, status, number, depot }
+      info: { business_type, category, name, title, number, depot }
     } = list;
     return {
       business_type,
@@ -306,7 +312,28 @@ const List = () => {
               })
             }
           />
-          <Search placeholder="請輸入查詢" allowClear className="pb-4" onSearch={onKeywordSearch} />
+          {filterParams.selectOption !== 'category' ? (
+            <Search
+              placeholder="請輸入查詢"
+              allowClear
+              className="pb-4"
+              onSearch={onKeywordSearch}
+            />
+          ) : (
+            <Select
+              className="w-full"
+              allowClear
+              placeholder="Please select"
+              options={categoryOptions}
+              value={category}
+              onChange={(val: string) => {
+                console.log('🚀 ~ val:', val);
+
+                setCategory(val);
+                onSearch(val, true);
+              }}
+            />
+          )}
         </Space.Compact>
         <div className="mb-4 ml-auto w-fit">
           {selectedItemsManager.hasSelected() ? (

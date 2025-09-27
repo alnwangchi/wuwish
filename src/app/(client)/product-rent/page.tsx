@@ -1,6 +1,6 @@
 'use client';
 import CategoryItem from '@/components/CategoryItem';
-import { categoryList, saleCategoryList } from '@/constance';
+import { categoryList } from '@/constance';
 import React from 'react';
 import slugify from 'slugify';
 import CategoryContainer from '@/components/template/CategoryContainer';

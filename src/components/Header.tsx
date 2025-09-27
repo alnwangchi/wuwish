@@ -161,7 +161,7 @@ const Header = () => {
           </div>
         </section>
         <FaSearch
-          className="absolute right-5 top-2/4 z-20 -translate-y-1/2 cursor-pointer text-xl md:hidden"
+          className="absolute right-5 top-2/4 z-20 h-8 w-8 -translate-y-1/2 cursor-pointer text-xl md:hidden"
           onClick={() => setIsMenuOpen((prev) => !prev)}
         />
 

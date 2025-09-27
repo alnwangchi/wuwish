@@ -79,7 +79,7 @@ const RentalCategoryPage = () => {
       <ClothesContainer>
         {cloth?.map((p: any) => (
           <ClothesCard
-            href={`/product-rent/${slugify(category!, { lower: true })}/${p.image_id}`}
+            href={`/product-rent/${category}/${p.image_id}`}
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
             key={p.image_id}
             alt={generateImgAlt('服裝租借 ', p.info.category, p.info.title, p.info.name)}

@@ -73,16 +73,22 @@ const SearchPage = () => {
         <Breadcrumb items={breadcrumbItems} />
       </div>
       <ClothesContainer className="pt-4">
-        {cloth?.map((p: any) => (
-          <ClothesCard
-            href={`/product-${p.info.business_type}/${slugify(p.info.category!, {
-              lower: true
-            })}/${p.image_id}`}
-            src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
-            key={p.image_id}
-            alt={generateImgAlt('服裝', p.info.category, p.info.title, p.info.name)}
-          />
-        ))}
+        {cloth?.map((p: any) => {
+          const isMultipleCategory = p.info.category.includes(',');
+          const displayCategory = isMultipleCategory
+            ? p.info.category.split(',')[0]
+            : p.info.category;
+          return (
+            <ClothesCard
+              href={`/product-rent/${slugify(displayCategory, {
+                lower: true
+              })}/${p.image_id}`}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${p.image_path}`}
+              key={p.image_id}
+              alt={generateImgAlt('服裝', displayCategory, p.info.title, p.info.name)}
+            />
+          );
+        })}
         <div className="col-span-full">
           <Pagination current={Number(currentPage)} onChange={onChange} total={totalCount} />
         </div>

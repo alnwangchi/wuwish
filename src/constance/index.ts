@@ -37,7 +37,7 @@ export const categoryOptions = categoryList.map((item) => ({
 
 export const enToNameMap = categoryList.reduce(
   (map, category) => {
-    map[toLower(slugify(category.en))] = category.name;
+    map[slugify(category.en, { lower: true })] = category.name;
     return map;
   },
   {} as Record<string, string>

@@ -18,6 +18,4 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-// console.log('Firestore 初始化完成:', db);
-
 export default app;
