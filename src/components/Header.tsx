@@ -36,12 +36,14 @@ const Header = () => {
 
   const onSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
-    const keyword = target.value;
-    eventTracker('search', {
-      event_category: 'product_search',
-      event_label: keyword,
-      value: 1
-    });
+    const keyword = target.value?.trim();
+    if (keyword) {
+      eventTracker('search', {
+        event_category: 'product_search',
+        event_label: keyword,
+        value: 1
+      });
+    }
     handleSearch(keyword);
   };
 

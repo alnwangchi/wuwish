@@ -22,7 +22,7 @@ export const eventTracker = (
     // event 是固定的 告訴 gtag 你要發送一個事件
     window.gtag('event', eventName, {
       event_category,
-      event_label,
+      event_label: event_label && String(event_label).trim() ? event_label : 'unTrack',
       value
     });
   } else {
