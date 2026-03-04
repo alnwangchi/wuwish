@@ -35,7 +35,14 @@ module.exports = {
   priority: 0.7, //指示搜尋引擎爬蟲網頁重要性的值 但實際搜尋引擎不會嚴格遵循
   sitemapSize: 5000,
   generateRobotsTxt: true,
-  exclude: ['/dashboard', '/dashboard/list', '/dashboard/upload', '/login'],
+  exclude: [
+    '/dashboard',
+    '/dashboard/list',
+    '/dashboard/upload',
+    '/dashboard/banner',
+    '/dashboard/indexnow',
+    '/login'
+  ],
   transform: async (config, path) => {
     return {
       loc: path,
@@ -66,7 +73,8 @@ module.exports = {
     policies: [
       {
         userAgent: '*',
-        allow: '/'
+        allow: '/',
+        disallow: ['/dashboard', '/login']
       },
       {
         userAgent: 'black-listed-bot',
