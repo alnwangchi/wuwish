@@ -18,7 +18,7 @@ const CategoryItem: FC<NavItemProps> = ({ href, text, alt = '神龍變裝類別�
       onClick={() => {
         eventTracker('click', {
           event_category: 'rent_category_button',
-          event_label: text || 'unTrack',
+          event_label: text?.trim() || 'unTrack',
           value: 1
         });
       }}

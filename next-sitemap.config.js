@@ -29,12 +29,6 @@ const categoryList = [
   { name: '芭比全系列', en: 'Barbie Series' }
 ];
 
-// const saleCategoryList = [
-//   { name: '萬聖節', en: 'Halloween' },
-//   { name: '卡通/動漫', en: 'Cartoons/Animations' },
-//   { name: '電影/影集', en: 'Movies/TV Series' }
-// ];
-
 module.exports = {
   siteUrl: 'https://www.wuwish.com.tw/',
   changefreq: 'weekly',

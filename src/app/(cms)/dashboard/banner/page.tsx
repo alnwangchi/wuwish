@@ -28,9 +28,11 @@ import {
   useState
 } from 'react';
 
+import useAuthenticate from '@/hooks/useAuthenticate';
 import { uploadMultipleImages } from '@/lib/utils/uploadImage';
 import { collection, getDocs } from 'firebase/firestore';
 import { cloneDeep, uniqBy } from 'lodash';
+import { useRouter } from 'next/navigation';
 
 interface DataType {
   key: string;
@@ -142,10 +144,18 @@ const Row: FC<RowProps> = (props) => {
 };
 
 const UploadBannerPage: FC = () => {
+  const isCanViewAdmin = useAuthenticate();
+  const router = useRouter();
   const [dataSource, setDataSource] = useState<DataType[]>(initialData);
   const originalDataSource = useRef<any>(null);
   const [uploadedFiles, setUploadedFiles] = useState<Map<string, File>>(new Map());
   const [isUpdating, setIsUpdating] = useState(false);
+
+  useEffect(() => {
+    if (!isCanViewAdmin) {
+      router.push('/login');
+    }
+  }, [isCanViewAdmin, router]);
 
   useEffect(() => {
     const fetchBanners = async () => {

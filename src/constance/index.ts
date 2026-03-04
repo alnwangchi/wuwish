@@ -1,4 +1,3 @@
-import { toLower } from 'lodash';
 import slugify from 'slugify';
 
 export const categoryList = [
@@ -27,7 +26,6 @@ export const categoryList = [
   { name: '玩偶裝', en: 'Doll Costume' },
   { name: '配件', en: 'Accessories' },
   { name: '大型道具', en: 'Large Props' }
-  // { name: '芭比全系列', en: 'Barbie Series' }
 ];
 
 export const categoryOptions = categoryList.map((item) => ({
@@ -52,11 +50,5 @@ export const categoryTransformer = (category: string) => {
       .join(' • ')
   );
 };
-
-export const saleCategoryList = [
-  { name: '萬聖節', en: 'Halloween' },
-  { name: '卡通/動漫', en: 'Cartoons/Animations' },
-  { name: '電影/影集', en: 'Movies/TV Series' }
-];
 
 export const authorization = { account: 'admin', password: 'dragonpassword' };
