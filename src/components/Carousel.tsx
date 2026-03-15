@@ -1,6 +1,9 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Slider from 'react-slick';
+import dynamic from 'next/dynamic';
+import type { Settings } from 'react-slick';
 import { db } from '@/lib/firebase';
 
 import draganball_1 from '@/assets/img/draganball_1.png';
@@ -21,6 +24,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import c1 from '@/assets/img/c1.jpg';
 import { collection, getDocs } from 'firebase/firestore';
 
+const Slider = dynamic(() => import('react-slick'), { ssr: false }) as any;
+
 const paginationImg = [
   draganball_1,
   draganball_2,
@@ -30,7 +35,13 @@ const paginationImg = [
   draganball_6,
   draganball_7
 ];
-const settings = {
+type BannerImage = {
+  order: number;
+  src: string;
+  alt: string;
+};
+
+const settings: Settings = {
   autoplay: true,
   infinite: true,
   speed: 500,
@@ -47,8 +58,8 @@ const settings = {
 };
 
 export default function Carousel() {
-  const carouselRef = useRef<Slider | null>(null);
-  const [images, setImages] = useState<any>();
+  const carouselRef = useRef<any>(null);
+  const [images, setImages] = useState<BannerImage[]>([]);
 
   useEffect(() => {
     const fetchBanners = async () => {
@@ -79,7 +90,7 @@ export default function Carousel() {
       <div
         className="absolute -left-10 top-2/4 z-10 hidden -translate-y-1/2 sm:block"
         onClick={() => {
-          carouselRef.current!.slickPrev();
+          carouselRef.current?.slickPrev();
         }}
       >
         <Image
@@ -90,29 +101,22 @@ export default function Carousel() {
         />
       </div>
       <Slider {...settings} ref={carouselRef}>
-        {images ? (
-          images.map((image: any, index: number) => (
-            <div key={index} className="relative aspect-[1348/605] w-full">
-              <Image
-                src={image.src || c1}
-                alt={image.alt || '活動檔期公告輪播'}
-                fill
-                style={{ objectFit: 'cover' }}
-                priority={index === 0}
-              />
-            </div>
-          ))
-        ) : (
-          // 預設圖片作為 fallback
-          <div className="opacity-0">
-            <Image src={c1} alt="活動檔期公告輪播" />
+        {(images.length > 0 ? images : [{ order: 0, src: '', alt: '' }]).map((image, index: number) => (
+          <div key={index} className="relative aspect-[1348/605] w-full">
+            <Image
+              src={image.src || c1}
+              alt={image.alt || '活動檔期公告輪播'}
+              fill
+              style={{ objectFit: 'cover' }}
+              priority={index === 0}
+            />
           </div>
-        )}
+        ))}
       </Slider>
       <div
         className="absolute -right-10 top-2/4 z-10 hidden  -translate-y-1/2 sm:block"
         onClick={() => {
-          carouselRef.current!.slickNext();
+          carouselRef.current?.slickNext();
         }}
       >
         <Image
