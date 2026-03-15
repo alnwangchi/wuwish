@@ -66,6 +66,7 @@ export default function Carousel() {
 
   useEffect(() => {
     const fetchBanners = async () => {
+      const startedAt = performance.now();
       try {
         const querySnapshot = await getDocs(collection(db, 'banners'));
 
@@ -78,11 +79,25 @@ export default function Carousel() {
         });
 
         banners.sort((a, b) => a.order - b.order);
-        console.log('🚀 ~ banners:', banners);
+        const elapsedMs = Math.round(performance.now() - startedAt);
+        console.log('[Carousel] fetch banners result', {
+          projectId: db.app.options.projectId,
+          size: querySnapshot.size,
+          empty: querySnapshot.empty,
+          elapsedMs,
+          banners
+        });
 
         setImages(banners);
       } catch (error) {
-        console.error('Error fetching banners:', error);
+        const elapsedMs = Math.round(performance.now() - startedAt);
+        const errorCode = typeof error === 'object' && error && 'code' in error ? error.code : undefined;
+        console.error('[Carousel] fetch banners failed', {
+          projectId: db.app.options.projectId,
+          elapsedMs,
+          errorCode,
+          error
+        });
       }
     };
 
