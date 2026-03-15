@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import type { Settings } from 'react-slick';
@@ -24,7 +24,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import c1 from '@/assets/img/c1.jpg';
 import { collection, getDocs } from 'firebase/firestore';
 
-const Slider = dynamic(() => import('react-slick'), { ssr: false }) as any;
+const Slider = dynamic(() => import('./SlickSliderClient'), { ssr: false });
 
 const paginationImg = [
   draganball_1,
@@ -60,6 +60,9 @@ const settings: Settings = {
 export default function Carousel() {
   const carouselRef = useRef<any>(null);
   const [images, setImages] = useState<BannerImage[]>([]);
+  const handleSliderInstance = useCallback((instance: any) => {
+    carouselRef.current = instance;
+  }, []);
 
   useEffect(() => {
     const fetchBanners = async () => {
@@ -75,6 +78,7 @@ export default function Carousel() {
         });
 
         banners.sort((a, b) => a.order - b.order);
+        console.log('🚀 ~ banners:', banners);
 
         setImages(banners);
       } catch (error) {
@@ -100,18 +104,20 @@ export default function Carousel() {
           priority
         />
       </div>
-      <Slider {...settings} ref={carouselRef}>
-        {(images.length > 0 ? images : [{ order: 0, src: '', alt: '' }]).map((image, index: number) => (
-          <div key={index} className="relative aspect-[1348/605] w-full">
-            <Image
-              src={image.src || c1}
-              alt={image.alt || '活動檔期公告輪播'}
-              fill
-              style={{ objectFit: 'cover' }}
-              priority={index === 0}
-            />
-          </div>
-        ))}
+      <Slider {...settings} onInstance={handleSliderInstance}>
+        {(images.length > 0 ? images : [{ order: 0, src: '', alt: '' }]).map(
+          (image, index: number) => (
+            <div key={index} className="relative aspect-[1348/605] w-full">
+              <Image
+                src={image.src || c1}
+                alt={image.alt || '活動檔期公告輪播'}
+                fill
+                style={{ objectFit: 'cover' }}
+                priority={index === 0}
+              />
+            </div>
+          )
+        )}
       </Slider>
       <div
         className="absolute -right-10 top-2/4 z-10 hidden  -translate-y-1/2 sm:block"
