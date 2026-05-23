@@ -5,7 +5,7 @@ import { message } from 'antd';
 
 const AxiosInstance = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-  timeout: 3000
+  timeout: 30000
 });
 AxiosInstance.defaults.headers.get['Content-Type'] = 'application/json';
 AxiosInstance.defaults.headers.post['Content-Type'] = 'multipart/form-data';
