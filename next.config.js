@@ -4,14 +4,14 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '127.0.0.1',
-        port: '9527',
+        hostname: '52.197.117.77',
+        port: '443',
         pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: 'www.wuwish.com.tw',
-        port: '9527',
+        port: '443',
         pathname: '/**'
       },
       {
