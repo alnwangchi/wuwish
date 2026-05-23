@@ -5,13 +5,13 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: '52.197.117.77',
-        port: '443',
+        port: '9527',
         pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: 'www.wuwish.com.tw',
-        port: '443',
+        port: '9527',
         pathname: '/**'
       },
       {
