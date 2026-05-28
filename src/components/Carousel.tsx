@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Image, { type StaticImageData } from 'next/image';
 import type { Settings } from 'react-slick';
 import { db } from '@/lib/firebase';
 
@@ -23,8 +22,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import c1 from '@/assets/img/c1.jpg';
 import { collection, getDocs } from 'firebase/firestore';
-
-const Slider = dynamic(() => import('./SlickSliderClient'), { ssr: false });
+import Slider from './SlickSliderClient';
 
 const paginationImg = [
   draganball_1,
@@ -37,29 +35,38 @@ const paginationImg = [
 ];
 type BannerImage = {
   order: number;
-  src: string;
+  src: string | StaticImageData;
   alt: string;
 };
 
-const settings: Settings = {
-  autoplay: true,
-  infinite: true,
+const fallbackImages: BannerImage[] = [{ order: 1, src: c1, alt: '活動檔期公告輪播' }];
+
+const getImageKey = (image: BannerImage) =>
+  `${image.order}-${typeof image.src === 'string' ? image.src : image.src.src}`;
+
+const createSettings = (slideCount: number): Settings => ({
+  autoplay: slideCount > 1,
+  infinite: slideCount > 1,
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplaySpeed: 5000,
   arrows: false,
-  dots: true,
+  dots: slideCount > 1,
   customPaging: function (i: number) {
+    const pagination = paginationImg[i % paginationImg.length];
+
     return (
-      <Image src={paginationImg[i]} alt={`神龍變裝輪播 ${i}星球`} aria-label={`跳轉到第${i}張圖`} />
+      <Image src={pagination} alt={`神龍變裝輪播 ${i + 1}星球`} aria-label={`跳轉到第${i + 1}張圖`} />
     );
   }
-};
+});
 
 export default function Carousel() {
   const carouselRef = useRef<any>(null);
-  const [images, setImages] = useState<BannerImage[]>([]);
+  const [images, setImages] = useState<BannerImage[]>(fallbackImages);
+  const settings = useMemo(() => createSettings(images.length), [images.length]);
+  const sliderKey = useMemo(() => images.map(getImageKey).join('|'), [images]);
   const handleSliderInstance = useCallback((instance: any) => {
     carouselRef.current = instance;
   }, []);
@@ -70,13 +77,15 @@ export default function Carousel() {
       try {
         const querySnapshot = await getDocs(collection(db, 'banners'));
 
-        const banners = querySnapshot.docs.map((doc) => {
-          return {
-            order: doc.data().order || 0,
-            src: doc.data().downloadURL || '',
-            alt: doc.data().imageAlt || ''
-          };
-        });
+        const banners = querySnapshot.docs
+          .map((doc) => {
+            return {
+              order: doc.data().order || 0,
+              src: doc.data().downloadURL || '',
+              alt: doc.data().imageAlt || ''
+            };
+          })
+          .filter((banner): banner is BannerImage => !!banner.src);
 
         banners.sort((a, b) => a.order - b.order);
         const elapsedMs = Math.round(performance.now() - startedAt);
@@ -88,7 +97,7 @@ export default function Carousel() {
           banners
         });
 
-        setImages(banners);
+        setImages(banners.length > 0 ? banners : fallbackImages);
       } catch (error) {
         const elapsedMs = Math.round(performance.now() - startedAt);
         const errorCode = typeof error === 'object' && error && 'code' in error ? error.code : undefined;
@@ -98,6 +107,7 @@ export default function Carousel() {
           errorCode,
           error
         });
+        setImages(fallbackImages);
       }
     };
 
@@ -119,20 +129,18 @@ export default function Carousel() {
           priority
         />
       </div>
-      <Slider {...settings} onInstance={handleSliderInstance}>
-        {(images.length > 0 ? images : [{ order: 0, src: '', alt: '' }]).map(
-          (image, index: number) => (
-            <div key={index} className="relative aspect-[1348/605] w-full">
-              <Image
-                src={image.src || c1}
-                alt={image.alt || '活動檔期公告輪播'}
-                fill
-                style={{ objectFit: 'cover' }}
-                priority={index === 0}
-              />
-            </div>
-          )
-        )}
+      <Slider key={sliderKey} {...settings} onInstance={handleSliderInstance}>
+        {images.map((image, index: number) => (
+          <div key={getImageKey(image)} className="relative aspect-[1348/605] w-full">
+            <Image
+              src={image.src}
+              alt={image.alt || '活動檔期公告輪播'}
+              fill
+              style={{ objectFit: 'cover' }}
+              priority={index === 0}
+            />
+          </div>
+        ))}
       </Slider>
       <div
         className="absolute -right-10 top-2/4 z-10 hidden  -translate-y-1/2 sm:block"
