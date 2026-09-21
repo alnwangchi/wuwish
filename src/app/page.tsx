@@ -25,14 +25,15 @@ export default function Home() {
       <LocalBusinessJsonLd />
       <main className="min-h-screen">
         <div className="relative mb-10">
+          {/* 手機版不顯示外框背景，讓輪播直接貼齊 Header */}
           <Image
             src={carousel_bg}
             sizes="100vw"
             alt="神龍變裝輪播圖背景"
-            className="invisible sm:visible"
+            className="hidden sm:block"
           />
-          <div className="ab-center">
-            <div className="mt-[-2%] w-screen sm:w-[70vw]">
+          <div className="sm:ab-center">
+            <div className="w-screen sm:mt-[-2%] sm:w-[80vw]">
               <Carousel />
             </div>
           </div>

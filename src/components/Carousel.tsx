@@ -57,14 +57,19 @@ const createSettings = (slideCount: number): Settings => ({
     const pagination = paginationImg[i % paginationImg.length];
 
     return (
-      <Image src={pagination} alt={`神龍變裝輪播 ${i + 1}星球`} aria-label={`跳轉到第${i + 1}張圖`} />
+      <Image
+        src={pagination}
+        alt={`神龍變裝輪播 ${i + 1}星球`}
+        aria-label={`跳轉到第${i + 1}張圖`}
+      />
     );
   }
 });
 
 export default function Carousel() {
   const carouselRef = useRef<any>(null);
-  const [images, setImages] = useState<BannerImage[]>(fallbackImages);
+  const [images, setImages] = useState<BannerImage[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const settings = useMemo(() => createSettings(images.length), [images.length]);
   const sliderKey = useMemo(() => images.map(getImageKey).join('|'), [images]);
   const handleSliderInstance = useCallback((instance: any) => {
@@ -73,7 +78,6 @@ export default function Carousel() {
 
   useEffect(() => {
     const fetchBanners = async () => {
-      const startedAt = performance.now();
       try {
         const querySnapshot = await getDocs(collection(db, 'banners'));
 
@@ -88,36 +92,34 @@ export default function Carousel() {
           .filter((banner): banner is BannerImage => !!banner.src);
 
         banners.sort((a, b) => a.order - b.order);
-        const elapsedMs = Math.round(performance.now() - startedAt);
-        console.log('[Carousel] fetch banners result', {
-          projectId: db.app.options.projectId,
-          size: querySnapshot.size,
-          empty: querySnapshot.empty,
-          elapsedMs,
-          banners
-        });
 
         setImages(banners.length > 0 ? banners : fallbackImages);
       } catch (error) {
-        const elapsedMs = Math.round(performance.now() - startedAt);
-        const errorCode = typeof error === 'object' && error && 'code' in error ? error.code : undefined;
+        const errorCode =
+          typeof error === 'object' && error && 'code' in error ? error.code : undefined;
         console.error('[Carousel] fetch banners failed', {
           projectId: db.app.options.projectId,
-          elapsedMs,
           errorCode,
           error
         });
         setImages(fallbackImages);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchBanners();
   }, []);
 
+  // 後台圖片載入完成前只保留版位，避免先閃一張預設圖
+  if (isLoading || images.length === 0) {
+    return <div className="aspect-[1348/605] w-full animate-pulse bg-black/30" aria-hidden />;
+  }
+
   return (
     <div className="relative">
       <div
-        className="absolute -left-10 top-2/4 z-10 hidden -translate-y-1/2 sm:block"
+        className="absolute left-1 top-2/4 z-10 hidden -translate-y-1/2 sm:block"
         onClick={() => {
           carouselRef.current?.slickPrev();
         }}
@@ -125,7 +127,7 @@ export default function Carousel() {
         <Image
           src={carousel_left}
           alt="向左滑動"
-          className="cursor-pointer contrast-50 hover:contrast-100"
+          className="cursor-pointer opacity-60 contrast-50 hover:opacity-100 hover:contrast-100"
           priority
         />
       </div>
@@ -143,7 +145,7 @@ export default function Carousel() {
         ))}
       </Slider>
       <div
-        className="absolute -right-10 top-2/4 z-10 hidden  -translate-y-1/2 sm:block"
+        className="absolute right-1 top-2/4 z-10 hidden -translate-y-1/2 sm:block"
         onClick={() => {
           carouselRef.current?.slickNext();
         }}
@@ -151,7 +153,7 @@ export default function Carousel() {
         <Image
           src={carousel_right}
           alt="向右滑動"
-          className="cursor-pointer contrast-50 hover:contrast-100"
+          className="cursor-pointer opacity-60 contrast-50 hover:opacity-100 hover:contrast-100"
           priority
         />
       </div>
