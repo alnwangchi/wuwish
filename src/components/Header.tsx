@@ -11,6 +11,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { KeyboardEvent, RefObject, useEffect, useRef, useState } from 'react';
 import { FaInstagram, FaSquareFacebook, FaXmark } from 'react-icons/fa6';
 import { FaSearch } from 'react-icons/fa';
+import { SiLine } from 'react-icons/si';
 import NavItem from './NavItem';
 import { eventTracker } from '@/ga/utils/eventTracker';
 
@@ -196,7 +197,7 @@ const Header = () => {
           target="_blank"
           href="https://lin.ee/w3FAybm"
           aria-label="LINE"
-          className="f-center h-11 w-11 rounded-full bg-white shadow-lg shadow-black/40 transition hover:scale-110"
+          className="f-center h-11 w-11 rounded-full bg-white text-2xl text-[#06C755] shadow-lg shadow-black/40 transition hover:scale-110"
           onClick={() => {
             eventTracker('social_media', {
               event_category: 'floating_social',
@@ -205,7 +206,7 @@ const Header = () => {
             });
           }}
         >
-          <Image src={icon_line} width={30} height={30} alt="line" priority />
+          <SiLine />
         </a>
       </div>
 
